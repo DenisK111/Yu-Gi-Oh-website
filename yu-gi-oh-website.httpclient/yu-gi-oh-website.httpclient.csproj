@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>yu_gi_oh_website.httpclient</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Yu-Gi-Oh-website.Data\Yu-Gi-Oh-website.Data.csproj" />
+    <ProjectReference Include="..\Yu-Gi-Oh-website.Models\Yu-Gi-Oh-website.Models.csproj" />
+  </ItemGroup>
+
+</Project>

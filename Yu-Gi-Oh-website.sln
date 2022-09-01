@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yu-Gi-Oh-website.Models", "Yu-Gi-Oh-website.Models\Yu-Gi-Oh-website.Models.csproj", "{C6425DAA-9CDF-4218-868A-FEEFA6178560}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yu-Gi-Oh-website.Data", "Yu-Gi-Oh-website.Data\Yu-Gi-Oh-website.Data.csproj", "{FDD128FE-2F91-4B21-928E-2E3ED563F363}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yu-Gi-Oh-website.Web", "Yu-Gi-Oh-website.Web\Yu-Gi-Oh-website.Web.csproj", "{2290B096-566D-4B24-8A0D-4F42F400C9D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yu-gi-oh-website.httpclient", "yu-gi-oh-website.httpclient\yu-gi-oh-website.httpclient.csproj", "{F0CBC86F-D545-4DCA-AF33-EF034C737FFA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C6425DAA-9CDF-4218-868A-FEEFA6178560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6425DAA-9CDF-4218-868A-FEEFA6178560}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6425DAA-9CDF-4218-868A-FEEFA6178560}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6425DAA-9CDF-4218-868A-FEEFA6178560}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDD128FE-2F91-4B21-928E-2E3ED563F363}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDD128FE-2F91-4B21-928E-2E3ED563F363}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDD128FE-2F91-4B21-928E-2E3ED563F363}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDD128FE-2F91-4B21-928E-2E3ED563F363}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2290B096-566D-4B24-8A0D-4F42F400C9D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2290B096-566D-4B24-8A0D-4F42F400C9D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2290B096-566D-4B24-8A0D-4F42F400C9D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2290B096-566D-4B24-8A0D-4F42F400C9D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0CBC86F-D545-4DCA-AF33-EF034C737FFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0CBC86F-D545-4DCA-AF33-EF034C737FFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0CBC86F-D545-4DCA-AF33-EF034C737FFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0CBC86F-D545-4DCA-AF33-EF034C737FFA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {38E6FFF9-21A1-45A8-B3FF-AF09B9B4B5B8}
+	EndGlobalSection
+EndGlobal
