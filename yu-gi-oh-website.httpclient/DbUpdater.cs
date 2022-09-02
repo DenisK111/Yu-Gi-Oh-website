@@ -20,7 +20,7 @@ namespace yu_gi_oh_website.httpclient
         {
             this.context = context;
         }
-        public async Task DbUpdate(string imageFolder, DateTime inputStartDate, DateTime? inputEndDate = null)
+        public async Task DbUpdateAsync(string imageFolder, DateTime inputStartDate, DateTime? inputEndDate = null)
         {
 
             if (!inputEndDate.HasValue)
@@ -33,10 +33,10 @@ namespace yu_gi_oh_website.httpclient
             result.EnsureSuccessStatusCode();
             string responseBody = await result.Content.ReadAsStringAsync();
 
-            var json = JsonConvert.DeserializeObject<RootObject>(responseBody);
+            RootObject? json = JsonConvert.DeserializeObject<RootObject>(responseBody);
 
             //  File.WriteAllText("text.json", JsonConvert.SerializeObject(json));
-            foreach (var cardJson in json!.Data!)
+            foreach (var cardJson in json?.Data!)
             {
                 var card = new Card()
                 {
@@ -66,7 +66,7 @@ namespace yu_gi_oh_website.httpclient
                 {
                     string path = $"{imageFolder}/{cardJson.Name}{count++}.jpg";
 
-                    await DownloadImage(httpClient, link!, path);
+                    await DownloadImageAsync(httpClient, link!, path);
 
                     var cardImage = new CardImage()
                     {
@@ -83,7 +83,7 @@ namespace yu_gi_oh_website.httpclient
 
 
         }
-        private async Task DownloadImage(HttpClient client, string url, string path)
+        private async Task DownloadImageAsync(HttpClient client, string url, string path)
         {
             var byteArray = await client.GetByteArrayAsync(url);
             await File.WriteAllBytesAsync(path, byteArray);
