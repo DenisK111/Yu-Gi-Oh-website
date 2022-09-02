@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>Yu_Gi_Oh_website.APItestApp</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Yu-Gi-Oh-website.Data\Yu-Gi-Oh-website.Data.csproj" />
+    <ProjectReference Include="..\yu-gi-oh-website.httpclient\yu-gi-oh-website.httpclient.csproj" />
+  </ItemGroup>
+
+</Project>
