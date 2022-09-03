@@ -14,25 +14,48 @@ namespace yu_gi_oh_website.httpclient
     public class DbUpdater
     {
         private readonly ApplicationDbContext context;
-      
+
 
         public DbUpdater(ApplicationDbContext context)
         {
             this.context = context;
         }
-        public async Task DbUpdateAsync(string imageFolder, DateTime inputStartDate, DateTime? inputEndDate = null)
+        public async Task AddAllCardsToDbAsync(string imageFolder, DateTime inputStartDate, DateTime? inputEndDate = null)
         {
-
             if (!inputEndDate.HasValue)
             {
                 inputEndDate = DateTime.Now;
             }
-            using var httpClient = new HttpClient();
             var apiParameters = new ApiCallString();
-            var result = await httpClient.GetAsync(apiParameters.GetAllTCGCardsString(inputStartDate, inputEndDate));
+            await UpdateDbAsync(imageFolder, apiParameters.GetAllTCGCardsString(inputStartDate, inputEndDate));
+
+        }
+
+        public async Task AddIndividualCardToDbAsync(string imageFolder,string cardName)
+        {
+            if (string.IsNullOrEmpty(cardName))
+            {
+                throw new ArgumentException("Card name cannot be empty");
+            }
+            ///TODO TEST
+            if(context.Cards.Any(x=>x.Name == cardName))
+            {
+                return;
+            }
+
+            
+            await UpdateDbAsync(imageFolder, $"https://db.ygoprodeck.com/api/v7/cardinfo.php?name={cardName}&misc=yes");
+
+        }
+
+        private async Task UpdateDbAsync(string imageFolder, string apiString)
+        {
+
+            using var httpClient = new HttpClient();
+            var result = await httpClient.GetAsync(apiString);
             result.EnsureSuccessStatusCode();
             string responseBody = await result.Content.ReadAsStringAsync();
-
+            //TODO Check for nullability
             RootObject? json = JsonConvert.DeserializeObject<RootObject>(responseBody);
 
             //  File.WriteAllText("text.json", JsonConvert.SerializeObject(json));
@@ -60,7 +83,7 @@ namespace yu_gi_oh_website.httpclient
                 await context.AddAsync(card);
                 await context.SaveChangesAsync();
 
-                var count = 1;                              
+                var count = 1;
                 List<CardImage> cardImages = new List<CardImage>();
                 foreach (var link in cardJson.ImageUrls.Select(x => x.ImageUrl))
                 {
@@ -71,7 +94,7 @@ namespace yu_gi_oh_website.httpclient
                     var cardImage = new CardImage()
                     {
                         Card = card,
-                        ImageUrl = path
+                        ImageUrl = path.Replace("wwwroot", ""),
                     };
 
                     cardImages.Add(cardImage);
@@ -80,9 +103,8 @@ namespace yu_gi_oh_website.httpclient
                 await context.AddRangeAsync(cardImages);
                 await context.SaveChangesAsync();
             }
-
-
         }
+
         private async Task DownloadImageAsync(HttpClient client, string url, string path)
         {
             var byteArray = await client.GetByteArrayAsync(url);

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yu-gi-oh-website.httpclient
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yu-Gi-Oh-website.APItestApp", "Yu-Gi-Oh-website.APItestApp\Yu-Gi-Oh-website.APItestApp.csproj", "{9FFC9846-1241-4DBB-A65C-50DE0EE9A2AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yu-Gi-Oh-website.Services", "Yu-Gi-Oh-website.Services\Yu-Gi-Oh-website.Services.csproj", "{75CE2A8C-7182-457D-BBAD-6781EFF8DC40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{9FFC9846-1241-4DBB-A65C-50DE0EE9A2AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FFC9846-1241-4DBB-A65C-50DE0EE9A2AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FFC9846-1241-4DBB-A65C-50DE0EE9A2AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75CE2A8C-7182-457D-BBAD-6781EFF8DC40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75CE2A8C-7182-457D-BBAD-6781EFF8DC40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75CE2A8C-7182-457D-BBAD-6781EFF8DC40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75CE2A8C-7182-457D-BBAD-6781EFF8DC40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

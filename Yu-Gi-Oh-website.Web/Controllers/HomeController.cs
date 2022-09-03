@@ -1,16 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using yu_gi_oh_website.httpclient;
+using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Web.Models;
 
 namespace Yu_Gi_Oh_website.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly string imageFolder = "wwwroot/Images";
         private readonly ILogger<HomeController> _logger;
+        private readonly DbUpdater updater;
+        private readonly ICardCollectionService service;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, DbUpdater updater,ICardCollectionService service)
         {
             _logger = logger;
+            this.updater = updater;
+            this.service = service;
         }
 
         public IActionResult Index()
@@ -21,6 +29,32 @@ namespace Yu_Gi_Oh_website.Web.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult AddToDb(AddToDbModel model)
+        {
+
+            var dbModel = model ?? new AddToDbModel();
+
+            return this.View(dbModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCardToDb(AddToDbModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(AddToDb),model);
+            }
+
+            await updater.AddIndividualCardToDbAsync(imageFolder, model.cardName);
+            return this.Redirect(nameof(Index));
+        }
+
+        public async Task<IActionResult> CardCollection()
+        {
+            var model = await service.GetAllCards();
+            return this.View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

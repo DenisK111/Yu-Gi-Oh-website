@@ -22,7 +22,7 @@ namespace Yu_Gi_Oh_website.Models.CardCatalogue.Models
         [MaxLength(200)]
         public string Name { get; set; } = null!;
 
-        public string CardTypeId { get; set; }  
+        public string CardTypeId { get; set; } = null!;
         public CardType CardType { get; set; } = null!;
         [MaxLength(2000)]
         public string Description { get; set; } = null!;
@@ -34,7 +34,7 @@ namespace Yu_Gi_Oh_website.Models.CardCatalogue.Models
        
         public Race Race { get; set; } = null!;
 
-        public string RaceId { get; set; } 
+        public string RaceId { get; set; } = null!;
 
       
         

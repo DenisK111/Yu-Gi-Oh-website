@@ -1,5 +1,10 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using yu_gi_oh_website.httpclient;
+using Yu_Gi_Oh_website.Services;
+using Yu_Gi_Oh_website.Services.AutoMapper;
+using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Web.Data;
 
 namespace Yu_Gi_Oh_website.Web
@@ -19,6 +24,10 @@ namespace Yu_Gi_Oh_website.Web
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddAutoMapper(typeof(CardProfile));
+            builder.Services.AddScoped<DbUpdater>();
+            builder.Services.AddTransient<ICardCollectionService, CardCollectionService>();
 
             var app = builder.Build();
 
