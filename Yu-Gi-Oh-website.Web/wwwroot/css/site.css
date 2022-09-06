@@ -1,18 +1,30 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+   
+}
+
+#leftmargin {
+    background-image: url("https://wallpaperaccess.com/full/505768.jpg");
+}
+
+#rightmargin {
+    background-image: url("https://wallpaperaccess.com/full/505768.jpg");
+}
+.fill {
+    min-height: 90vh;
+    height: 100%;
 }

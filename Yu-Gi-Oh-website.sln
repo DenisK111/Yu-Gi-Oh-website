@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yu-Gi-Oh-website.APItestApp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yu-Gi-Oh-website.Services", "Yu-Gi-Oh-website.Services\Yu-Gi-Oh-website.Services.csproj", "{75CE2A8C-7182-457D-BBAD-6781EFF8DC40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yu-Gi-Oh-website.Web.Architecture", "Yu-Gi-Oh-website.Web.Architecture\Yu-Gi-Oh-website.Web.Architecture.csproj", "{F7254DF6-79EB-4A1A-8114-4BDDF1039FBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yu-Gi-Oh-website.Web.ViewModels", "Yu-Gi-Oh-website.Web.ViewModels\Yu-Gi-Oh-website.Web.ViewModels.csproj", "{C78F4837-F48D-457B-93BF-2F9DD266B348}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{75CE2A8C-7182-457D-BBAD-6781EFF8DC40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75CE2A8C-7182-457D-BBAD-6781EFF8DC40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75CE2A8C-7182-457D-BBAD-6781EFF8DC40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7254DF6-79EB-4A1A-8114-4BDDF1039FBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7254DF6-79EB-4A1A-8114-4BDDF1039FBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7254DF6-79EB-4A1A-8114-4BDDF1039FBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7254DF6-79EB-4A1A-8114-4BDDF1039FBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C78F4837-F48D-457B-93BF-2F9DD266B348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C78F4837-F48D-457B-93BF-2F9DD266B348}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C78F4837-F48D-457B-93BF-2F9DD266B348}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C78F4837-F48D-457B-93BF-2F9DD266B348}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

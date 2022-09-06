@@ -1,0 +1,22 @@
+﻿@model IEnumerable<CardDisplayViewModel>
+    <div class="container-fluid">
+        <div class="row ali text-center g-2">
+
+            @foreach (var entry in Model)
+            {
+                <div class="col-2">
+                    <div>
+                        <a asp-action="Details" asp-route-id="@entry.Id" class="flex-lg-wrap">
+
+                            <img src="@entry.ImageUrl" alt="@entry.Name" class="img-fluid rounded" />
+
+                        </a>
+                    </div>
+                </div>
+
+
+
+            }
+
+        </div>
+    </div>

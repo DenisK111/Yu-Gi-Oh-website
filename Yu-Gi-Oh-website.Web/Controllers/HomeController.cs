@@ -51,11 +51,7 @@ namespace Yu_Gi_Oh_website.Web.Controllers
             return this.Redirect(nameof(Index));
         }
 
-        public async Task<IActionResult> CardCollection()
-        {
-            var model = await service.GetAllCards();
-            return this.View(model);
-        }
+       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

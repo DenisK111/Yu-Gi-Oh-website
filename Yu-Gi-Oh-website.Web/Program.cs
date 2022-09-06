@@ -14,27 +14,15 @@ namespace Yu_Gi_Oh_website.Web
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString, options => options.EnableRetryOnFailure()));
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-            builder.Services.AddControllersWithViews();
-
-            builder.Services.AddAutoMapper(typeof(CardProfile));
-            builder.Services.AddScoped<DbUpdater>();
-            builder.Services.AddTransient<ICardCollectionService, CardCollectionService>();
-
-            var app = builder.Build();
+            var app = builder.ConfigureAndBuild();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
+                // TODO look into DI Error with Db
+            //  new ApplicationDbContext().Database.Migrate();
+                
             }
             else
             {
@@ -47,7 +35,7 @@ namespace Yu_Gi_Oh_website.Web
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
 
