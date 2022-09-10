@@ -21,7 +21,7 @@ namespace Yu_Gi_Oh_website.Web.Data
 
         }
 
-        
+
 
         public DbSet<Card> Cards { get; set; } = null!;
         public DbSet<CardImage> CardImages { get; set; } = null!;
@@ -37,22 +37,23 @@ namespace Yu_Gi_Oh_website.Web.Data
             if (!optionsBuilder.IsConfigured)
             {
                 IConfigurationRoot configuration = new ConfigurationBuilder()
-                    .Add(new JsonConfigurationSource { Path = "appsettings.json" })                    
+                    .Add(new JsonConfigurationSource { Path = "appsettings.json" })
                           .Build();
-                             
+
                 var connectionString = configuration.GetConnectionString("DefaultConnection");
                 optionsBuilder.UseSqlServer(connectionString);
             }
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-          
+            builder.Entity<Card>()
+                .HasIndex(b => b.Name);
             base.OnModelCreating(builder);
             //builder.Entity<CustomAttributeData>().HasNoKey();
         }
 
-      
 
-       
+
+
     }
 }

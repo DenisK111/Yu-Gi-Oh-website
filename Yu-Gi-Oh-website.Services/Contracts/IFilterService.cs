@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Yu_Gi_Oh_website.Services.Contracts
 {
-    public interface IFilterService
+    public interface IFilterService<T>
     {
-
+        IQueryable<T> Search(IQueryable<T> query,string name);
     }
 }

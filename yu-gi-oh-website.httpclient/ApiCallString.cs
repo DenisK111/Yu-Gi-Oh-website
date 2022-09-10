@@ -22,7 +22,7 @@ namespace yu_gi_oh_website.httpclient
             var startDate = inputStartDate.Date.ToString("MM/dd/yyyy");
             var endDate = inputEndDate.Value.Date.ToString("MM/dd/yyyy");
 
-            return $"https://db.ygoprodeck.com/api/v7/cardinfo.php?&startdate={startDate}&enddate={endDate}&dateregion=tcg_date&misc=yes";
+            return $"https://db.ygoprodeck.com/api/v7/cardinfo.php?&startdate={startDate}&enddate={endDate}&dateregion=tcg_date&misc=yes&format=tcg";
            
         } 
     }

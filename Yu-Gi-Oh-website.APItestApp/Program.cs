@@ -10,7 +10,7 @@ namespace yu_gi_oh_website.httpclient
         {
             var startDate = DateTime.ParseExact("01/01/2000", "MM/dd/yyyy", CultureInfo.InvariantCulture);
             var endDate = DateTime.ParseExact(DateTime.UtcNow.Date.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture), "MM/dd/yyyy", CultureInfo.InvariantCulture);
-            await new DbUpdater(new ApplicationDbContext()).AddAllCardsToDbAsync("../../../Images", startDate, endDate);
+           await new DbUpdater(new ApplicationDbContext(),new ApiConstantValues(),new HttpClient()).AddAllCardsToDbAsync("../../../Images", startDate, endDate);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Services.Models;
 
@@ -15,11 +16,12 @@ namespace Yu_Gi_Oh_website.Web.Controllers
             this.service = service;
             this.mapper = mapper;
         }
-
-        public async Task<IActionResult> CardCollection()
+        [Route("CardCollection/{page=0}")]
+        public async Task<IActionResult> Index(uint page)
         {
-            var model = await service.GetAllCards();
-            var viewModel = mapper.Map<CardDisplayViewModel>(model);
+
+            var model = await service.GetAllCards(page);
+            var viewModel = mapper.Map<IEnumerable<CardDisplayViewModel>>(model);
             return this.View(viewModel);
         }
 

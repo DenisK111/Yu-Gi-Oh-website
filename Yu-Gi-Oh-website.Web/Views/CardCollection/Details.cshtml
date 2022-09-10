@@ -15,7 +15,7 @@
                 <th scope="col">Def</th>
                 <th scope="col">Level</th>
                 <th scope="col">Attribute</th>
-                <th scope="col">d</th>
+                <th scope="col">Race</th>
 
             </tr>
         </thead>
@@ -28,7 +28,7 @@
                 <td>@Model.Def</td>
                 <td>@Model.Level</td>
                 <td>@Model.CardAttribute</td>
-                <td>@Model.</td>
+                <td>@Model.Race</td>
 
             </tr>
 
@@ -38,8 +38,8 @@
 
 </p>
 
-<div class="container-fluid align-content-center d-flex">
-    <div class="row text-center g-2 ">
+<div class="container-fluid">
+    <div class="row g-2 ">
 
         @foreach (var entry in Model.CardImages)
         {

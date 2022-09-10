@@ -24,12 +24,28 @@ namespace Yu_Gi_Oh_website.Services.Implementations
 
         }
 
-        public async Task<IEnumerable<CardDisplayDto>> GetAllCards()
+        public async Task<IEnumerable<CardDisplayDto>> GetAllCards(uint page)
         {
-            var result = await mapper.ProjectTo<CardDisplayDto>(context.Cards)
-                .ToListAsync();
+            int cardsPerPage = 18;
 
+            var result = await mapper.ProjectTo<CardDisplayDto>(
+                context.Cards
+                .OrderBy(x=>x.Name)
+                .Skip((int)page * cardsPerPage)
+                .Take(cardsPerPage))
+                .ToListAsync();
+      //      CheckNull(result);
             return result;
+        }
+
+        private void CheckNull<T>(T input)
+            where T : new()
+        {
+            if(input is null)
+            {
+                input = new T();
+            }
+
         }
 
         public async Task<CardDto> GetCard(string Id)
@@ -37,5 +53,7 @@ namespace Yu_Gi_Oh_website.Services.Implementations
             var result = mapper.ProjectTo<CardDto>(context.Cards.Where(x => x.Id == Id));
             return await result.FirstAsync();
         }
+
+      
     }
 }

@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using yu_gi_oh_website.httpclient.Models;
 using Yu_Gi_Oh_website.Models;
@@ -14,14 +16,25 @@ namespace yu_gi_oh_website.httpclient
     public class DbUpdater
     {
         private readonly ApplicationDbContext context;
+        private readonly ICollection<string> races;
+        private readonly ICollection<string> types;
+        private readonly HttpClient httpClient;
 
-
-        public DbUpdater(ApplicationDbContext context)
+        public DbUpdater(ApplicationDbContext context, ApiConstantValues apiConstants, HttpClient httpClient)
         {
             this.context = context;
+            this.races = apiConstants.Races;
+            this.types = apiConstants.Types;
+            this.httpClient = httpClient;
         }
         public async Task AddAllCardsToDbAsync(string imageFolder, DateTime inputStartDate, DateTime? inputEndDate = null)
         {
+            if (context.Cards.Any())
+            {
+                return;
+            }
+            await UpdateRacesAsync();
+            await UpdateTypesAsync();
             if (!inputEndDate.HasValue)
             {
                 inputEndDate = DateTime.Now;
@@ -31,19 +44,19 @@ namespace yu_gi_oh_website.httpclient
 
         }
 
-        public async Task AddIndividualCardToDbAsync(string imageFolder,string cardName)
+        public async Task AddIndividualCardToDbAsync(string imageFolder, string cardName)
         {
             if (string.IsNullOrEmpty(cardName))
             {
                 throw new ArgumentException("Card name cannot be empty");
             }
-            ///TODO TEST
-            if(context.Cards.Any(x=>x.Name == cardName))
+
+            if (context.Cards.Any(x => x.Name == cardName))
             {
                 return;
             }
 
-            
+
             await UpdateDbAsync(imageFolder, $"https://db.ygoprodeck.com/api/v7/cardinfo.php?name={cardName}&misc=yes");
 
         }
@@ -51,13 +64,24 @@ namespace yu_gi_oh_website.httpclient
         private async Task UpdateDbAsync(string imageFolder, string apiString)
         {
 
-            using var httpClient = new HttpClient();
-            var result = await httpClient.GetAsync(apiString);
-            result.EnsureSuccessStatusCode();
-            string responseBody = await result.Content.ReadAsStringAsync();
-            //TODO Check for nullability
-            RootObject? json = JsonConvert.DeserializeObject<RootObject>(responseBody);
 
+
+            RootObject? json = await GetJsonResponse(apiString);
+            var raceObjects = new List<Race>();
+            var typeObjects = new List<CardType>();
+            var attributeObjects = new List<CardAttribute>();
+
+
+
+
+            if (json?.Data?.Count() > 1)
+            {
+                raceObjects = await context.Races.ToListAsync();
+                typeObjects = await context.Types.ToListAsync();
+                attributeObjects = await context.CardAttributes.ToListAsync();
+            }
+            List<Card> cards = new List<Card>();
+            List<CardImage> cardImages = new List<CardImage>();
             //  File.WriteAllText("text.json", JsonConvert.SerializeObject(json));
             foreach (var cardJson in json?.Data!)
             {
@@ -67,12 +91,9 @@ namespace yu_gi_oh_website.httpclient
                     Atk = cardJson.Atk,
                     Def = cardJson.Def,
                     Description = cardJson.Description,
-                    CardType = context.Types.FirstOrDefault(x => x.Name == cardJson.Type) ?? new CardType() { Name = cardJson.Type },
-                    Race = context.Races.FirstOrDefault(x => x.Name == cardJson.Race) ?? new Race() { Name = cardJson.Race },
-                    CardAttribute = cardJson.Attribute == null
-                     ? null
-                     : (context.CardAttributes.FirstOrDefault(x => x.Name == cardJson.Attribute)
-                     ?? new CardAttribute() { Name = cardJson.Attribute }),
+                    CardType = await SetType(cardJson, typeObjects),
+                    Race = await SetRace(cardJson, raceObjects),
+                    CardAttribute = await SetAttribute(cardJson, attributeObjects),
                     Scale = cardJson.Scale,
                     LinkValue = cardJson.LinkValue,
                     Level = cardJson.Level,
@@ -80,14 +101,20 @@ namespace yu_gi_oh_website.httpclient
 
 
                 };
-                await context.AddAsync(card);
-                await context.SaveChangesAsync();
+
+                if (card.Race.Name.StartsWith("Ignore ") || card.CardType.Name.StartsWith("Ignore "))
+                {
+                    string log = $"{card.Name} : Type {card.CardType.Name.Replace("Ignore ", "")}, Race: {card.Race.Name.Replace("Ignore ", "")}\n";
+                    File.AppendAllText("log.txt", log);
+                    continue;
+                }
 
                 var count = 1;
-                List<CardImage> cardImages = new List<CardImage>();
+
                 foreach (var link in cardJson.ImageUrls.Select(x => x.ImageUrl))
                 {
-                    string path = $"{imageFolder}/{cardJson.Name}{count++}.jpg";
+                    string path = $"{imageFolder}/{RemoveSpecialCharacters(cardJson.Name)}{count++}.jpg";
+                    //  Console.WriteLine(path);
 
                     await DownloadImageAsync(httpClient, link!, path);
 
@@ -100,15 +127,168 @@ namespace yu_gi_oh_website.httpclient
                     cardImages.Add(cardImage);
                 }
 
-                await context.AddRangeAsync(cardImages);
-                await context.SaveChangesAsync();
+                cards.Add(card);
+
             }
+            await context.AddRangeAsync(cards);
+            await context.SaveChangesAsync();
+            await context.AddRangeAsync(cardImages);
+            await context.SaveChangesAsync();
         }
+
 
         private async Task DownloadImageAsync(HttpClient client, string url, string path)
         {
+            if (File.Exists(path))
+            {
+                return;
+            }
             var byteArray = await client.GetByteArrayAsync(url);
             await File.WriteAllBytesAsync(path, byteArray);
+
+        }
+
+        private string RemoveSpecialCharacters(string str)
+        {
+            return Regex.Replace(str, "[^a-zA-Z0-9_]+", "_", RegexOptions.Compiled);
+        }
+
+        private async Task UpdateRacesAsync()
+        {
+            var racesObjects = new HashSet<Race>();
+
+            foreach (var race in races)
+            {
+                racesObjects.Add(new Race() { Name = race });
+
+            }
+
+            var existingRaceNames = await context.Races.Select(x => x.Name).ToListAsync();
+
+            racesObjects = racesObjects.Where(race => !existingRaceNames.Contains(race.Name)).ToHashSet();
+
+            await context.AddRangeAsync(racesObjects);
+            await context.SaveChangesAsync();
+
+        }
+
+        private async Task UpdateTypesAsync()
+        {
+            var typeObjects = new HashSet<CardType>();
+
+            foreach (var type in types)
+            {
+                typeObjects.Add(new CardType() { Name = type });
+
+            }
+
+            var existingTypeNames = await context.Types.Select(x => x.Name).ToListAsync();
+
+            typeObjects = typeObjects.Where(type => !existingTypeNames.Contains(type.Name)).ToHashSet();
+
+            await context.AddRangeAsync(typeObjects);
+            await context.SaveChangesAsync();
+
+        }
+
+        private async Task<RootObject?> GetJsonResponse(string apiString)
+        {
+
+            var result = await httpClient.GetAsync(apiString);
+            result.EnsureSuccessStatusCode();
+            string responseBody = await result.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<RootObject>(responseBody);
+        }
+
+        private async Task<Race> SetRace(CardDTO json, ICollection<Race> raceObjects)
+        {
+            Race? race;
+            if (raceObjects.Any())
+            {
+                race = raceObjects.FirstOrDefault(x => x.Name == json.Race)!;
+
+                if (race is null)
+                {
+                    race = new Race() { Name = $"Ignore {json.Race}" };
+                }
+
+                return race;
+            }
+
+            race = await context.Races.FirstOrDefaultAsync(x => x.Name == json.Race);
+
+            if (race is null)
+            {
+                throw new ArgumentException("Race is invalid value");
+            }
+
+            return race;
+        }
+
+        private async Task<CardType> SetType(CardDTO json, ICollection<CardType> typeObjects)
+        {
+            CardType? type;
+            if (typeObjects.Any())
+            {
+                type = typeObjects.FirstOrDefault(x => x.Name == json.Type)!;
+
+                if (type is null)
+                {
+                    type = new CardType() { Name = $"Ignore {json.Type}" };
+                }
+
+                return type;
+            }
+
+            type = await context.Types.FirstOrDefaultAsync(x => x.Name == json.Type);
+
+            if (type is null)
+            {
+                throw new ArgumentException("Type is invalid value");
+            }
+
+            return type;
+
+        }
+        private async Task<CardAttribute?> SetAttribute(CardDTO json, ICollection<CardAttribute> attributeObjects)
+        {
+            if (json.Attribute is null)
+            {
+                return null;
+            }
+
+            CardAttribute? attribute;
+
+            if (attributeObjects.Any())
+            {
+                attribute = attributeObjects.FirstOrDefault(o => o.Name == json.Attribute);
+
+                if (attribute is null && !attributeObjects.Select(x => x.Name).Contains(json.Attribute))
+                {
+                    attribute = new CardAttribute() { Name = json.Name };
+                    attributeObjects.Add(attribute);
+
+                }
+
+                return attribute;
+
+
+            }
+
+            attribute = await context.CardAttributes.FirstOrDefaultAsync(x => x.Name == json.Attribute);
+
+            if (attribute is null)
+            {
+
+                attribute = new CardAttribute() { Name = json.Attribute };
+                attributeObjects.Add(attribute);
+
+            }
+
+            return attribute;
+
+
+
 
         }
     }

@@ -58,5 +58,14 @@ namespace Yu_Gi_Oh_website.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [Route("/update")]
+        public async Task<IActionResult> UpdateDb()
+        {
+            
+            await updater.AddAllCardsToDbAsync(imageFolder,DateTime.MinValue);
+
+            return RedirectToAction(nameof(this.Index));
+        }
     }
 }
