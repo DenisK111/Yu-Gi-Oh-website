@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
@@ -16,32 +17,36 @@ namespace Yu_Gi_Oh_website.Services.Implementations
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
+        private readonly IFilterService filter;
 
-        public CardCollectionService(ApplicationDbContext context, IMapper mapper)
+        public CardCollectionService(ApplicationDbContext context, IMapper mapper, IFilterService filter)
         {
             this.context = context;
             this.mapper = mapper;
-
+            this.filter = filter;
+        }
+             
+        private IQueryable<Card> Filter(IQueryable<Card> expression, string name)
+        {
+            return filter.Search(expression, name);
         }
 
-        public async Task<IEnumerable<CardDisplayDto>> GetAllCards(uint page)
+        public async Task<IEnumerable<CardDisplayDto>> GetCards(uint page, string name)
         {
             int cardsPerPage = 18;
-
-            var result = await mapper.ProjectTo<CardDisplayDto>(
-                context.Cards
-                .OrderBy(x=>x.Name)
-                .Skip((int)page * cardsPerPage)
-                .Take(cardsPerPage))
-                .ToListAsync();
-      //      CheckNull(result);
-            return result;
+            var result = context.Cards .OrderBy(x => x.Name).AsNoTracking();
+            var filteredResult = Filter(result, name);
+            var endResult = await mapper.ProjectTo<CardDisplayDto>(filteredResult)
+            .Skip((int)page * cardsPerPage)
+            .Take(cardsPerPage)
+            .ToListAsync();
+            return endResult;
         }
 
         private void CheckNull<T>(T input)
             where T : new()
         {
-            if(input is null)
+            if (input is null)
             {
                 input = new T();
             }
@@ -54,6 +59,6 @@ namespace Yu_Gi_Oh_website.Services.Implementations
             return await result.FirstAsync();
         }
 
-      
+
     }
 }

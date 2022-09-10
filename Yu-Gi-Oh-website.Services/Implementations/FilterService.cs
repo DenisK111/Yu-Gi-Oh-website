@@ -9,12 +9,16 @@ using Yu_Gi_Oh_website.Services.Contracts;
 
 namespace Yu_Gi_Oh_website.Services.Implementations
 {
-    public class FilterService : IFilterService<Expression<Func<Card>>>
+    public class FilterService : IFilterService
     {
         
-        public IQueryable<Expression<Func<Card>>> Search(IQueryable<Expression<Func<Card>>> query, string name)
+        public IQueryable<Card> Search(IQueryable<Card> query, string name)
         {
-            return query.Where(x => x.Name == name);
+            return query.Where(x => x.Name.Contains(name));
+
+            
         }
+
+       
     }
 }

@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using yu_gi_oh_website.httpclient;
+using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
 using Yu_Gi_Oh_website.Services.AutoMapper;
 using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Services.Implementations;
@@ -44,6 +46,9 @@ namespace Yu_Gi_Oh_website.Web
             builder.Services.AddTransient<ICardCollectionService, CardCollectionService>();
             builder.Services.AddSingleton<ApiConstantValues>();
             builder.Services.AddTransient<HttpClient>();
+            builder.Services.AddScoped<IFilterService, FilterService>();
+
+           
 
             return builder.Build();
         }

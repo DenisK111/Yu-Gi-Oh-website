@@ -16,11 +16,11 @@ namespace Yu_Gi_Oh_website.Web.Controllers
             this.service = service;
             this.mapper = mapper;
         }
-        [Route("CardCollection/{page=0}")]
+        [Route("CardCollection/{page:int}")]
         public async Task<IActionResult> Index(uint page)
         {
 
-            var model = await service.GetAllCards(page);
+            var model = await service.GetCards(page,"");
             var viewModel = mapper.Map<IEnumerable<CardDisplayViewModel>>(model);
             return this.View(viewModel);
         }
@@ -30,6 +30,16 @@ namespace Yu_Gi_Oh_website.Web.Controllers
             var model = await service.GetCard(Id);
             var viewModel = mapper.Map<CardViewModel>(model);
             return this.View(viewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Search(uint page, string name = "")
+        {
+
+
+            var model = await service.GetCards(page, name);
+            var viewModel = mapper.Map<IEnumerable<CardDisplayViewModel>>(model);
+            return this.View(nameof(Index),viewModel);
         }
     }
 }
