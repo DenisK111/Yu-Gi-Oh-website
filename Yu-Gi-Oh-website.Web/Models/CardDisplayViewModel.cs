@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Yu_Gi_Oh_website.Services.Models
+namespace Yu_Gi_Oh_website.Web.Models
 {
     public class CardDisplayViewModel
     {

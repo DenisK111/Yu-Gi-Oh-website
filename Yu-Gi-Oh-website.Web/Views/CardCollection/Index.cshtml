@@ -1,22 +1,64 @@
-﻿@model IEnumerable<CardDisplayViewModel>
-    <div class="container-fluid">
-        <div class="row ali text-center g-2">
+﻿@model CardCollectionViewModel
 
-            @foreach (var entry in Model)
-            {
-                <div class="col-2">
-                    <div>
-                        <a asp-action="Details" asp-route-id="@entry.Id" class="flex-lg-wrap">
 
-                            <img src="@entry.ImageUrl" alt="@entry.Name" class="img-fluid rounded" />
 
-                        </a>
+<div>
+
+
+    <form class="d-flex row" asp-controller="CardCollection" asp-action="Index" method="get">
+        <div class="row py-2">
+            <div class="col-3"></div>
+            <div class="col-5">
+                <input class="form-control me-sm-2" type="text" placeholder="Search for card..." value="@Model.FilterModel.SearchTerm" asp-for="FilterModel.SearchTerm">
+            </div>
+            <div class="col-2 px-1">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </div>
+
+            <div class="row p-2">
+                @for (var i = 0; i < Model.FilterModel.FilterEntries.Count; i++)
+                {<div class="col-4 px-2 m-2">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                            <input type="checkbox" class="btn-check" id="@($"btncheck" + i)" autocomplete="off" asp-for="@Model.FilterModel.FilterEntries[i].IsChecked" />
+                            <label class="btn btn-info" for="@($"btncheck" + i)">@Model.FilterModel.FilterEntries[i].Name</label>
+                            <input type="hidden" asp-for="@Model.FilterModel.FilterEntries[i].Name" />
+                        </div>
                     </div>
-                </div>
 
 
-
-            }
+                }
+            </div>
 
         </div>
-    </div>
+    </form>
+
+</div>
+
+
+<div class="row text-center g-2">
+
+  
+
+
+
+    @foreach (var entry in Model.CardModel)
+    {
+        <div class="col-xs-8r">
+            <div>
+                <a asp-action="Details" asp-route-id="@entry.Id" class="flex-lg-wrap">
+
+                    <img src="@entry.ImageUrl" alt="@entry.Name" class="img-fluid rounded" />
+
+                </a>
+            </div>
+        </div>
+
+
+
+    }
+</div>
+
+
+
+
+

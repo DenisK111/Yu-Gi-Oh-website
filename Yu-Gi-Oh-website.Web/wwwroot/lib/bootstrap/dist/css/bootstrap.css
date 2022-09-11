@@ -727,6 +727,11 @@ progress {
   width: 16.66666667%;
 }
 
+.col-8-custom {
+    flex: 0 0 auto;
+    width: 12.5%;
+}
+
 .col-3 {
   flex: 0 0 auto;
   width: 25%;

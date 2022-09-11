@@ -18,6 +18,7 @@ namespace Yu_Gi_Oh_website.Services.Implementations
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
         private readonly IFilterService filter;
+        private readonly int cardsPerPage = 14;
 
         public CardCollectionService(ApplicationDbContext context, IMapper mapper, IFilterService filter)
         {
@@ -26,17 +27,17 @@ namespace Yu_Gi_Oh_website.Services.Implementations
             this.filter = filter;
         }
              
-        private IQueryable<Card> Filter(IQueryable<Card> expression, string name)
+        private IQueryable<Card> Filter(IQueryable<Card> expression, string name, string[] parameters)
         {
-            return filter.Search(expression, name);
+            return filter.Search(expression, name,parameters);
         }
 
-        public async Task<IEnumerable<CardDisplayDto>> GetCards(uint page, string name)
+        public async Task<IEnumerable<CardDisplayDto>> GetCards(uint page, string name,string[] parameters,bool applyFilter)
         {
-            int cardsPerPage = 18;
+            
             var result = context.Cards .OrderBy(x => x.Name).AsNoTracking();
-            var filteredResult = Filter(result, name);
-            var endResult = await mapper.ProjectTo<CardDisplayDto>(filteredResult)
+            result = applyFilter ? Filter(result, name,parameters) : result;
+            var endResult = await mapper.ProjectTo<CardDisplayDto>(result)
             .Skip((int)page * cardsPerPage)
             .Take(cardsPerPage)
             .ToListAsync();
@@ -53,9 +54,9 @@ namespace Yu_Gi_Oh_website.Services.Implementations
 
         }
 
-        public async Task<CardDto> GetCard(string Id)
+        public async Task<CardDto> GetCard(string id)
         {
-            var result = mapper.ProjectTo<CardDto>(context.Cards.Where(x => x.Id == Id));
+            var result = mapper.ProjectTo<CardDto>(context.Cards.Where(x => x.Id == id));
             return await result.FirstAsync();
         }
 

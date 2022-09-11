@@ -1,16 +1,16 @@
-﻿<!DOCTYPE html >
-<html lang="en" >
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Yu-Gi-Oh BG</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Yu_Gi_Oh_website.Web.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/solarly.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
 
 </head>
-<body >
+<body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
@@ -47,74 +47,75 @@
                         </li>
                     </ul>
                     <partial class="nav-link" name="_LoginPartial" />
-                    <form class="d-flex" asp-controller="CardCollection" asp-action ="Search" method="get">
-                        <input class="form-control me-sm-2" type="text" placeholder="Search for card..." name="name" >
+
+                    <form class="d-flex" asp-controller="CardCollection" asp-action="Index" asp-route-page="0" method="get">
+                        <input class="form-control me-sm-2" type="text" placeholder="Search for card..." name="searchTerm">
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </div>
             </div>
         </nav>
         @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand text-primary" asp-area="" asp-controller="Home" asp-action="Index">Yu_Gi_Oh_website.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="AddToDb">Add Card</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-muted" asp-area="" asp-controller="CardCollection" asp-action="CardCollection">Card Collection</a>
-                        </li>
+                <div class="container-fluid">
+                    <a class="navbar-brand text-primary" asp-area="" asp-controller="Home" asp-action="Index">Yu_Gi_Oh_website.Web</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="AddToDb">Add Card</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-muted" asp-area="" asp-controller="CardCollection" asp-action="CardCollection">Card Collection</a>
+                            </li>
 
-                    </ul>
-                    <partial name="_LoginPartial" />
+                        </ul>
+                        <partial name="_LoginPartial" />
+                    </div>
                 </div>
-            </div>
-        </nav>*@
+            </nav>*@
     </header>
-        <div class="container-fluid">
-            <main role="main" class="pb-3">
-                <div class="row fill" >
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            <div class="row fill">
 
-                    <div class="col-md-2" id="leftmargin">
+                <div class="col-md-2" id="leftmargin">
 
-
-                    </div>
-                    <div class="col-md-8">
-
-                @RenderBody()
-
-                    </div>
-                    <div class="col-md-2" id="rightmargin">
-
-
-                    </div>
 
                 </div>
-            </main>
-        </div>
+                <div class="col-md-8">
 
-        <footer class="border-top footer text-muted mt-auto">
-            <div class="container">
-                &copy; 2022 - Yu_Gi_Oh_website.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    @RenderBody()
+
+                </div>
+                <div class="col-md-2" id="rightmargin">
+
+
+                </div>
+
             </div>
-        </footer>
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+        </main>
+    </div>
 
-        @await RenderSectionAsync("Scripts", required: false)
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <footer class="border-top footer text-muted mt-auto">
+        <div class="container">
+            &copy; 2022 - Yu_Gi_Oh_website.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>
