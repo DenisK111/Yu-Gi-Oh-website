@@ -1,9 +1,7 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using yu_gi_oh_website.httpclient;
+
 using Yu_Gi_Oh_website.Services;
-using Yu_Gi_Oh_website.Services.AutoMapper;
 using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Web.Data;
 

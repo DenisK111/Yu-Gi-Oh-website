@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Yu-Gi-Oh-website.Services\Yu-Gi-Oh-website.Services.csproj" />
+    <ProjectReference Include="..\..\Services\Yu-Gi-Oh-website.Services\Yu-Gi-Oh-website.Services.csproj" />
     <ProjectReference Include="..\Yu-Gi-Oh-website.Web.ViewModels\Yu-Gi-Oh-website.Web.ViewModels.csproj" />
   </ItemGroup>
 

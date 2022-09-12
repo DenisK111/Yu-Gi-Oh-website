@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
-using yu_gi_oh_website.httpclient;
+
+using Yu_Gi_Oh_website.Models;
 using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
-using Yu_Gi_Oh_website.Services.AutoMapper;
+using Yu_Gi_Oh_website.Services.ApiService;
 using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Services.Implementations;
+using Yu_Gi_Oh_website.Web.AutoMapper;
 using Yu_Gi_Oh_website.Web.Data;
 
 namespace Yu_Gi_Oh_website.Web
@@ -20,7 +22,8 @@ namespace Yu_Gi_Oh_website.Web
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString, options => options.EnableRetryOnFailure()));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => {
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+            {
 
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireDigit = false;
@@ -29,9 +32,16 @@ namespace Yu_Gi_Oh_website.Web
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
-                })
-                .AddRoles<IdentityRole>()
+            })
+                .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            builder.Services.Configure<CookiePolicyOptions>(
+                options =>
+                {
+                    options.CheckConsentNeeded = context => true;
+                    options.MinimumSameSitePolicy = SameSiteMode.None;
+                });
 
 
             builder.Services.AddControllersWithViews(options =>
@@ -42,13 +52,12 @@ namespace Yu_Gi_Oh_website.Web
 
             builder.Services.AddAutoMapper(typeof(CardProfile));
 
-            builder.Services.AddTransient<DbUpdater>();
+            builder.Services.AddTransient<IDbUpdateService,DbUpdateService>();
             builder.Services.AddTransient<ICardCollectionService, CardCollectionService>();
-            builder.Services.AddSingleton<ApiConstantValues>();
             builder.Services.AddTransient<HttpClient>();
             builder.Services.AddScoped<IFilterService, FilterService>();
 
-           
+
 
             return builder.Build();
         }

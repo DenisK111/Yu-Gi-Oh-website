@@ -12,8 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Yu-Gi-Oh-website.Data\Yu-Gi-Oh-website.Data.csproj" />
-    <ProjectReference Include="..\Yu-Gi-Oh-website.Models\Yu-Gi-Oh-website.Models.csproj" />
+    <ProjectReference Include="..\..\Yu-Gi-Oh-website.Data\Yu-Gi-Oh-website.Data.csproj" />
+    <ProjectReference Include="..\..\Yu-Gi-Oh-website.Models\Yu-Gi-Oh-website.Models.csproj" />
+    <ProjectReference Include="..\..\Yu-Gi-Oh-website.Data\Yu-Gi-Oh-website.Data.csproj" />
+    <ProjectReference Include="..\..\Yu-Gi-Oh-website.Models\Yu-Gi-Oh-website.Models.csproj" />
   </ItemGroup>
 
 </Project>

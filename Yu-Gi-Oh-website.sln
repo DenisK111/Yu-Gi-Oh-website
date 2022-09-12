@@ -3,21 +3,28 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yu-Gi-Oh-website.Models", "Yu-Gi-Oh-website.Models\Yu-Gi-Oh-website.Models.csproj", "{C6425DAA-9CDF-4218-868A-FEEFA6178560}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yu-Gi-Oh-website.Models", "Yu-Gi-Oh-website.Models\Yu-Gi-Oh-website.Models.csproj", "{C6425DAA-9CDF-4218-868A-FEEFA6178560}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yu-Gi-Oh-website.Data", "Yu-Gi-Oh-website.Data\Yu-Gi-Oh-website.Data.csproj", "{FDD128FE-2F91-4B21-928E-2E3ED563F363}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yu-Gi-Oh-website.Data", "Yu-Gi-Oh-website.Data\Yu-Gi-Oh-website.Data.csproj", "{FDD128FE-2F91-4B21-928E-2E3ED563F363}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yu-Gi-Oh-website.Web", "Yu-Gi-Oh-website.Web\Yu-Gi-Oh-website.Web.csproj", "{2290B096-566D-4B24-8A0D-4F42F400C9D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yu-Gi-Oh-website.APItestApp", "Yu-Gi-Oh-website.APItestApp\Yu-Gi-Oh-website.APItestApp.csproj", "{9FFC9846-1241-4DBB-A65C-50DE0EE9A2AA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C6425DAA-9CDF-4218-868A-FEEFA6178560} = {C6425DAA-9CDF-4218-868A-FEEFA6178560}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yu-gi-oh-website.httpclient", "yu-gi-oh-website.httpclient\yu-gi-oh-website.httpclient.csproj", "{F0CBC86F-D545-4DCA-AF33-EF034C737FFA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{9D5D5894-8A4E-477A-86CD-02F185469EB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yu-Gi-Oh-website.APItestApp", "Yu-Gi-Oh-website.APItestApp\Yu-Gi-Oh-website.APItestApp.csproj", "{9FFC9846-1241-4DBB-A65C-50DE0EE9A2AA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{6DA43028-D21C-4884-B273-FC5F6DD2363B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yu-Gi-Oh-website.Services", "Yu-Gi-Oh-website.Services\Yu-Gi-Oh-website.Services.csproj", "{75CE2A8C-7182-457D-BBAD-6781EFF8DC40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yu-Gi-Oh-website.Services", "Services\Yu-Gi-Oh-website.Services\Yu-Gi-Oh-website.Services.csproj", "{FE2C5126-D019-4898-8D69-C33689927700}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yu-Gi-Oh-website.Web.Architecture", "Yu-Gi-Oh-website.Web.Architecture\Yu-Gi-Oh-website.Web.Architecture.csproj", "{F7254DF6-79EB-4A1A-8114-4BDDF1039FBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yu-Gi-Oh-website.Services.ApiService", "Services\Yu-Gi-Oh-website.Services.ApiService\Yu-Gi-Oh-website.Services.ApiService.csproj", "{0BE474A7-6503-4191-9304-0FD18761F223}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yu-Gi-Oh-website.Web.ViewModels", "Yu-Gi-Oh-website.Web.ViewModels\Yu-Gi-Oh-website.Web.ViewModels.csproj", "{C78F4837-F48D-457B-93BF-2F9DD266B348}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yu-Gi-Oh-website.Web", "Web\Yu-Gi-Oh-website.Web\Yu-Gi-Oh-website.Web.csproj", "{7DD8D94C-BB08-40E5-99A8-3486A976855F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yu-Gi-Oh-website.Web.Architecture", "Web\Yu-Gi-Oh-website.Web.Architecture\Yu-Gi-Oh-website.Web.Architecture.csproj", "{9812710B-8984-4FC6-B3ED-5030B4E17404}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yu-Gi-Oh-website.Web.ViewModels", "Web\Yu-Gi-Oh-website.Web.ViewModels\Yu-Gi-Oh-website.Web.ViewModels.csproj", "{A0C31A4A-91DB-4FFE-A163-F7EF2A2E5E49}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,33 +40,40 @@ Global
 		{FDD128FE-2F91-4B21-928E-2E3ED563F363}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDD128FE-2F91-4B21-928E-2E3ED563F363}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDD128FE-2F91-4B21-928E-2E3ED563F363}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2290B096-566D-4B24-8A0D-4F42F400C9D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2290B096-566D-4B24-8A0D-4F42F400C9D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2290B096-566D-4B24-8A0D-4F42F400C9D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2290B096-566D-4B24-8A0D-4F42F400C9D7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F0CBC86F-D545-4DCA-AF33-EF034C737FFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F0CBC86F-D545-4DCA-AF33-EF034C737FFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F0CBC86F-D545-4DCA-AF33-EF034C737FFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F0CBC86F-D545-4DCA-AF33-EF034C737FFA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9FFC9846-1241-4DBB-A65C-50DE0EE9A2AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9FFC9846-1241-4DBB-A65C-50DE0EE9A2AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FFC9846-1241-4DBB-A65C-50DE0EE9A2AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FFC9846-1241-4DBB-A65C-50DE0EE9A2AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{75CE2A8C-7182-457D-BBAD-6781EFF8DC40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{75CE2A8C-7182-457D-BBAD-6781EFF8DC40}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{75CE2A8C-7182-457D-BBAD-6781EFF8DC40}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{75CE2A8C-7182-457D-BBAD-6781EFF8DC40}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F7254DF6-79EB-4A1A-8114-4BDDF1039FBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F7254DF6-79EB-4A1A-8114-4BDDF1039FBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F7254DF6-79EB-4A1A-8114-4BDDF1039FBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F7254DF6-79EB-4A1A-8114-4BDDF1039FBC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C78F4837-F48D-457B-93BF-2F9DD266B348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C78F4837-F48D-457B-93BF-2F9DD266B348}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C78F4837-F48D-457B-93BF-2F9DD266B348}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C78F4837-F48D-457B-93BF-2F9DD266B348}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE2C5126-D019-4898-8D69-C33689927700}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE2C5126-D019-4898-8D69-C33689927700}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE2C5126-D019-4898-8D69-C33689927700}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE2C5126-D019-4898-8D69-C33689927700}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BE474A7-6503-4191-9304-0FD18761F223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BE474A7-6503-4191-9304-0FD18761F223}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BE474A7-6503-4191-9304-0FD18761F223}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BE474A7-6503-4191-9304-0FD18761F223}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DD8D94C-BB08-40E5-99A8-3486A976855F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DD8D94C-BB08-40E5-99A8-3486A976855F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DD8D94C-BB08-40E5-99A8-3486A976855F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DD8D94C-BB08-40E5-99A8-3486A976855F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9812710B-8984-4FC6-B3ED-5030B4E17404}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9812710B-8984-4FC6-B3ED-5030B4E17404}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9812710B-8984-4FC6-B3ED-5030B4E17404}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9812710B-8984-4FC6-B3ED-5030B4E17404}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0C31A4A-91DB-4FFE-A163-F7EF2A2E5E49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0C31A4A-91DB-4FFE-A163-F7EF2A2E5E49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0C31A4A-91DB-4FFE-A163-F7EF2A2E5E49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0C31A4A-91DB-4FFE-A163-F7EF2A2E5E49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FE2C5126-D019-4898-8D69-C33689927700} = {9D5D5894-8A4E-477A-86CD-02F185469EB6}
+		{0BE474A7-6503-4191-9304-0FD18761F223} = {9D5D5894-8A4E-477A-86CD-02F185469EB6}
+		{7DD8D94C-BB08-40E5-99A8-3486A976855F} = {6DA43028-D21C-4884-B273-FC5F6DD2363B}
+		{9812710B-8984-4FC6-B3ED-5030B4E17404} = {6DA43028-D21C-4884-B273-FC5F6DD2363B}
+		{A0C31A4A-91DB-4FFE-A163-F7EF2A2E5E49} = {6DA43028-D21C-4884-B273-FC5F6DD2363B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {38E6FFF9-21A1-45A8-B3FF-AF09B9B4B5B8}

@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace yu_gi_oh_website.httpclient
-{
-    public class ApiConstantValues
+namespace Yu_Gi_Oh_website.Services.ApiService
+
+{ 
+    internal static class ApiConstantValues
     {
-        private HashSet<string> types = new HashSet<string>()
+        internal static readonly string allCardsString = $"https://db.ygoprodeck.com/api/v7/cardinfo.php?&startdate={DateTime.MinValue.Date.ToString("MM/dd/yyyy")}&enddate={DateTime.UtcNow.Date.ToString("MM/dd/yyyy")}&dateregion=tcg_date&misc=yes&format=tcg";
+        internal static readonly HashSet<string> types = new HashSet<string>()
         {
             "Effect Monster",
             "Flip Effect Monster",
@@ -39,7 +41,7 @@ namespace yu_gi_oh_website.httpclient
             "XYZ Pendulum Effect Monster",
         };
 
-        private HashSet<string> races = new HashSet<string>()
+        internal static readonly HashSet<string> races = new HashSet<string>()
         {
             "Aqua",
             "Beast",
@@ -76,10 +78,7 @@ namespace yu_gi_oh_website.httpclient
             "Continuous",
             "Counter",
         };
-
-        public ICollection<string> Types => this.types;
-
-        public ICollection<string> Races => this.races;
+              
 
 
     }

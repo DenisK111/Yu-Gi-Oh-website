@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace yu_gi_oh_website.httpclient.Models
+namespace Yu_Gi_Oh_website.Services.ApiService.Models
+
 {
     public class RootObject
     {
-       
-            public CardDTO[]? Data { get; set; }
-        
+
+        public CardDTO[]? Data { get; set; }
+
     }
 }

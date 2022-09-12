@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using yu_gi_oh_website.httpclient;
+using Yu_Gi_Oh_website.Services.ApiService;
 using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Web.Models;
 
@@ -11,10 +11,10 @@ namespace Yu_Gi_Oh_website.Web.Controllers
     {
         private readonly string imageFolder = "wwwroot/Images";
         private readonly ILogger<HomeController> _logger;
-        private readonly DbUpdater updater;
+        private readonly IDbUpdateService updater;
         private readonly ICardCollectionService service;
 
-        public HomeController(ILogger<HomeController> logger, DbUpdater updater,ICardCollectionService service)
+        public HomeController(ILogger<HomeController> logger, IDbUpdateService updater,ICardCollectionService service)
         {
             _logger = logger;
             this.updater = updater;
@@ -63,7 +63,7 @@ namespace Yu_Gi_Oh_website.Web.Controllers
         public async Task<IActionResult> UpdateDb()
         {
             
-            await updater.AddAllCardsToDbAsync(imageFolder,DateTime.MinValue);
+            await updater.AddAllCardsToDbAsync(imageFolder);
 
             return RedirectToAction(nameof(this.Index));
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,28 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using yu_gi_oh_website.httpclient.Models;
 using Yu_Gi_Oh_website.Models;
 using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
+using Yu_Gi_Oh_website.Services.ApiService.Models;
 using Yu_Gi_Oh_website.Web.Data;
 
-namespace yu_gi_oh_website.httpclient
+namespace Yu_Gi_Oh_website.Services.ApiService
 {
-    public class DbUpdater
+    public class DbUpdateService : IDbUpdateService
     {
-        private readonly ApplicationDbContext context;
-        private readonly ICollection<string> races;
-        private readonly ICollection<string> types;
+        private readonly ApplicationDbContext context;     
         private readonly HttpClient httpClient;
 
-        public DbUpdater(ApplicationDbContext context, ApiConstantValues apiConstants, HttpClient httpClient)
+        public DbUpdateService(ApplicationDbContext context, HttpClient httpClient)
         {
-            this.context = context;
-            this.races = apiConstants.Races;
-            this.types = apiConstants.Types;
+            this.context = context;            
             this.httpClient = httpClient;
         }
-        public async Task AddAllCardsToDbAsync(string imageFolder, DateTime inputStartDate, DateTime? inputEndDate = null)
+        public async Task AddAllCardsToDbAsync(string imageFolder)
         {
             if (context.Cards.Any())
             {
@@ -35,12 +32,9 @@ namespace yu_gi_oh_website.httpclient
             }
             await UpdateRacesAsync();
             await UpdateTypesAsync();
-            if (!inputEndDate.HasValue)
-            {
-                inputEndDate = DateTime.Now;
-            }
-            var apiParameters = new ApiCallString();
-            await UpdateDbAsync(imageFolder, apiParameters.GetAllTCGCardsString(inputStartDate, inputEndDate));
+         
+           
+            await UpdateDbAsync(imageFolder, ApiConstantValues.allCardsString);
 
         }
 
@@ -157,7 +151,7 @@ namespace yu_gi_oh_website.httpclient
         {
             var racesObjects = new HashSet<Race>();
 
-            foreach (var race in races)
+            foreach (var race in ApiConstantValues.races)
             {
                 racesObjects.Add(new Race() { Name = race });
 
@@ -176,7 +170,7 @@ namespace yu_gi_oh_website.httpclient
         {
             var typeObjects = new HashSet<CardType>();
 
-            foreach (var type in types)
+            foreach (var type in ApiConstantValues.types)
             {
                 typeObjects.Add(new CardType() { Name = type });
 
