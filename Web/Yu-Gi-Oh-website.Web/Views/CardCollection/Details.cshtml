@@ -1,6 +1,10 @@
 ﻿@model CardViewModel
 
+@{  
+    ViewData["atk"] = Model.Atk >= 0 ? Model.Atk : Model.Atk.HasValue ? "?" : null;
+    ViewData["def"] = Model.Def >= 0 ? Model.Def : Model.Def.HasValue ? "?" : null;
 
+}
 
 
 
@@ -10,26 +14,28 @@
             <tr>
 
                 <th scope="col">Name</th>
-                <th scope="col">Type</th>
+                <th scope="col">Card Type</th>
                 <th scope="col">Atk</th>
                 <th scope="col">Def</th>
-                <th scope="col">Level</th>
+                <th scope="col">Level/Rank</th>
                 <th scope="col">Attribute</th>
-                <th scope="col">Race</th>
-
+                <th scope="col">Type</th>
+                <th scope="col">Scale</th>
+                <th scope="col">Link Value</th>
             </tr>
         </thead>
         <tbody>
             <tr>
 
                 <td>@Model.Name</td>
-                <td>@Model.Race</td>
-                <td>@Model.Atk</td>
-                <td>@Model.Def</td>
+                <td>@Model.ExactCardType</td>
+                <td>@ViewData["atk"]</td>
+                <td>@ViewData["def"]</td>
                 <td>@Model.Level</td>
                 <td>@Model.CardAttribute</td>
-                <td>@Model.Race</td>
-
+                <td>@Model.Type</td>
+                <td>@Model.Scale</td>
+                <td>@Model.LinkValue</td>
             </tr>
 
         </tbody>
@@ -49,6 +55,9 @@
 
 
         }
+
+        <h2>Description</h2>
+        <div>@Model.Description</div>
 
     </div>
 </div>

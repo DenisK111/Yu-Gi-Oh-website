@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Yu_Gi_Oh_website.Services.ApiService.Models
 {
-    public class CardDTO
+    public class CardApiDTO
     {
 
 
@@ -18,8 +18,8 @@ namespace Yu_Gi_Oh_website.Services.ApiService.Models
         [JsonProperty("desc")]
         [JsonRequired]
         public string Description { get; set; } = null!;
-        public ushort? Atk { get; set; }
-        public ushort? Def { get; set; }
+        public short? Atk { get; set; }
+        public short? Def { get; set; }
 
         public byte? Level { get; set; }
         [JsonRequired]
@@ -46,8 +46,10 @@ public class CardImages
 
 public class Misc
 {
-    [JsonProperty("has_effect")]
-    public bool HasEffect { get; set; }
+    [JsonProperty("question_atk")]
+    public bool QuestionAtk { get; set; }
+    [JsonProperty("question_def")]
+    public bool QuestionDef { get; set; }
 }
 
 

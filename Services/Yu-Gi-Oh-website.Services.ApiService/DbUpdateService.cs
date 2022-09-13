@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Yu_Gi_Oh_website.Models;
 using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
+using Yu_Gi_Oh_website.Models.Enums;
 using Yu_Gi_Oh_website.Services.ApiService.Models;
 using Yu_Gi_Oh_website.Web.Data;
 
@@ -16,12 +17,12 @@ namespace Yu_Gi_Oh_website.Services.ApiService
 {
     public class DbUpdateService : IDbUpdateService
     {
-        private readonly ApplicationDbContext context;     
+        private readonly ApplicationDbContext context;
         private readonly HttpClient httpClient;
 
         public DbUpdateService(ApplicationDbContext context, HttpClient httpClient)
         {
-            this.context = context;            
+            this.context = context;
             this.httpClient = httpClient;
         }
         public async Task AddAllCardsToDbAsync(string imageFolder)
@@ -30,10 +31,8 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             {
                 return;
             }
-            await UpdateRacesAsync();
             await UpdateTypesAsync();
-         
-           
+            await UpdateExactTypesAsync();
             await UpdateDbAsync(imageFolder, ApiConstantValues.allCardsString);
 
         }
@@ -58,22 +57,23 @@ namespace Yu_Gi_Oh_website.Services.ApiService
         private async Task UpdateDbAsync(string imageFolder, string apiString)
         {
 
-
-
-            RootObject? json = await GetJsonResponse(apiString);
-            var raceObjects = new List<Race>();
+            RootObject? json = await GetJsonResponseAsync(apiString);
             var typeObjects = new List<CardType>();
+            var exactCardTypeObjects = new List<ExactCardType>();
             var attributeObjects = new List<CardAttribute>();
 
 
-
-
-            if (json?.Data?.Count() > 1)
+            if (json is null || json.Data is null || !json.Data!.Any())
             {
-                raceObjects = await context.Races.ToListAsync();
-                typeObjects = await context.Types.ToListAsync();
-                attributeObjects = await context.CardAttributes.ToListAsync();
+                return;
+                
             }
+            
+            typeObjects = await context.Types.ToListAsync();
+            exactCardTypeObjects = await context.ExactCardTypes.ToListAsync();
+            attributeObjects = await context.CardAttributes.ToListAsync();
+
+            
             List<Card> cards = new List<Card>();
             List<CardImage> cardImages = new List<CardImage>();
             //  File.WriteAllText("text.json", JsonConvert.SerializeObject(json));
@@ -82,23 +82,24 @@ namespace Yu_Gi_Oh_website.Services.ApiService
                 var card = new Card()
                 {
                     Name = cardJson.Name,
-                    Atk = cardJson.Atk,
-                    Def = cardJson.Def,
+                    Atk = cardJson.Misc[0].QuestionAtk ? -1 : cardJson.Atk,
+                    Def = cardJson.Misc[0].QuestionDef ? -1 : cardJson.Def,
                     Description = cardJson.Description,
-                    CardType = await SetType(cardJson, typeObjects),
-                    Race = await SetRace(cardJson, raceObjects),
-                    CardAttribute = await SetAttribute(cardJson, attributeObjects),
+                    CardType = SetCardType(cardJson),
+                    Type = await SetTypeAsync(cardJson, typeObjects),
+                    ExactCardType = await SetExactCardTypeAsync(cardJson, exactCardTypeObjects),
+                    CardAttribute = await SetAttributeAsync(cardJson, attributeObjects),
                     Scale = cardJson.Scale,
                     LinkValue = cardJson.LinkValue,
                     Level = cardJson.Level,
-                    HasEffect = cardJson.Misc[0].HasEffect,
+
 
 
                 };
 
-                if (card.Race.Name.StartsWith("Ignore ") || card.CardType.Name.StartsWith("Ignore "))
+                if (card.Type.Name.StartsWith("Ignore ") || card.ExactCardType.Name.StartsWith("Ignore "))
                 {
-                    string log = $"{card.Name} : Type {card.CardType.Name.Replace("Ignore ", "")}, Race: {card.Race.Name.Replace("Ignore ", "")}\n";
+                    string log = $"{card.Name} : Type {card.ExactCardType.Name.Replace("Ignore ", "")}, Race: {card.Type.Name.Replace("Ignore ", "")}\n";
                     File.AppendAllText("log.txt", log);
                     continue;
                 }
@@ -110,7 +111,7 @@ namespace Yu_Gi_Oh_website.Services.ApiService
                     string path = $"{imageFolder}/{RemoveSpecialCharacters(cardJson.Name)}{count++}.jpg";
                     //  Console.WriteLine(path);
 
-                    await DownloadImageAsync(httpClient, link!, path);
+                    //await DownloadImageAsync(httpClient, link!, path);
 
                     var cardImage = new CardImage()
                     {
@@ -130,6 +131,30 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             await context.SaveChangesAsync();
         }
 
+        private async Task<ExactCardType> SetExactCardTypeAsync(CardApiDTO cardJson, List<ExactCardType> exactCardTypeObjects)
+        {
+            ExactCardType? type;
+            if (exactCardTypeObjects.Any())
+            {
+                type = exactCardTypeObjects.FirstOrDefault(x => x.Name == cardJson.Type)!;
+
+                if (type is null)
+                {
+                    type = new ExactCardType() { Name = $"Ignore {cardJson.Type}" };
+                }
+
+                return type;
+            }
+
+            type = await context.ExactCardTypes.FirstOrDefaultAsync(x => x.Name == cardJson.Type);
+
+            if (type is null)
+            {
+                throw new ArgumentException("Type is invalid value");
+            }
+
+            return type;
+        }
 
         private async Task DownloadImageAsync(HttpClient client, string url, string path)
         {
@@ -147,32 +172,13 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             return Regex.Replace(str, "[^a-zA-Z0-9_]+", "_", RegexOptions.Compiled);
         }
 
-        private async Task UpdateRacesAsync()
-        {
-            var racesObjects = new HashSet<Race>();
-
-            foreach (var race in ApiConstantValues.races)
-            {
-                racesObjects.Add(new Race() { Name = race });
-
-            }
-
-            var existingRaceNames = await context.Races.Select(x => x.Name).ToListAsync();
-
-            racesObjects = racesObjects.Where(race => !existingRaceNames.Contains(race.Name)).ToHashSet();
-
-            await context.AddRangeAsync(racesObjects);
-            await context.SaveChangesAsync();
-
-        }
-
         private async Task UpdateTypesAsync()
         {
             var typeObjects = new HashSet<CardType>();
 
-            foreach (var type in ApiConstantValues.types)
+            foreach (var race in ApiConstantValues.types)
             {
-                typeObjects.Add(new CardType() { Name = type });
+                typeObjects.Add(new CardType() { Name = race });
 
             }
 
@@ -185,7 +191,27 @@ namespace Yu_Gi_Oh_website.Services.ApiService
 
         }
 
-        private async Task<RootObject?> GetJsonResponse(string apiString)
+        private async Task UpdateExactTypesAsync()
+        {
+            var typeObjects = new HashSet<ExactCardType>();
+
+            foreach (var type in ApiConstantValues.cardTypeMapping.SelectMany(x => x.Value))
+            {
+                typeObjects.Add(new ExactCardType() { Name = type });
+
+            }
+
+            var existingTypeNames = await context.ExactCardTypes.Select(x => x.Name).ToListAsync();
+
+            typeObjects = typeObjects.Where(type => !existingTypeNames.Contains(type.Name)).ToHashSet();
+
+            await context.AddRangeAsync(typeObjects);
+            await context.SaveChangesAsync();
+
+        }
+
+
+        private async Task<RootObject?> GetJsonResponseAsync(string apiString)
         {
 
             var result = await httpClient.GetAsync(apiString);
@@ -194,57 +220,56 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             return JsonConvert.DeserializeObject<RootObject>(responseBody);
         }
 
-        private async Task<Race> SetRace(CardDTO json, ICollection<Race> raceObjects)
+
+        private async Task<CardType> SetTypeAsync(CardApiDTO json, ICollection<CardType> typeObjects)
         {
-            Race? race;
-            if (raceObjects.Any())
-            {
-                race = raceObjects.FirstOrDefault(x => x.Name == json.Race)!;
-
-                if (race is null)
-                {
-                    race = new Race() { Name = $"Ignore {json.Race}" };
-                }
-
-                return race;
-            }
-
-            race = await context.Races.FirstOrDefaultAsync(x => x.Name == json.Race);
-
-            if (race is null)
-            {
-                throw new ArgumentException("Race is invalid value");
-            }
-
-            return race;
-        }
-
-        private async Task<CardType> SetType(CardDTO json, ICollection<CardType> typeObjects)
-        {
+            this.CheckForSpellTrapTypes(json);
             CardType? type;
             if (typeObjects.Any())
             {
-                type = typeObjects.FirstOrDefault(x => x.Name == json.Type)!;
+                type = typeObjects.FirstOrDefault(x => x.Name == json.Race)!;
 
                 if (type is null)
                 {
-                    type = new CardType() { Name = $"Ignore {json.Type}" };
+                    type = new CardType() { Name = $"Ignore {json.Race}" };
                 }
 
                 return type;
             }
 
-            type = await context.Types.FirstOrDefaultAsync(x => x.Name == json.Type);
+            type = await context.Types.FirstOrDefaultAsync(x => x.Name == json.Race);
 
             if (type is null)
             {
-                throw new ArgumentException("Type is invalid value");
+                throw new ArgumentException("Race is invalid value");
             }
 
             return type;
+        }
+
+        private void CheckForSpellTrapTypes(CardApiDTO json)
+        {
+            if (json.Type == "Spell Card")
+            {
+                json.Race = $"{json.Race} Spell";
+            }
+
+            else if (json.Type == "Trap Card")
+            {
+                json.Race = $"{json.Race} Trap";
+            }
+
 
         }
-        private async Task<CardAttribute?> SetAttribute(CardDTO json, ICollection<CardAttribute> attributeObjects)
+
+        private CardTypeEnum SetCardType(CardApiDTO json)
+        {
+            string type = json.Type;
+            var typeValue = ApiConstantValues.cardTypeMapping.FirstOrDefault(t => t.Value.Contains(type)).Key;
+            return typeValue;
+
+        }
+        private async Task<CardAttribute?> SetAttributeAsync(CardApiDTO json, ICollection<CardAttribute> attributeObjects)
         {
             if (json.Attribute is null)
             {
@@ -259,7 +284,7 @@ namespace Yu_Gi_Oh_website.Services.ApiService
 
                 if (attribute is null && !attributeObjects.Select(x => x.Name).Contains(json.Attribute))
                 {
-                    attribute = new CardAttribute() { Name = json.Name };
+                    attribute = new CardAttribute() { Name = json.Attribute };
                     attributeObjects.Add(attribute);
 
                 }

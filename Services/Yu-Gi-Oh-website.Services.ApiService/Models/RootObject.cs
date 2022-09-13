@@ -10,7 +10,7 @@ namespace Yu_Gi_Oh_website.Services.ApiService.Models
     public class RootObject
     {
 
-        public CardDTO[]? Data { get; set; }
+        public CardApiDTO[]? Data { get; set; }
 
     }
 }

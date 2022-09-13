@@ -16,9 +16,10 @@ namespace Yu_Gi_Oh_website.Web.AutoMapper
         {
 
             CreateMap<Card, CardDto>()
-                .ForMember(x => x.Race, y => y.MapFrom(s => s.Race.Name))
+                .ForMember(x => x.Type, y => y.MapFrom(s => s.Type.Name))
                 .ForMember(x => x.CardAttribute, y => y.MapFrom(s => s.CardAttribute!.Name))
-                .ForMember(x => x.CardType, y => y.MapFrom(s => s.CardType.Name))
+                .ForMember(x => x.CardType, y => y.MapFrom(s => s.CardType.ToString()))
+                .ForMember(x=>x.ExactCardType,y=>y.MapFrom(s=>s.ExactCardType.Name))
                 .ForMember(x => x.CardImages, y => y.MapFrom(s => s.CardImages.Select(c => c.ImageUrl)));
             CreateMap<CardDto, CardViewModel>();
             // Use CreateMap... Etc.. here (Profile methods are the same as configuration methods)

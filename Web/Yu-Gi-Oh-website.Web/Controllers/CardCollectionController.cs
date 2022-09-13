@@ -50,7 +50,7 @@ namespace Yu_Gi_Oh_website.Web.Controllers
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> Details(string Id)
+        public async Task<IActionResult> Details(int Id)
         {
             var model = await service.GetCard(Id);
             var viewModel = mapper.Map<CardViewModel>(model);

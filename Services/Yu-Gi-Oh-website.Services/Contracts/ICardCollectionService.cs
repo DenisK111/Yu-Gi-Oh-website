@@ -11,6 +11,6 @@ namespace Yu_Gi_Oh_website.Services.Contracts
     public interface ICardCollectionService
     {
         Task<IEnumerable<CardDisplayDto>> GetCards(uint page, string name,string[] parameters, bool applyFilter);
-        Task<CardDto> GetCard(string Id);
+        Task<CardDto> GetCard(int Id);
     }
 }

@@ -52,8 +52,8 @@ namespace Yu_Gi_Oh_website.Web.Data
         public DbSet<CardImage> CardImages { get; set; } = null!;
 
         public DbSet<CardType> Types { get; set; } = null!;
-
-        public DbSet<Race> Races { get; set; } = null!;
+        public DbSet<ExactCardType> ExactCardTypes { get; set; } = null!;
+      
 
         public DbSet<CardAttribute> CardAttributes { get; set; } = null!;
 
