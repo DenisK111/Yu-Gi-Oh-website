@@ -1,12 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Yu_Gi_Oh_website.Models;
 using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
 using Yu_Gi_Oh_website.Models.Enums;
@@ -33,6 +27,7 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             }
             await UpdateTypesAsync();
             await UpdateExactTypesAsync();
+            await UpdateAttributesAsync();
             await UpdateDbAsync(imageFolder, ApiConstantValues.allCardsString);
 
         }
@@ -176,9 +171,9 @@ namespace Yu_Gi_Oh_website.Services.ApiService
         {
             var typeObjects = new HashSet<CardType>();
 
-            foreach (var race in ApiConstantValues.types)
+            foreach (var type in ApiConstantValues.monsterTypes.Union<string>(ApiConstantValues.spellTrapTypes))
             {
-                typeObjects.Add(new CardType() { Name = race });
+                typeObjects.Add(new CardType() { Name = type });
 
             }
 
@@ -187,6 +182,25 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             typeObjects = typeObjects.Where(type => !existingTypeNames.Contains(type.Name)).ToHashSet();
 
             await context.AddRangeAsync(typeObjects);
+            await context.SaveChangesAsync();
+
+        }
+
+        private async Task UpdateAttributesAsync()
+        {
+            var attributeObjects = new HashSet<CardAttribute>();
+
+            foreach (var attribute in ApiConstantValues.attributes)
+            {
+                attributeObjects.Add(new CardAttribute() { Name = attribute });
+
+            }
+
+            var existingAttributeNames = await context.CardAttributes.Select(x => x.Name).ToListAsync();
+
+            attributeObjects = attributeObjects.Where(attr => !existingAttributeNames.Contains(attr.Name)).ToHashSet();
+
+            await context.AddRangeAsync(attributeObjects);
             await context.SaveChangesAsync();
 
         }

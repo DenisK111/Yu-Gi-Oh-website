@@ -9,11 +9,11 @@ using Yu_Gi_Oh_website.Models.Enums;
 namespace Yu_Gi_Oh_website.Services.ApiService
 
 {
-    internal static class ApiConstantValues
+    public static class ApiConstantValues
     {
-        internal static readonly string allCardsString = $"https://db.ygoprodeck.com/api/v7/cardinfo.php?&startdate={DateTime.MinValue.Date.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture)}&enddate={DateTime.UtcNow.Date.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture)}&dateregion=tcg_date&format=tcg&misc=yes";
+        public static readonly string allCardsString = $"https://db.ygoprodeck.com/api/v7/cardinfo.php?&startdate={DateTime.MinValue.Date.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture)}&enddate={DateTime.UtcNow.Date.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture)}&dateregion=tcg_date&format=tcg&misc=yes";
 
-        internal static readonly Dictionary<CardTypeEnum, HashSet<string>> cardTypeMapping = new()
+        public static readonly Dictionary<CardTypeEnum, HashSet<string>> cardTypeMapping = new()
         {
             [CardTypeEnum.Normal] = new HashSet<string>()
             {
@@ -45,7 +45,7 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             [CardTypeEnum.Trap] = new HashSet<string>() { "Trap Card", },
         };
 
-        internal static readonly HashSet<string> types = new HashSet<string>()
+        public static readonly HashSet<string> monsterTypes = new HashSet<string>()
         {
             "Aqua",
             "Beast",
@@ -72,7 +72,12 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             "Winged Beast",
             "Wyrm",
             "Zombie",
-            "Normal Spell",
+           
+        };
+
+        public static readonly HashSet<string> spellTrapTypes = new HashSet<string>()
+        {
+             "Normal Spell",
             "Field Spell",
             "Equip Spell",
             "Continuous Spell",
@@ -83,6 +88,18 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             "Counter Trap",
         };
 
+
+        public static readonly HashSet<string> attributes = new HashSet<string>()
+        {
+            "LIGHT",
+            "DARK",
+            "WATER",
+            "FIRE",
+            "EARTH",
+            "WIND",
+            "DIVINE",
+
+        };
 
 
     }

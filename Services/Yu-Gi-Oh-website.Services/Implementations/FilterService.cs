@@ -9,24 +9,39 @@ using Yu_Gi_Oh_website.Models.Enums;
 using Yu_Gi_Oh_website.Services.Common;
 using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Services.Models;
+using Yu_Gi_Oh_website.Web.Data;
+using Yu_Gi_Oh_website.Services.ApiService;
+using Yu_Gi_Oh_website.Services.Common.Enums;
 
 namespace Yu_Gi_Oh_website.Services.Implementations
 {
     public class FilterService : IFilterService
     {
-        private static readonly Dictionary<string, Func<IQueryable<Card>, IQueryable<Card>>> filter = new()
+        private readonly Dictionary<FilterTypesEnum, HashSet<string>> filterTypes = new()
         {
-            [CardTypeEnum.Normal.ToString()] = x => x.Where(q => q.CardType == CardTypeEnum.Normal)
-
+            [FilterTypesEnum.Card_Type] = Enum.GetValues<CardTypeEnum>().Skip(1).Select(x => x.ToString()).ToHashSet(),
+            [FilterTypesEnum.Attribute] = ApiConstantValues.attributes,
+            [FilterTypesEnum.Spell_Trap_Type] = ApiConstantValues.spellTrapTypes,
+            [FilterTypesEnum.Type] = ApiConstantValues.monsterTypes,
+            [FilterTypesEnum.Level_Rank_Link] = Enumerable.Range(0,14).Select(x=>x.ToString()).ToHashSet(),
+            
         };
+             
 
-        public List<FilterEntryModel> GetFilterEntries()
+        
+
+        public Dictionary<FilterTypesEnum, List<FilterEntryModel>> GetFilterEntries()
         {
-            var model = new List<FilterEntryModel>();
+            var model = new Dictionary<FilterTypesEnum, List<FilterEntryModel>>();
 
-            foreach (var key in filter.Keys)
+            foreach (var (key,value) in filterTypes)
             {
-                model.Add(new FilterEntryModel() { Name = key });
+                model.Add(key, new List<FilterEntryModel>());
+
+                foreach(var name in value)
+                {
+                    model[key].Add(new FilterEntryModel() { Name = name });
+                }
             }
 
             return model;
@@ -34,18 +49,29 @@ namespace Yu_Gi_Oh_website.Services.Implementations
 
         public IQueryable<Card> Search(IQueryable<Card> query, string name, string[] parameters)
         {
-           query = query.Where(x => x.Name.Contains(name));
+            query = query.Where(x => x.Name.Contains(name));
+
+            if (!parameters.Any())
+            {
+                return query;
+            }
+
+            var queryBuilder = new HashSet<CardTypeEnum>();
 
             foreach (var parameter in parameters)
             {
-                query = filter[parameter].Invoke(query);
+                queryBuilder.Add(Enum.Parse<CardTypeEnum>(parameter));
+                //  query = filter[parameter].Invoke(query);
             }
+
+
+            query = query.Where(x => queryBuilder.Contains(x.CardType));
 
             return query;
 
-            
+
         }
 
-       
+
     }
 }

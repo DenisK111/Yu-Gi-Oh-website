@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+
 using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Services.Models;
 using Yu_Gi_Oh_website.Web.Models;
@@ -20,6 +21,8 @@ namespace Yu_Gi_Oh_website.Web.Controllers
             this.filter = filter;
         }
         [Route("CardCollection/{page:int}")]
+        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Index(FilterViewModel filterModel, uint page)
         {
             bool applyFilter = true;
@@ -35,7 +38,7 @@ namespace Yu_Gi_Oh_website.Web.Controllers
             }
 
             var filterParameters = applyFilter
-                ? filterModel.FilterEntries.Where(x => x.IsChecked).Select(x => x.Name).ToArray()
+                ? filterModel.FilterEntries.SelectMany(x=>x.Value).Where(x => x.IsChecked).Select(x => x.Name).ToArray()
                 : new string[0];
 
             var cardModel = await service.GetCards(
@@ -44,6 +47,8 @@ namespace Yu_Gi_Oh_website.Web.Controllers
                 filterParameters,
                 applyFilter);
             var cardDisplayModel = mapper.Map<List<CardDisplayViewModel>>(cardModel);
+
+            
 
             var viewModel = new CardCollectionViewModel(cardDisplayModel, filterModel);
 

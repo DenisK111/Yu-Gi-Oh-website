@@ -2,9 +2,6 @@
 .col-sm-8r,
 .col-md-8r,
 .col-lg-8r {
-   
-   
-    
 }
 
 .col-xs-8r {
@@ -31,4 +28,18 @@
         width: 14.2857142857%;
         float: left;
     }
+}
+
+.btn-check:focus + .btn, .btn:focus {
+    color: var(--bs-btn-hover-color);
+    background-color: var(--bs-btn-bg);
+    border-color: var(--bs-btn-bg);
+    outline: 0;
+    box-shadow: none;
+}
+
+.btn-check:checked + .btn, .btn-check:active + .btn, .btn:active, .btn.active, .btn.show {
+    color: black;
+    background-color: rgba(252, 255, 155, 0.894);
+    border-color: rgba(252, 255, 155, 0.894);
 }
