@@ -6,7 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-Yu_Gi_Oh_website.Web-1426DD99-A9FF-40FE-8700-B698BAD0BC37</UserSecretsId>
     <RootNamespace>Yu_Gi_Oh_website.Web</RootNamespace>
+	  <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="web.config" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
@@ -30,6 +35,12 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="web.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

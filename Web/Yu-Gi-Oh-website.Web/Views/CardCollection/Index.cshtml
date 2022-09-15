@@ -1,58 +1,74 @@
 ﻿@model CardCollectionViewModel
 
 
-<div>
 
 
-    <form class="d-flex" asp-controller="CardCollection" asp-action="Index" method="post">
-        <div class="row py-2">
+
+    <form class="d-flex" asp-controller="CardCollection" asp-action="Index" method="get">
+       
+        <div class="row w-100 py-2">
             <div class="col-3"></div>
             <div class="col-5 pb-1">
-                <input class="form-control me-sm-2 py-2 pb-1" type="text" placeholder="Search for card..." value="@Model.FilterModel.SearchTerm" asp-for="FilterModel.SearchTerm">
+                <input class="form-control me-sm-2 py-2 pb-1" type="text" placeholder="Search for card..." value="@Model.Fm.SearchTerm" asp-for="Fm.SearchTerm">
+                <input type="hidden" value = "1" asp-for="Fm.Page" />
+            </div>
+            <div class="col-2  px-1">
+                <button class="btn btn-secondary my-2 my-sm-0 w-100" type="submit">Search</button>
             </div>
             <div class="col-2 px-1">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                <a class="btn btn-danger" data-bs-toggle="collapse" data-bs-target="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Filter
+                </a>
             </div>
-            <div class="card border-0">
-                <div class="card-body">
-                    <div class="card mb-3">
+            
+            
+
+                <div class="collapse cardborder-0" id="collapseExample">
+                    <div class="card-body">
+                        <div class="card mb-3">
 
 
-                        @for (var kvp = 0; kvp < Model.FilterModel.FilterEntries.Count; kvp++)
-                        {
-                            <div class="card-header">
-                                <h5 class="text-center text-danger"><span class="fa fa-calendar mr-3 "></span>@(((FilterTypesEnum)kvp).GetDisplayName())</h5>
-                            </div>
+                            @for (var kvp = 0; kvp < Model.Fm.Fe.Count; kvp++)
+                            {
+                                <div class="card-header">
+                                    <h5 class="text-center text-danger"><span class="fa fa-calendar mr-3 "></span>@(((FilterTypesEnum)kvp).GetDisplayName())</h5>
+                                </div>
 
-                            <div class="card-body">
-                                <div class="d-grid">
-                                    <div class="row-cols-auto m-2 text-center px-4">
-                                      
-                                            @for (var i = 0; i < Model.FilterModel.FilterEntries[(FilterTypesEnum)kvp].Count; i++)
+                                <div class="card-body">
+                                    <div class="d-grid">
+                                        <div class="row-cols-auto m-2 text-center px-4">
+
+
+                                            @for (var i = 0; i < Model.Fm.Fe[(FilterTypesEnum)kvp].Count; i++)
                                             {
 
 
 
-                                                <input type="checkbox" class="btn-check" id="@($"btncheck" + kvp +""+ i)" autocomplete="off" asp-for="@Model.FilterModel.FilterEntries[(FilterTypesEnum)kvp][i].IsChecked" />
-                                                <label class="btn btn-info my-1 shadow-none" for="@($"btncheck" + kvp +""+ i)">@Model.FilterModel.FilterEntries[(FilterTypesEnum)kvp][i].Name</label>
-                                                <input type="hidden" asp-for="@Model.FilterModel.FilterEntries[(FilterTypesEnum)kvp][i].Name" />
+
+                                                //asp -for= "@Model.Fm.Fe[(FilterTypesEnum)kvp][i].IsChecked"
+
+                                             <input type="checkbox" class="btn-check" id="@($"btncheck" + kvp +""+ i)" autocomplete="off" asp-for="@Model.Fm.Fe[(FilterTypesEnum)kvp][i].IsChecked" />
+                                                <label class="btn btn-info my-1 shadow-none" for="@($"btncheck" + kvp +""+ i)">@Model.Fm.Fe[(FilterTypesEnum)kvp][i].Name</label>
+                                                <input type="hidden" asp-for="@Model.Fm.Fe[(FilterTypesEnum)kvp][i].Name" />
 
 
 
 
                                             }
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                                    }
-                                    </div>
-                                </div>
-                            </div>
-                </div>
 
-</form>
-</div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
 
 
 

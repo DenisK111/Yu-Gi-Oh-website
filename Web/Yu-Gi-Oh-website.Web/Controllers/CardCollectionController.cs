@@ -20,37 +20,42 @@ namespace Yu_Gi_Oh_website.Web.Controllers
             this.mapper = mapper;
             this.filter = filter;
         }
-        [Route("CardCollection/{page:int}")]
+        //[Route("CardCollection/{page:int}")]
         [HttpGet]
-        [HttpPost]
-        public async Task<IActionResult> Index(FilterViewModel filterModel, uint page)
+        public async Task<IActionResult> Index([FromQuery]FilterViewModel fm)
         {
-            bool applyFilter = true;
-            if (filterModel.FilterEntries == null)
-            {
-                filterModel.FilterEntries = filter.GetFilterEntries();
 
-                if (filterModel.SearchTerm == String.Empty)
+            bool applyFilter = true;
+            if (fm.Fe == null)
+            {
+                fm.Fe = filter.GetFilterEntries();
+
+                if (fm.SearchTerm == String.Empty)
                 {
                     applyFilter = false;
                 }
 
             }
 
+            if (!ModelState.IsValid)
+            {
+                fm.Page = 1;
+            }
+
             var filterParameters = applyFilter
-                ? filterModel.FilterEntries.SelectMany(x=>x.Value).Where(x => x.IsChecked).Select(x => x.Name).ToArray()
+                ? fm.Fe.SelectMany(x => x.Value).Where(x => x.IsChecked).Select(x => x.Name).ToArray()
                 : new string[0];
 
             var cardModel = await service.GetCards(
-                page,
-                filterModel.SearchTerm!,
+                fm.Page - 1,
+                fm.SearchTerm!,
                 filterParameters,
                 applyFilter);
             var cardDisplayModel = mapper.Map<List<CardDisplayViewModel>>(cardModel);
 
-            
 
-            var viewModel = new CardCollectionViewModel(cardDisplayModel, filterModel);
+
+            var viewModel = new CardCollectionViewModel(cardDisplayModel, fm);
 
             return this.View(viewModel);
         }
@@ -62,7 +67,7 @@ namespace Yu_Gi_Oh_website.Web.Controllers
             return this.View(viewModel);
         }
 
-      
+
 
 
 

@@ -43,6 +43,8 @@ namespace Yu_Gi_Oh_website.Web
                     options.MinimumSameSitePolicy = SameSiteMode.None;
                 });
 
+          
+
 
             builder.Services.AddControllersWithViews(options =>
             {

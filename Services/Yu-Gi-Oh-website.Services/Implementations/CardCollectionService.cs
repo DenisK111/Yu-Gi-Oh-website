@@ -32,7 +32,7 @@ namespace Yu_Gi_Oh_website.Services.Implementations
             return filter.Search(expression, name,parameters);
         }
 
-        public async Task<IEnumerable<CardDisplayDto>> GetCards(uint page, string name,string[] parameters,bool applyFilter)
+        public async Task<IEnumerable<CardDisplayDto>> GetCards(int page, string name,string[] parameters,bool applyFilter)
         {
             
             var result = context.Cards .OrderBy(x => x.Name).AsNoTracking();
