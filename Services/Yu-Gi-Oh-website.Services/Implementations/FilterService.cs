@@ -111,9 +111,6 @@ namespace Yu_Gi_Oh_website.Services.Implementations
             return dict;
         }
 
-        private static bool CheckPendulum(HashSet<string> parameters, Card x)
-        {
-            return parameters.Contains("Pendulum") && x.Scale.HasValue;
-        }
+    
     }
 }

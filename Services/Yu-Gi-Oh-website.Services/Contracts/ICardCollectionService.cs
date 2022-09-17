@@ -10,7 +10,7 @@ namespace Yu_Gi_Oh_website.Services.Contracts
 {
     public interface ICardCollectionService
     {
-        Task<IEnumerable<CardDisplayDto>> GetCards(int page, string name,string[] parameters, bool applyFilter);
+        Task<(IQueryable<CardDisplayDto>? cards,int count)> GetCardsAndCount(string name,string[] parameters, bool applyFilter);
         Task<CardDto> GetCard(int Id);
     }
 }

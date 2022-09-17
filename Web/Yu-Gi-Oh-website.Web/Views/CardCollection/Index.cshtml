@@ -4,76 +4,76 @@
 
 
 
-    <form class="d-flex" asp-controller="CardCollection" asp-action="Index" method="get">
-       
-        <div class="row w-100 py-2">
-            <div class="col-3"></div>
-            <div class="col-5 pb-1">
-                <input class="form-control me-sm-2 py-2 pb-1" type="text" placeholder="Search for card..." value="@Model.Fm.SearchTerm" asp-for="Fm.SearchTerm">
-                <input type="hidden" value = "1" asp-for="Fm.Page" />
-            </div>
-            <div class="col-2  px-1">
-                <button class="btn btn-secondary my-2 my-sm-0 w-100" type="submit">Search</button>
-            </div>
-            <div class="col-2 px-1">
-                <a class="btn btn-danger" data-bs-toggle="collapse" data-bs-target="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                    Filter
-                </a>
-            </div>
-            
-            
+<form class="d-flex" asp-controller="CardCollection" asp-action="Index" method="get">
 
-                <div class="collapse cardborder-0" id="collapseExample">
-                    <div class="card-body">
-                        <div class="card mb-3">
+    <div class="row w-100 py-2">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-5 pb-1">
+            <input class="form-control  pb-1" type="text" placeholder="Search for card..." value="@Model.Fm.SearchTerm" asp-for="Fm.SearchTerm">
+            <input type="hidden" value="1" asp-for="Fm.Page" />
+        </div>
+        <div class="col-sm-1  px-1">
+            <button class="btn btn-secondary w-100" type="submit">Search</button>
+        </div>
+        <div class="col-sm-2 px-1">
+            <a class="btn btn-danger" data-bs-toggle="collapse" data-bs-target="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Filter
+            </a>
+        </div>
 
 
-                            @for (var kvp = 0; kvp < Model.Fm.Fe.Count; kvp++)
-                            {
-                                <div class="card-header">
-                                    <h5 class="text-center text-danger"><span class="fa fa-calendar mr-3 "></span>@(((FilterTypesEnum)kvp).GetDisplayName())</h5>
+
+        <div class="collapse cardborder-0" id="collapseExample">
+            <div class="card-body">
+                <div class="card mb-3">
+
+
+                    @for (var kvp = 0; kvp < Model.Fm.Fe!.Count; kvp++)
+                    {
+                        <div class="card-header">
+                            <h5 class="text-center text-danger"><span class="fa fa-calendar mr-3 "></span>@(((FilterTypesEnum)kvp).GetDisplayName())</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="d-grid">
+                                <div class="row-cols-auto m-2 text-center px-4">
+
+
+                                    @for (var i = 0; i < Model.Fm.Fe[(FilterTypesEnum)kvp].Count; i++)
+                                    {
+
+
+
+
+                                        //asp -for= "@Model.Fm.Fe[(FilterTypesEnum)kvp][i].IsChecked"
+
+                                        <input type="checkbox" class="btn-check" id="@($"btncheck" + kvp +""+ i)" autocomplete="off" asp-for="@Model.Fm.Fe[(FilterTypesEnum)kvp][i].IsChecked" />
+                                        <label class="btn btn-info my-1 shadow-none" for="@($"btncheck" + kvp +""+ i)">@Model.Fm.Fe[(FilterTypesEnum)kvp][i].Name</label>
+                                        <input type="hidden" asp-for="@Model.Fm.Fe[(FilterTypesEnum)kvp][i].Name" />
+
+
+
+
+                                    }
+
+
                                 </div>
+                            </div>
+                        </div>
+                    }
 
-                                <div class="card-body">
-                                    <div class="d-grid">
-                                        <div class="row-cols-auto m-2 text-center px-4">
-
-
-                                            @for (var i = 0; i < Model.Fm.Fe[(FilterTypesEnum)kvp].Count; i++)
-                                            {
-
-
-
-
-                                                //asp -for= "@Model.Fm.Fe[(FilterTypesEnum)kvp][i].IsChecked"
-
-                                             <input type="checkbox" class="btn-check" id="@($"btncheck" + kvp +""+ i)" autocomplete="off" asp-for="@Model.Fm.Fe[(FilterTypesEnum)kvp][i].IsChecked" />
-                                                <label class="btn btn-info my-1 shadow-none" for="@($"btncheck" + kvp +""+ i)">@Model.Fm.Fe[(FilterTypesEnum)kvp][i].Name</label>
-                                                <input type="hidden" asp-for="@Model.Fm.Fe[(FilterTypesEnum)kvp][i].Name" />
-
-
-
-
-                                            }
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                        
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-    </form>
-
-
-
+</form>
 
 
-<div class="row text-center g-2">
+
+
+
+<div class="row text-center g-2 ">
 
 
 
@@ -95,6 +95,69 @@
 
     }
 </div>
+
+@{
+    var url = $"/CardCollection/Index" + Context.Request.QueryString;
+    
+}
+
+<nav aria-label="Card Pages">
+    <ul class="pagination justify-content-sm-center position-relative py-3"> 
+        @if (this.Model.CurrentPage > 1)
+        {
+            <li class="page-item">
+                <a class="page-link" href="@url.Replace($"page={Model.CurrentPage}",$"page={Model.PreviousPage}",true,null)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        }
+        @{
+            const int MorePagesToShow = 3;
+            var pagesToShow = new List<int>();
+            for (var i = 1; i <= MorePagesToShow; i++)
+            {
+                pagesToShow.Add(i);
+            }
+            for (var i = this.Model.CurrentPage - MorePagesToShow; i <= this.Model.CurrentPage + MorePagesToShow; i++)
+            {
+                if (i > 0)
+                {
+                    pagesToShow.Add(i);
+                }
+            }
+            for (var i = this.Model.PagesCount - MorePagesToShow + 1; i <= this.Model.PagesCount; i++)
+            {
+                if (i > 0)
+                {
+                    pagesToShow.Add(i);
+                }
+            }
+            pagesToShow = pagesToShow.Where(x => x <= this.Model.PagesCount).Distinct().OrderBy(x => x).ToList();
+        }
+        @for (var i = 0; i < pagesToShow.Count; i++)
+        {
+            var className = string.Empty;
+            var pageNumber = pagesToShow[i];
+            if (pageNumber == this.Model.CurrentPage)
+            {
+                className = "active";
+            }
+            if (i > 0 && pageNumber - 1 != pagesToShow[i - 1])
+            {
+                <li class="page-item @className"><a class="page-link bg-primary" href="@url.Replace($"page={Model.CurrentPage}",$"Page={pagesToShow[i - 1] + 1}",true,null)">...</a></li>
+            }
+            <li class="page-item @className"><a class="page-link" href="@url.Replace($"page={Model.CurrentPage}",$"Page={pageNumber}",true,null)">@pageNumber</a></li>
+        }
+        @if (this.Model.CurrentPage < this.Model.PagesCount)
+        {
+            <li class="page-item">
+                <a class="page-link" href="@url.Replace($"page={Model.CurrentPage}",$"Page={Model.NextPage}",true,null)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        }
+    </ul>
+</nav>
 
 
 

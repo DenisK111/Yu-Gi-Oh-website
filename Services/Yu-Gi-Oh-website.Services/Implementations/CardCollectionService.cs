@@ -18,7 +18,7 @@ namespace Yu_Gi_Oh_website.Services.Implementations
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
         private readonly IFilterService filter;
-        private readonly int cardsPerPage = 14;
+        public static readonly int cardsPerPage = 14;
 
         public CardCollectionService(ApplicationDbContext context, IMapper mapper, IFilterService filter)
         {
@@ -32,16 +32,13 @@ namespace Yu_Gi_Oh_website.Services.Implementations
             return filter.Search(expression, name,parameters);
         }
 
-        public async Task<IEnumerable<CardDisplayDto>> GetCards(int page, string name,string[] parameters,bool applyFilter)
+        public async Task<(IQueryable<CardDisplayDto>? cards,int count)> GetCardsAndCount(string name,string[] parameters,bool applyFilter)
         {
             
-            var result = context.Cards .OrderBy(x => x.Name).AsNoTracking();
+           IQueryable<Card> result = context.Cards.OrderBy(x => x.Name).AsNoTracking();
             result = applyFilter ? Filter(result, name,parameters) : result;
-            var endResult = await mapper.ProjectTo<CardDisplayDto>(result)
-            .Skip((int)page * cardsPerPage)
-            .Take(cardsPerPage)
-            .ToListAsync();
-            return endResult;
+           IQueryable<CardDisplayDto>? endResult = mapper.ProjectTo<CardDisplayDto>(result);
+            return (endResult,await result.CountAsync());
         }
 
         private void CheckNull<T>(T input)
