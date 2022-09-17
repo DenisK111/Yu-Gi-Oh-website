@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Net;
+
 using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Services.Models;
 using Yu_Gi_Oh_website.Web.Models;
@@ -28,31 +28,17 @@ namespace Yu_Gi_Oh_website.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(FilterViewModel fm)
         {
+            fm.Filters = HttpContext.Request.Query
+                .Where(x => x.Key == "Filters")
+                .SelectMany(x => x.Value, (col, value) => new KeyValuePair<string, string>(col.Key, value))
+                .Select(x=>x.Value)
+                .ToArray();
 
-            bool applyFilter = true;
-            if (fm.Fe == null)
-            {
-                fm.Fe = filter.GetFilterEntries();
-
-                if (fm.SearchTerm == String.Empty)
-                {
-                    applyFilter = false;
-                }
-
-            }
-
-            if (!ModelState.IsValid)
-            {
-                fm.Page = 1;
-            }
-
-            var filterParameters = applyFilter
-                ? fm.Fe.SelectMany(x => x.Value).Where(x => x.IsChecked).Select(x => x.Name).ToArray()
-                : new string[0];
+            bool applyFilter = CheckModelParameters(fm);      
 
             var cardModel = await service.GetCardsAndCount(
                 fm.SearchTerm!,
-                filterParameters,
+                fm.Filters!,
                 applyFilter);
 
             var cardDisplayModel = mapper
@@ -60,24 +46,25 @@ namespace Yu_Gi_Oh_website.Web.Controllers
                 .Skip((fm.Page - 1) * cardsPerPage)
                 .Take(cardsPerPage)
                 .ToListAsync());
-            
+
             var cardsCount = cardModel.count;
             var pagesCount = (int)Math.Ceiling(cardsCount / (decimal)cardsPerPage);
             var viewModel = new CardCollectionViewModel
             {
                 Fm = fm,
-                CardModel= cardDisplayModel,
+                CardModel = cardDisplayModel,
                 CurrentPage = fm.Page,
                 PagesCount = pagesCount,
                 CardsCount = cardsCount,
-                
+
             };
 
-            
+
 
             return this.View(viewModel);
-                       
+
         }
+            
 
         public async Task<IActionResult> Details(int Id)
         {
@@ -86,6 +73,32 @@ namespace Yu_Gi_Oh_website.Web.Controllers
             return this.View(viewModel);
         }
 
+        private bool CheckModelParameters(FilterViewModel fm)
+        {
+            bool applyFilter = true;
+            if (fm.FilterEntries == null)
+            {
+                fm.FilterEntries = filter.GetFilterEntries();
+            }
+
+            if (fm.SearchTerm == String.Empty && fm.Filters is null)
+            {
+                fm.Filters = new string[0];
+                applyFilter = false;
+            }
+
+            else if (fm.Filters is null)
+            {
+                fm.Filters = new string[0];
+            }
+
+            if (!ModelState.IsValid)
+            {
+                fm.Page = 1;
+            }
+
+            return applyFilter;
+        }
 
 
 
