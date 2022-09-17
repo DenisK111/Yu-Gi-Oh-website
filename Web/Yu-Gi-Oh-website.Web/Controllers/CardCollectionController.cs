@@ -22,7 +22,7 @@ namespace Yu_Gi_Oh_website.Web.Controllers
         }
         //[Route("CardCollection/{page:int}")]
         [HttpGet]
-        public async Task<IActionResult> Index([FromQuery]FilterViewModel fm)
+        public async Task<IActionResult> Index(FilterViewModel fm)
         {
 
             bool applyFilter = true;

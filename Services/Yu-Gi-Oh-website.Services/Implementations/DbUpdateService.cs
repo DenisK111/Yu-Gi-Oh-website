@@ -5,6 +5,7 @@ using Yu_Gi_Oh_website.Models;
 using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
 using Yu_Gi_Oh_website.Models.Enums;
 using Yu_Gi_Oh_website.Services.ApiService.Models;
+using Yu_Gi_Oh_website.Services.ExtensionMethods;
 using Yu_Gi_Oh_website.Web.Data;
 
 namespace Yu_Gi_Oh_website.Services.ApiService
@@ -85,8 +86,8 @@ namespace Yu_Gi_Oh_website.Services.ApiService
                     ExactCardType = await SetExactCardTypeAsync(cardJson, exactCardTypeObjects),
                     CardAttribute = await SetAttributeAsync(cardJson, attributeObjects),
                     Scale = cardJson.Scale,
-                    LinkValue = cardJson.LinkValue,
-                    Level = cardJson.Level,
+                    LinkValue = cardJson.LinkValue.HasValue ? cardJson.LinkValue.ToString() : null, 
+                    Level = cardJson.Level.HasValue ? cardJson.Level.ToString() : null,
 
 
 
@@ -276,11 +277,11 @@ namespace Yu_Gi_Oh_website.Services.ApiService
 
         }
 
-        private CardTypeEnum SetCardType(CardApiDTO json)
+        private string SetCardType(CardApiDTO json)
         {
             string type = json.Type;
             var typeValue = ApiConstantValues.cardTypeMapping.FirstOrDefault(t => t.Value.Contains(type)).Key;
-            return typeValue;
+            return typeValue.GetDisplayName();
 
         }
         private async Task<CardAttribute?> SetAttributeAsync(CardApiDTO json, ICollection<CardAttribute> attributeObjects)

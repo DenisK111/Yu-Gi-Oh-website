@@ -28,7 +28,8 @@ namespace Yu_Gi_Oh_website.Web.Controllers
 
         public IActionResult Privacy()
         {
-            return View();
+            this.HttpContext.Session.SetString("Read Privacy", "true");
+            return this.View();
         }
 
         public IActionResult AddToDb(AddToDbModel model)

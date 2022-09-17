@@ -22,14 +22,14 @@ namespace Yu_Gi_Oh_website.Models.CardCatalogue.Models
         public string Name { get; set; } = null!;
 
 
-        public CardTypeEnum CardType { get; set; }
+        public string CardType { get; set; }
 
         [MaxLength(2000)]
         public string Description { get; set; } = null!;
         public short? Atk { get; set; }
         public short? Def { get; set; }
 
-        public byte? Level { get; set; }
+        public string? Level { get; set; }
 
         public CardType Type { get; set; } = null!;
 
@@ -40,7 +40,7 @@ namespace Yu_Gi_Oh_website.Models.CardCatalogue.Models
         public int? CardAttributeId { get; set; }
         public byte? Scale { get; set; }
 
-        public byte? LinkValue { get; set; }
+        public string? LinkValue { get; set; }
 
         public ICollection<CardImage> CardImages { get; set; }
 

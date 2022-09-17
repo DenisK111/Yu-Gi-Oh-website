@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 
-namespace Yu_Gi_Oh_website.Services.Common.Enums
+namespace Yu_Gi_Oh_website.Services.ExtensionMethods
 {
     public static class EnumExtensionMethods
     {
@@ -18,7 +18,7 @@ namespace Yu_Gi_Oh_website.Services.Common.Enums
                             .GetCustomAttribute<DisplayAttribute>()?
                             .GetName();
 
-            if(value is null)
+            if (value is null)
             {
                 return enumValue.ToString();
             }

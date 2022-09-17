@@ -19,4 +19,8 @@
     <ProjectReference Include="..\..\Yu-Gi-Oh-website.Models\Yu-Gi-Oh-website.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

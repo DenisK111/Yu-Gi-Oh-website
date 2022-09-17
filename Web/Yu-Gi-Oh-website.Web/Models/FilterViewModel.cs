@@ -10,9 +10,9 @@ namespace Yu_Gi_Oh_website.Web.Models
 
         public string? SearchTerm { get; set; } = String.Empty;
 
-        public Dictionary<FilterTypesEnum, List<FilterEntryModel>> Fe { get; set; } = null!;
+        public Dictionary<FilterTypesEnum, List<FilterEntryModel>>? Fe { get; set; }
         [Range(1, Int32.MaxValue)]
-        public int Page { get; set; } = 1;
+        public int Page { get; set; }
 
     }
 }

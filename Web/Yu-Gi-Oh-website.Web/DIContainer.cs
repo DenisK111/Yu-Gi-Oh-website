@@ -42,15 +42,31 @@ namespace Yu_Gi_Oh_website.Web
                     options.CheckConsentNeeded = context => true;
                     options.MinimumSameSitePolicy = SameSiteMode.None;
                 });
+            builder.Services.AddDistributedSqlServerCache(options =>
+            {
+                options.ConnectionString = builder.Configuration.GetConnectionString(
+                    "DefaultConnection");
+                options.SchemaName = "dbo";
+                options.TableName = "TestCache";
+            });
 
-          
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            builder.Services.AddResponseCompression();
+
 
 
             builder.Services.AddControllersWithViews(options =>
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
 
-            });
+            })
+                .AddSessionStateTempDataProvider();
 
             builder.Services.AddAutoMapper(typeof(CardProfile));
 

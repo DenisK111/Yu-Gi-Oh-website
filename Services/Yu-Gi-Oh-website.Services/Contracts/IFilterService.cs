@@ -13,7 +13,7 @@ namespace Yu_Gi_Oh_website.Services.Contracts
 {
     public interface IFilterService
     {
-        IQueryable<Card> Search(IQueryable<Card> query, string name, string[] parameters);
+        IQueryable<Card> Search(IQueryable<Card> query, string name, ICollection<string> parameters);
         Dictionary<FilterTypesEnum, List<FilterEntryModel>> GetFilterEntries();
     }
 }
