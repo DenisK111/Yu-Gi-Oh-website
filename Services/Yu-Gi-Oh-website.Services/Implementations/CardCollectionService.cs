@@ -56,7 +56,7 @@ namespace Yu_Gi_Oh_website.Services.Implementations
         }
 
         public async Task<CardDto> GetCard(int id)
-        {
+        {                       
             var result = mapper.ProjectTo<CardDto>(context.Cards.Where(x => x.Id == id));
             return await result.FirstAsync();
         }

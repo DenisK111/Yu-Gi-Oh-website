@@ -10,7 +10,7 @@ using Yu_Gi_Oh_website.Models.Enums;
 
 namespace Yu_Gi_Oh_website.Models.CardCatalogue.Models
 {
-    public class Card : BaseModel<int>
+    public class Card : BaseModel<int>,IDeletableEntity
     {
         public Card()
         {
@@ -47,5 +47,7 @@ namespace Yu_Gi_Oh_website.Models.CardCatalogue.Models
         public int ExactCardTypeId { get; set; }
 
         public ExactCardType ExactCardType { get; set; } = null!;
+        public bool IsDeleted { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DateTime? DeletedOn { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

@@ -42,10 +42,6 @@ namespace Yu_Gi_Oh_website.Services.Implementations
             return sortingFunctions[key].Invoke(query);
         }
 
-        private static int? ParseToNullableInt(string? value)
-        {
-            return null;
-
-        }
+       
     }
 }
