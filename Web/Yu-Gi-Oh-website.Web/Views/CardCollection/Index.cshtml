@@ -12,13 +12,33 @@
             <input class="form-control  pb-1" type="text" placeholder="Search for card..." value="@Model.Fm.SearchTerm" asp-for="Fm.SearchTerm">
             <input type="hidden" value="1" asp-for="Fm.Page" />
         </div>
-        <div class="col-sm-1  px-1">
+        <div class="col-sm-2  px-1">
             <button class="btn btn-secondary w-100" type="submit">Search</button>
         </div>
-        <div class="col-sm-2 px-1">
-            <a class="btn btn-danger" data-bs-toggle="collapse" data-bs-target="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <div class="col-sm-1 px-1 ">
+            <a class="btn btn-danger w-100" data-bs-toggle="collapse" data-bs-target="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Filter
             </a>
+        </div>
+
+        <div class="dropdown col-sm-1 px-1 ">
+            <button class="btn btn-info dropdown-toggle w-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Sort
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <div class="form-group">
+                   
+                    @for (int i = 0; i < Model.Fm.Sortings!.Length; i++)
+                    {                       
+
+                        <input  class="btn-check" type="radio" asp-for="@Model.Fm.Sorting" id="exampleRadios@(i)" value="@Model.Fm.Sortings[i]" >
+                        <label class="btn btn-info my-1 shadow-none w-100 text-center" for="exampleRadios@(i)">
+                            @Model.Fm.Sortings[i].GetDisplayName()
+                        </label>
+                       // <li><a class="dropdown-item" href="#">@Model.Fm.Sortings[i].GetDisplayName()</a></li>
+                    }
+                </div>
+                </div>
         </div>
 
 
@@ -91,7 +111,7 @@
     {
         <div class="col-xs-8r">
             <div>
-                <a asp-action="Details" asp-route-id="@entry.Id" class="flex-lg-wrap">
+                <a asp-action="Details" asp-route-id="@entry.Id"  class="flex-lg-wrap">
 
                     <img src="@entry.ImageUrl" alt="@entry.Name" class="img-fluid rounded" />
 

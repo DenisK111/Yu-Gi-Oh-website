@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
+using Yu_Gi_Oh_website.Services.Common.Enums;
 using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Services.Models;
 using Yu_Gi_Oh_website.Web.Data;
@@ -18,13 +19,15 @@ namespace Yu_Gi_Oh_website.Services.Implementations
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
         private readonly IFilterService filter;
+        private readonly ISortingService sorting;
         public static readonly int cardsPerPage = 14;
 
-        public CardCollectionService(ApplicationDbContext context, IMapper mapper, IFilterService filter)
+        public CardCollectionService(ApplicationDbContext context, IMapper mapper, IFilterService filter,ISortingService sorting)
         {
             this.context = context;
             this.mapper = mapper;
             this.filter = filter;
+            this.sorting = sorting;
         }
              
         private IQueryable<Card> Filter(IQueryable<Card> expression, string name, string[] parameters)
@@ -32,11 +35,12 @@ namespace Yu_Gi_Oh_website.Services.Implementations
             return filter.Search(expression, name,parameters);
         }
 
-        public async Task<(IQueryable<CardDisplayDto>? cards,int count)> GetCardsAndCount(string name,string[] parameters,bool applyFilter)
+        public async Task<(IQueryable<CardDisplayDto>? cards,int count)> GetCardsAndCount(SortTypeEnum sortKey,string name,string[] parameters,bool applyFilter)
         {
             
-           IQueryable<Card> result = context.Cards.OrderBy(x => x.Name).AsNoTracking();
+           IQueryable<Card> result = context.Cards.AsNoTracking();
             result = applyFilter ? Filter(result, name,parameters) : result;
+            result = sorting.Sort(result, sortKey);
            IQueryable<CardDisplayDto>? endResult = mapper.ProjectTo<CardDisplayDto>(result);
             return (endResult,await result.CountAsync());
         }

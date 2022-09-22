@@ -17,6 +17,10 @@ namespace Yu_Gi_Oh_website.Web.Models
 
         [Range(1, Int32.MaxValue)]
         public int Page { get; set; }
+        [EnumDataType(typeof(SortTypeEnum))]
+        public SortTypeEnum Sorting { get; set; } 
+
+        public SortTypeEnum[]? Sortings { get; set; }
 
     }
 }

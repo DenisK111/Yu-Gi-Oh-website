@@ -1,4 +1,6 @@
-﻿namespace Yu_Gi_Oh_website.Web.Models
+﻿using Yu_Gi_Oh_website.Services.Common.Enums;
+
+namespace Yu_Gi_Oh_website.Web.Models
 {
     public class CardCollectionViewModel
     {
@@ -6,6 +8,8 @@
         public List<CardDisplayViewModel> CardModel { get; set; } = null!;
 
         public FilterViewModel Fm { get; set; } = null!;
+
+        
 
         public int CurrentPage { get; set; }
 

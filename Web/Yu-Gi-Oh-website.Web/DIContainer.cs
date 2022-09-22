@@ -74,6 +74,7 @@ namespace Yu_Gi_Oh_website.Web
             builder.Services.AddTransient<ICardCollectionService, CardCollectionService>();
             builder.Services.AddTransient<HttpClient>();
             builder.Services.AddScoped<IFilterService, FilterService>();
+            builder.Services.AddScoped<ISortingService, SortingService>();
 
 
 
