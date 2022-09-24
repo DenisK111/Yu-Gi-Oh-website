@@ -1,3 +1,4 @@
+using AspNetCoreTemplate.Data.Seeding;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,8 +21,13 @@ namespace Yu_Gi_Oh_website.Web
             {
                 app.UseMigrationsEndPoint();
                 // TODO look into DI Error with Db
-                new ApplicationDbContext().Database.Migrate();
-                await app.Services.GetService<IDbUpdateService>()!.AddAllCardsToDbAsync(ApiConstantValues.imagePath);
+                using (var serviceScope = app.Services.CreateScope())
+                {
+                    var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                    dbContext.Database.Migrate();
+                    await new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider);
+                    await new DbUpdateService(dbContext,new HttpClient()).AddAllCardsToDbAsync(ApiConstantValues.imagePath);
+                }
 
 
 
