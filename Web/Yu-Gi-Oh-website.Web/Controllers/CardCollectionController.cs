@@ -7,6 +7,8 @@ using Yu_Gi_Oh_website.Services.Common.Enums;
 using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Services.Models;
 using Yu_Gi_Oh_website.Web.Models;
+using Yu_Gi_Oh_website.Web.Models.CardCollection;
+using Yu_Gi_Oh_website.Web.Models.CardDetails;
 
 namespace Yu_Gi_Oh_website.Web.Controllers
 {
@@ -73,7 +75,7 @@ namespace Yu_Gi_Oh_website.Web.Controllers
         public async Task<IActionResult> Details(int Id)
         {
             var model = await service.GetCard(Id);
-            var viewModel = mapper.Map<CardViewModel>(model);
+            var viewModel = mapper.Map<CardDetailsViewModel>(model);
             return this.View(viewModel);
         }
 

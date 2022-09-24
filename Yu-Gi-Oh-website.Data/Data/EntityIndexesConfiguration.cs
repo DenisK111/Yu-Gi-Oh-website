@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Yu_Gi_Oh_website.Models.BaseModels;
+using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
 
 namespace Yu_Gi_Oh_website.Data.Data
 {
@@ -12,16 +13,19 @@ namespace Yu_Gi_Oh_website.Data.Data
 
     internal static class EntityIndexesConfiguration
     {
-        public static void Configure(ModelBuilder modelBuilder)
+        public static void Configure(ModelBuilder builder)
         {
             // IDeletableEntity.IsDeleted index
-            var deletableEntityTypes = modelBuilder.Model
+            var deletableEntityTypes = builder.Model
                 .GetEntityTypes()
                 .Where(et => et.ClrType != null && typeof(IDeletableEntity).IsAssignableFrom(et.ClrType));
             foreach (var deletableEntityType in deletableEntityTypes)
             {
-                modelBuilder.Entity(deletableEntityType.ClrType).HasIndex(nameof(IDeletableEntity.IsDeleted));
+                builder.Entity(deletableEntityType.ClrType).HasIndex(nameof(IDeletableEntity.IsDeleted));
             }
+
+            builder.Entity<Card>()
+                .HasIndex(b => b.Name);
         }
     }
 }

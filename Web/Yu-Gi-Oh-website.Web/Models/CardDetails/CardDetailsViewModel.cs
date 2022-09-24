@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Yu_Gi_Oh_website.Web.Models
+namespace Yu_Gi_Oh_website.Web.Models.CardDetails
 {
-    public class CardViewModel
+    public class CardDetailsViewModel
     {
 
-        public CardViewModel()
+        public CardDetailsViewModel()
         {
 
             CardImages = new HashSet<string>();
@@ -34,7 +34,7 @@ namespace Yu_Gi_Oh_website.Web.Models
         public byte? Scale { get; set; }
 
         public string? LinkValue { get; set; }
-       
+
         public ICollection<string> CardImages { get; set; }
     }
 }

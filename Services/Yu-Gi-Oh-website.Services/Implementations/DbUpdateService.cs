@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using Yu_Gi_Oh_website.Models;
 using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
-using Yu_Gi_Oh_website.Models.Enums;
 using Yu_Gi_Oh_website.Services.ApiService.Models;
 using Yu_Gi_Oh_website.Services.ExtensionMethods;
 using Yu_Gi_Oh_website.Web.Data;
@@ -62,14 +61,14 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             if (json is null || json.Data is null || !json.Data!.Any())
             {
                 return;
-                
+
             }
-            
+
             typeObjects = await context.Types.ToListAsync();
             exactCardTypeObjects = await context.ExactCardTypes.ToListAsync();
             attributeObjects = await context.CardAttributes.ToListAsync();
 
-            
+
             List<Card> cards = new List<Card>();
             List<CardImage> cardImages = new List<CardImage>();
             //  File.WriteAllText("text.json", JsonConvert.SerializeObject(json));
@@ -86,7 +85,7 @@ namespace Yu_Gi_Oh_website.Services.ApiService
                     ExactCardType = await SetExactCardTypeAsync(cardJson, exactCardTypeObjects),
                     CardAttribute = await SetAttributeAsync(cardJson, attributeObjects),
                     Scale = cardJson.Scale,
-                    LinkValue = cardJson.LinkValue.HasValue ? cardJson.LinkValue.ToString() : null, 
+                    LinkValue = cardJson.LinkValue.HasValue ? cardJson.LinkValue.ToString() : null,
                     Level = cardJson.Level.HasValue ? cardJson.Level.ToString() : null,
 
 
@@ -107,7 +106,7 @@ namespace Yu_Gi_Oh_website.Services.ApiService
                     string path = $"{imageFolder}/{RemoveSpecialCharacters(cardJson.Name)}{count++}.jpg";
                     //  Console.WriteLine(path);
 
-                    //await DownloadImageAsync(httpClient, link!, path);
+                    await DownloadImageAsync(httpClient, link!, path);
 
                     var cardImage = new CardImage()
                     {

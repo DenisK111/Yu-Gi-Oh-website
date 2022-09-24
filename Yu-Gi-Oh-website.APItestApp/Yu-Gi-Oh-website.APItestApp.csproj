@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Services\Yu-Gi-Oh-website.Services.ApiService\Yu-Gi-Oh-website.Services.ApiService.csproj" />
     <ProjectReference Include="..\Services\Yu-Gi-Oh-website.Services\Yu-Gi-Oh-website.Services.csproj" />
     <ProjectReference Include="..\Yu-Gi-Oh-website.Data\Yu-Gi-Oh-website.Data.csproj" />
     

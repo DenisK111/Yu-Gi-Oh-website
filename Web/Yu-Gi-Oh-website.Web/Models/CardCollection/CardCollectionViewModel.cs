@@ -1,6 +1,6 @@
 ﻿using Yu_Gi_Oh_website.Services.Common.Enums;
 
-namespace Yu_Gi_Oh_website.Web.Models
+namespace Yu_Gi_Oh_website.Web.Models.CardCollection
 {
     public class CardCollectionViewModel
     {
@@ -9,7 +9,7 @@ namespace Yu_Gi_Oh_website.Web.Models
 
         public FilterViewModel Fm { get; set; } = null!;
 
-        
+
 
         public int CurrentPage { get; set; }
 
@@ -17,10 +17,10 @@ namespace Yu_Gi_Oh_website.Web.Models
 
         public int CardsCount { get; set; }
 
-        public int PreviousPage => this.CurrentPage == 1 ? 1 : this.CurrentPage - 1;
+        public int PreviousPage => CurrentPage == 1 ? 1 : CurrentPage - 1;
 
-        public int NextPage => this.CurrentPage == this.PagesCount ? this.PagesCount : this.CurrentPage + 1;
+        public int NextPage => CurrentPage == PagesCount ? PagesCount : CurrentPage + 1;
 
-        
+
     }
 }

@@ -109,7 +109,7 @@
 
     @foreach (var entry in Model.CardModel)
     {
-        <div class="col-xs-8r">
+        <div class="col-lg-8r col-xs-12 col-sm-6 col-md-3">
             <div>
                 <a asp-action="Details" asp-route-id="@entry.Id"  class="flex-lg-wrap">
 
@@ -130,7 +130,7 @@
 }
 
 <nav aria-label="Card Pages">
-    <ul class="pagination justify-content-sm-center position-relative py-3">
+    <ul class="pagination justify-content-center position-relative py-3 text-center">
         @if (this.Model.CurrentPage > 1)
         {
             <li class="page-item">

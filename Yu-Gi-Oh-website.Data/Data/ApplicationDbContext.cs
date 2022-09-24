@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Yu_Gi_Oh_website.Data.Data;
+using Yu_Gi_Oh_website.Models.Forum.Models;
 
 namespace Yu_Gi_Oh_website.Web.Data
 {
@@ -54,8 +55,12 @@ namespace Yu_Gi_Oh_website.Web.Data
         public DbSet<CardType> Types { get; set; } = null!;
         public DbSet<ExactCardType> ExactCardTypes { get; set; } = null!;
       
-
         public DbSet<CardAttribute> CardAttributes { get; set; } = null!;
+        public DbSet<Cattegory> Cattegories { get; set; } = null!;
+        public DbSet<SubCattegory> SubCattegories { get; set; } = null!;
+        public DbSet<ForumThread> Threads { get; set; } = null!;
+        public DbSet<Post> Posts { get; set; } = null!;
+        public DbSet<PostContent> PostContents { get; set; } = null!;
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -81,10 +86,19 @@ namespace Yu_Gi_Oh_website.Web.Data
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
 
-            builder.Entity<Card>()
-                .HasIndex(b => b.Name);
-            base.OnModelCreating(builder);
-            
+            builder.Entity<ApplicationUser>()
+                .Property(x => x.PostsCount)
+                .HasDefaultValue(0);
+
+            builder.Entity<ForumThread>()
+                .Property(x => x.Status)
+                .HasDefaultValue(true);
+
+            builder.Entity<Post>()
+                .Property(x => x.Status)
+                .HasDefaultValue(true);
+
+
 
             this.ConfigureUserIdentityRelations(builder);
 

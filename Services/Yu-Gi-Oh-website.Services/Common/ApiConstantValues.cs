@@ -11,6 +11,8 @@ namespace Yu_Gi_Oh_website.Services.ApiService
 {
     public static class ApiConstantValues
     {
+        public static readonly string imagePath = "wwwroot/Images";
+
         public static readonly string allCardsString = $"https://db.ygoprodeck.com/api/v7/cardinfo.php?&startdate={DateTime.MinValue.Date.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture)}&enddate={DateTime.UtcNow.Date.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture)}&dateregion=tcg_date&format=tcg&misc=yes";
 
         public static readonly Dictionary<CardTypeEnum, HashSet<string>> cardTypeMapping = new()

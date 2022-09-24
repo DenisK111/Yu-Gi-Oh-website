@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Yu_Gi_Oh_website.Web.Data;
 
@@ -11,9 +12,10 @@ using Yu_Gi_Oh_website.Web.Data;
 namespace Yu_Gi_Oh_website.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220924091655_AddedForumModels2")]
+    partial class AddedForumModels2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -256,10 +258,8 @@ namespace Yu_Gi_Oh_website.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("PostsCount")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
+                    b.Property<int>("PostsCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("ProfilePic")
                         .HasColumnType("nvarchar(max)");
@@ -322,12 +322,10 @@ namespace Yu_Gi_Oh_website.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Level")
-                        .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LinkValue")
-                        .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -494,7 +492,11 @@ namespace Yu_Gi_Oh_website.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<Guid>("AuthorId")
+                    b.Property<string>("AuthorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("AuthorId1")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedOn")
@@ -503,34 +505,22 @@ namespace Yu_Gi_Oh_website.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Dislikes")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<int>("Likes")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<int>("SubCattegoryId")
+                    b.Property<int?>("SubCattegoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Subject")
+                    b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("AuthorId1");
 
                     b.HasIndex("IsDeleted");
 
@@ -547,7 +537,11 @@ namespace Yu_Gi_Oh_website.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<Guid>("AuthorId")
+                    b.Property<string>("AuthorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("AuthorId1")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedOn")
@@ -557,6 +551,9 @@ namespace Yu_Gi_Oh_website.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Dislikes")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ForumThreadId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
@@ -574,25 +571,17 @@ namespace Yu_Gi_Oh_website.Data.Migrations
                     b.Property<int>("PostContentId")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<int>("ThreadId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("AuthorId1");
+
+                    b.HasIndex("ForumThreadId");
 
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("ParentPostId");
 
                     b.HasIndex("PostContentId");
-
-                    b.HasIndex("ThreadId");
 
                     b.ToTable("Posts");
                 });
@@ -637,7 +626,7 @@ namespace Yu_Gi_Oh_website.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CattegoryId")
+                    b.Property<int?>("CattegoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -792,32 +781,32 @@ namespace Yu_Gi_Oh_website.Data.Migrations
             modelBuilder.Entity("Yu_Gi_Oh_website.Models.Forum.Models.ForumThread", b =>
                 {
                     b.HasOne("Yu_Gi_Oh_website.Models.ApplicationUser", "Author")
-                        .WithMany("Threads")
-                        .HasForeignKey("AuthorId")
+                        .WithMany()
+                        .HasForeignKey("AuthorId1")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Yu_Gi_Oh_website.Models.Forum.Models.SubCattegory", "SubCattegory")
-                        .WithMany("Threads")
-                        .HasForeignKey("SubCattegoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasOne("Yu_Gi_Oh_website.Models.Forum.Models.SubCattegory", null)
+                        .WithMany("Thread")
+                        .HasForeignKey("SubCattegoryId");
 
                     b.Navigation("Author");
-
-                    b.Navigation("SubCattegory");
                 });
 
             modelBuilder.Entity("Yu_Gi_Oh_website.Models.Forum.Models.Post", b =>
                 {
                     b.HasOne("Yu_Gi_Oh_website.Models.ApplicationUser", "Author")
-                        .WithMany("Posts")
-                        .HasForeignKey("AuthorId")
+                        .WithMany()
+                        .HasForeignKey("AuthorId1")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Yu_Gi_Oh_website.Models.Forum.Models.ForumThread", null)
+                        .WithMany("Posts")
+                        .HasForeignKey("ForumThreadId");
+
                     b.HasOne("Yu_Gi_Oh_website.Models.Forum.Models.Post", "ParentPost")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("ParentPostId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -828,30 +817,18 @@ namespace Yu_Gi_Oh_website.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Yu_Gi_Oh_website.Models.Forum.Models.ForumThread", "Thread")
-                        .WithMany("Posts")
-                        .HasForeignKey("ThreadId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("Author");
 
                     b.Navigation("ParentPost");
 
                     b.Navigation("PostContent");
-
-                    b.Navigation("Thread");
                 });
 
             modelBuilder.Entity("Yu_Gi_Oh_website.Models.Forum.Models.SubCattegory", b =>
                 {
-                    b.HasOne("Yu_Gi_Oh_website.Models.Forum.Models.Cattegory", "Cattegory")
+                    b.HasOne("Yu_Gi_Oh_website.Models.Forum.Models.Cattegory", null)
                         .WithMany("SubCattegories")
-                        .HasForeignKey("CattegoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Cattegory");
+                        .HasForeignKey("CattegoryId");
                 });
 
             modelBuilder.Entity("Yu_Gi_Oh_website.Models.ApplicationUser", b =>
@@ -860,11 +837,7 @@ namespace Yu_Gi_Oh_website.Data.Migrations
 
                     b.Navigation("Logins");
 
-                    b.Navigation("Posts");
-
                     b.Navigation("Roles");
-
-                    b.Navigation("Threads");
                 });
 
             modelBuilder.Entity("Yu_Gi_Oh_website.Models.CardCatalogue.Models.Card", b =>
@@ -897,9 +870,14 @@ namespace Yu_Gi_Oh_website.Data.Migrations
                     b.Navigation("Posts");
                 });
 
+            modelBuilder.Entity("Yu_Gi_Oh_website.Models.Forum.Models.Post", b =>
+                {
+                    b.Navigation("Comments");
+                });
+
             modelBuilder.Entity("Yu_Gi_Oh_website.Models.Forum.Models.SubCattegory", b =>
                 {
-                    b.Navigation("Threads");
+                    b.Navigation("Thread");
                 });
 #pragma warning restore 612, 618
         }

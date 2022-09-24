@@ -10,25 +10,26 @@ using Yu_Gi_Oh_website.Models.Enums;
 
 namespace Yu_Gi_Oh_website.Models.CardCatalogue.Models
 {
-    public class Card : BaseModel<int>,IDeletableEntity
+    public class Card : BaseModel<int>
     {
         public Card()
         {
 
             CardImages = new HashSet<CardImage>();
+            this.Users = new HashSet<ApplicationUser>();
         }
 
         [MaxLength(200)]
         public string Name { get; set; } = null!;
 
 
-        public string CardType { get; set; }
+        public string CardType { get; set; } = null!;
 
         [MaxLength(2000)]
         public string Description { get; set; } = null!;
         public short? Atk { get; set; }
         public short? Def { get; set; }
-
+        [MaxLength(2)]
         public string? Level { get; set; }
 
         public CardType Type { get; set; } = null!;
@@ -39,7 +40,7 @@ namespace Yu_Gi_Oh_website.Models.CardCatalogue.Models
 
         public int? CardAttributeId { get; set; }
         public byte? Scale { get; set; }
-
+        [MaxLength(2)]
         public string? LinkValue { get; set; }
 
         public ICollection<CardImage> CardImages { get; set; }
@@ -47,7 +48,7 @@ namespace Yu_Gi_Oh_website.Models.CardCatalogue.Models
         public int ExactCardTypeId { get; set; }
 
         public ExactCardType ExactCardType { get; set; } = null!;
-        public bool IsDeleted { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime? DeletedOn { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public ICollection<ApplicationUser> Users { get; set; }
     }
 }

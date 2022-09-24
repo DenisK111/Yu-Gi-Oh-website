@@ -18,11 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{6DA43028-D21
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yu-Gi-Oh-website.Services", "Services\Yu-Gi-Oh-website.Services\Yu-Gi-Oh-website.Services.csproj", "{FE2C5126-D019-4898-8D69-C33689927700}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yu-Gi-Oh-website.Services.ApiService", "Services\Yu-Gi-Oh-website.Services.ApiService\Yu-Gi-Oh-website.Services.ApiService.csproj", "{0BE474A7-6503-4191-9304-0FD18761F223}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yu-Gi-Oh-website.Web", "Web\Yu-Gi-Oh-website.Web\Yu-Gi-Oh-website.Web.csproj", "{7DD8D94C-BB08-40E5-99A8-3486A976855F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yu-Gi-Oh-website.Web.Architecture", "Web\Yu-Gi-Oh-website.Web.Architecture\Yu-Gi-Oh-website.Web.Architecture.csproj", "{9812710B-8984-4FC6-B3ED-5030B4E17404}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yu-Gi-Oh-website.Web.ViewModels", "Web\Yu-Gi-Oh-website.Web.ViewModels\Yu-Gi-Oh-website.Web.ViewModels.csproj", "{A0C31A4A-91DB-4FFE-A163-F7EF2A2E5E49}"
 EndProject
@@ -48,18 +44,10 @@ Global
 		{FE2C5126-D019-4898-8D69-C33689927700}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE2C5126-D019-4898-8D69-C33689927700}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE2C5126-D019-4898-8D69-C33689927700}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0BE474A7-6503-4191-9304-0FD18761F223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0BE474A7-6503-4191-9304-0FD18761F223}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0BE474A7-6503-4191-9304-0FD18761F223}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0BE474A7-6503-4191-9304-0FD18761F223}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7DD8D94C-BB08-40E5-99A8-3486A976855F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7DD8D94C-BB08-40E5-99A8-3486A976855F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DD8D94C-BB08-40E5-99A8-3486A976855F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DD8D94C-BB08-40E5-99A8-3486A976855F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9812710B-8984-4FC6-B3ED-5030B4E17404}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9812710B-8984-4FC6-B3ED-5030B4E17404}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9812710B-8984-4FC6-B3ED-5030B4E17404}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9812710B-8984-4FC6-B3ED-5030B4E17404}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A0C31A4A-91DB-4FFE-A163-F7EF2A2E5E49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A0C31A4A-91DB-4FFE-A163-F7EF2A2E5E49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0C31A4A-91DB-4FFE-A163-F7EF2A2E5E49}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -70,9 +58,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FE2C5126-D019-4898-8D69-C33689927700} = {9D5D5894-8A4E-477A-86CD-02F185469EB6}
-		{0BE474A7-6503-4191-9304-0FD18761F223} = {9D5D5894-8A4E-477A-86CD-02F185469EB6}
 		{7DD8D94C-BB08-40E5-99A8-3486A976855F} = {6DA43028-D21C-4884-B273-FC5F6DD2363B}
-		{9812710B-8984-4FC6-B3ED-5030B4E17404} = {6DA43028-D21C-4884-B273-FC5F6DD2363B}
 		{A0C31A4A-91DB-4FFE-A163-F7EF2A2E5E49} = {6DA43028-D21C-4884-B273-FC5F6DD2363B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

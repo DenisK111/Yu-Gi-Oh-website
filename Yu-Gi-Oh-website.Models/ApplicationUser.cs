@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yu_Gi_Oh_website.Models.BaseModels;
+using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
+using Yu_Gi_Oh_website.Models.Forum.Models;
 
 namespace Yu_Gi_Oh_website.Models
 {
@@ -18,6 +20,9 @@ namespace Yu_Gi_Oh_website.Models
             this.Roles = new HashSet<IdentityUserRole<Guid>>();
             this.Claims = new HashSet<IdentityUserClaim<Guid>>();
             this.Logins = new HashSet<IdentityUserLogin<Guid>>();
+            this.FavouriteCards = new HashSet<Card>();
+            this.Posts = new HashSet<Post>();
+            this.Threads = new HashSet<ForumThread>();
         }
 
         // Audit info
@@ -35,5 +40,13 @@ namespace Yu_Gi_Oh_website.Models
         public virtual ICollection<IdentityUserClaim<Guid>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<Guid>> Logins { get; set; }
+
+        public string? ProfilePic { get; set; }
+
+        public int? PostsCount { get; set; }
+
+        public ICollection<Card> FavouriteCards { get; set; }
+        public ICollection<Post> Posts { get; set; }
+        public ICollection<ForumThread> Threads { get; set; }
     }
 }

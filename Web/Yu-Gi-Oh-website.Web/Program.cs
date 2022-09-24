@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 using Yu_Gi_Oh_website.Services;
+using Yu_Gi_Oh_website.Services.ApiService;
 using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Web.Data;
 
@@ -9,7 +10,7 @@ namespace Yu_Gi_Oh_website.Web
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
             var app = builder.ConfigureAndBuild();
@@ -20,6 +21,8 @@ namespace Yu_Gi_Oh_website.Web
                 app.UseMigrationsEndPoint();
                 // TODO look into DI Error with Db
                 new ApplicationDbContext().Database.Migrate();
+                await app.Services.GetService<IDbUpdateService>()!.AddAllCardsToDbAsync(ApiConstantValues.imagePath);
+
 
 
             }
@@ -38,6 +41,8 @@ namespace Yu_Gi_Oh_website.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",
