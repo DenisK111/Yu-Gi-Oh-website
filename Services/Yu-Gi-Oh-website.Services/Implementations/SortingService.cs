@@ -15,7 +15,7 @@ namespace Yu_Gi_Oh_website.Services.Implementations
         private Dictionary<SortTypeEnum, Func<IQueryable<Card>, IQueryable<Card>>> sortingFunctions = new Dictionary<SortTypeEnum, Func<IQueryable<Card>, IQueryable<Card>>>()
         {
 
-            [SortTypeEnum.None] = x => x,
+            
             [SortTypeEnum.A_Z] = x => x.OrderBy(y=>y.Name),
             [SortTypeEnum.Z_A] = x => x.OrderByDescending(y=>y.Name),
             [SortTypeEnum.ATKASC] = x => x.OrderBy(y=>y.Atk),

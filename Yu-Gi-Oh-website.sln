@@ -20,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yu-Gi-Oh-website.Services",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yu-Gi-Oh-website.Web", "Web\Yu-Gi-Oh-website.Web\Yu-Gi-Oh-website.Web.csproj", "{7DD8D94C-BB08-40E5-99A8-3486A976855F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yu-Gi-Oh-website.Web.ViewModels", "Web\Yu-Gi-Oh-website.Web.ViewModels\Yu-Gi-Oh-website.Web.ViewModels.csproj", "{A0C31A4A-91DB-4FFE-A163-F7EF2A2E5E49}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yu-Gi-Oh-website.Services.Forum", "Yu-Gi-Oh-website.Services.Forum\Yu-Gi-Oh-website.Services.Forum.csproj", "{F627FB94-980B-489B-93E1-C8D3B5394D9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,10 +48,10 @@ Global
 		{7DD8D94C-BB08-40E5-99A8-3486A976855F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DD8D94C-BB08-40E5-99A8-3486A976855F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DD8D94C-BB08-40E5-99A8-3486A976855F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A0C31A4A-91DB-4FFE-A163-F7EF2A2E5E49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A0C31A4A-91DB-4FFE-A163-F7EF2A2E5E49}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A0C31A4A-91DB-4FFE-A163-F7EF2A2E5E49}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A0C31A4A-91DB-4FFE-A163-F7EF2A2E5E49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F627FB94-980B-489B-93E1-C8D3B5394D9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F627FB94-980B-489B-93E1-C8D3B5394D9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F627FB94-980B-489B-93E1-C8D3B5394D9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F627FB94-980B-489B-93E1-C8D3B5394D9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,7 +59,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{FE2C5126-D019-4898-8D69-C33689927700} = {9D5D5894-8A4E-477A-86CD-02F185469EB6}
 		{7DD8D94C-BB08-40E5-99A8-3486A976855F} = {6DA43028-D21C-4884-B273-FC5F6DD2363B}
-		{A0C31A4A-91DB-4FFE-A163-F7EF2A2E5E49} = {6DA43028-D21C-4884-B273-FC5F6DD2363B}
+		{F627FB94-980B-489B-93E1-C8D3B5394D9B} = {9D5D5894-8A4E-477A-86CD-02F185469EB6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {38E6FFF9-21A1-45A8-B3FF-AF09B9B4B5B8}

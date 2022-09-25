@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Yu_Gi_Oh_website.Services.ExtensionMethods
 {
-    public static class EnumExtensionMethods
+    public static class EnumExtensionMethod
     {
 
         public static string GetDisplayName(this Enum enumValue)

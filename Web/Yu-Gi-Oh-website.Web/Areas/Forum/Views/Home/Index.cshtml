@@ -1,2 +1,31 @@
-﻿
-<h2>Hello from Forum!</h2>
+﻿@model List<CattegoryDto>
+
+
+<h2 class="text-center col-10">Weclome to the Forum</h2>
+
+<div class="text-center col-10">
+
+    @foreach (var cattegory in Model)
+    {
+        <h4>@cattegory.Name</h4>
+        <div><img src="@cattegory.ImageUrl" class="img-cattegory img-fluid" /></div>
+
+        @foreach (var sub in cattegory.SubCattegories)
+        {
+            <div class="row">
+
+                <div>@sub.Name</div>
+                <div>@sub.ModifiedOn</div>
+                <div>@sub.Description</div>
+                
+
+            </div>
+        }
+
+    }
+
+
+
+
+
+</div>

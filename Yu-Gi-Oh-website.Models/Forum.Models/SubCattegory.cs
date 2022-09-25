@@ -18,11 +18,12 @@ namespace Yu_Gi_Oh_website.Models.Forum.Models
 
         public ICollection<ForumThread> Threads { get; set; }
 
-        public string ImageUrl { get; set; } = null!;
+        public string? ImageUrl { get; set; }
 
         public Cattegory Cattegory { get; set; } = null!;
         public int CattegoryId { get; set; }
 
+        public DateTime? LastThreadModifiedOn { get; set; }
 
 
     }

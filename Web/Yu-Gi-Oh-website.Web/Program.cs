@@ -20,13 +20,13 @@ namespace Yu_Gi_Oh_website.Web
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
-                // TODO look into DI Error with Db
+                
                 using (var serviceScope = app.Services.CreateScope())
                 {
                     var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                     dbContext.Database.Migrate();
                     await new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider);
-                    await new DbUpdateService(dbContext,new HttpClient()).AddAllCardsToDbAsync(ApiConstantValues.imagePath);
+                  //  await new DbUpdateService(dbContext,new HttpClient()).AddAllCardsToDbAsync(ApiConstantValues.imagePath);
                 }
 
 

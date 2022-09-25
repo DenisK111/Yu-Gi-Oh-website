@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
+using Yu_Gi_Oh_website.Models.Forum.Models;
+using Yu_Gi_Oh_website.Services.Forum.Models;
 using Yu_Gi_Oh_website.Services.Models;
 using Yu_Gi_Oh_website.Web.Models;
 using Yu_Gi_Oh_website.Web.Models.CardCollection;
@@ -28,7 +30,13 @@ namespace Yu_Gi_Oh_website.Web.AutoMapper
             CreateMap<Card, CardDisplayDto>()
                 .ForMember(x => x.ImageUrl, y => y.MapFrom(s => s.CardImages.Select(c => c.ImageUrl).FirstOrDefault(x => x.EndsWith("1.jpg"))));
             CreateMap<CardDisplayDto, CardDisplayViewModel>();
+            
+            CreateMap<Cattegory, CattegoryDto>();
 
+
+            CreateMap<SubCattegory, SubCattegoryDto>()
+                .ForMember(x=>x.ModifiedOn, y=>y.MapFrom(s=>s.ModifiedOn.HasValue ? ((DateTime)s.ModifiedOn).ToString("d") : null))
+                .ForMember(x=>x.ModifiedOn, y=>y.MapFrom(s=>s.LastThreadModifiedOn.HasValue ? ((DateTime)s.LastThreadModifiedOn).ToString("d") : null));
 
         }
     }

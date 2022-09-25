@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using Yu_Gi_Oh_website.Models;
 using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
@@ -13,22 +14,28 @@ namespace Yu_Gi_Oh_website.Services.ApiService
     {
         private readonly ApplicationDbContext context;
         private readonly HttpClient httpClient;
+        public readonly string allCardsString;
 
         public DbUpdateService(ApplicationDbContext context, HttpClient httpClient)
         {
             this.context = context;
             this.httpClient = httpClient;
+            allCardsString = GetApiString();
+
         }
         public async Task AddAllCardsToDbAsync(string imageFolder)
         {
-            if (context.Cards.Any())
+            var tasks = new List<Task>()
             {
-                return;
-            }
-            await UpdateTypesAsync();
-            await UpdateExactTypesAsync();
-            await UpdateAttributesAsync();
-            await UpdateDbAsync(imageFolder, ApiConstantValues.allCardsString);
+              UpdateTypesAsync(),
+              UpdateAttributesAsync(),
+              UpdateExactTypesAsync()
+            };
+
+
+            await Task.WhenAll(tasks);
+            await context.SaveChangesAsync();
+            await UpdateDbAsync(imageFolder, allCardsString);
 
         }
 
@@ -67,13 +74,22 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             typeObjects = await context.Types.ToListAsync();
             exactCardTypeObjects = await context.ExactCardTypes.ToListAsync();
             attributeObjects = await context.CardAttributes.ToListAsync();
+            var cardNames = context.Cards.Select(x => x.Name).ToHashSet();
 
+            json.Data = json!.Data!.Where(x => !cardNames.Contains(x.Name)).ToArray();
+
+            if (json.Data is null || !json.Data.Any())
+            {
+                return;
+            }
 
             List<Card> cards = new List<Card>();
             List<CardImage> cardImages = new List<CardImage>();
             //  File.WriteAllText("text.json", JsonConvert.SerializeObject(json));
-            foreach (var cardJson in json?.Data!)
+            foreach (var cardJson in json!.Data!)
             {
+
+
                 var card = new Card()
                 {
                     Name = cardJson.Name,
@@ -182,7 +198,7 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             typeObjects = typeObjects.Where(type => !existingTypeNames.Contains(type.Name)).ToHashSet();
 
             await context.AddRangeAsync(typeObjects);
-            await context.SaveChangesAsync();
+
 
         }
 
@@ -201,7 +217,7 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             attributeObjects = attributeObjects.Where(attr => !existingAttributeNames.Contains(attr.Name)).ToHashSet();
 
             await context.AddRangeAsync(attributeObjects);
-            await context.SaveChangesAsync();
+
 
         }
 
@@ -220,7 +236,7 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             typeObjects = typeObjects.Where(type => !existingTypeNames.Contains(type.Name)).ToHashSet();
 
             await context.AddRangeAsync(typeObjects);
-            await context.SaveChangesAsync();
+
 
         }
 
@@ -261,6 +277,38 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             return type;
         }
 
+        private async Task<CardAttribute?> SetAttributeAsync(CardApiDTO json, ICollection<CardAttribute> attributeObjects)
+        {
+            if (json.Attribute is null)
+            {
+                return null;
+            }
+
+            CardAttribute? attribute;
+
+            if (attributeObjects.Any())
+            {
+                attribute = attributeObjects.FirstOrDefault(o => o.Name == json.Attribute);
+
+                if (attribute is null && !attributeObjects.Select(x => x.Name).Contains(json.Attribute))
+                {
+                    attribute = new CardAttribute() { Name = json.Attribute };
+                    attributeObjects.Add(attribute);
+
+                }
+                return attribute;
+            }
+
+            attribute = await context.CardAttributes.FirstOrDefaultAsync(x => x.Name == json.Attribute);
+
+            if (attribute is null)
+            {
+                attribute = new CardAttribute() { Name = json.Attribute };
+                attributeObjects.Add(attribute);
+            }
+            return attribute;
+        }
+
         private void CheckForSpellTrapTypes(CardApiDTO json)
         {
             if (json.Type == "Spell Card")
@@ -283,46 +331,14 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             return typeValue.GetDisplayName();
 
         }
-        private async Task<CardAttribute?> SetAttributeAsync(CardApiDTO json, ICollection<CardAttribute> attributeObjects)
+
+
+        private string GetApiString()
         {
-            if (json.Attribute is null)
-            {
-                return null;
-            }
-
-            CardAttribute? attribute;
-
-            if (attributeObjects.Any())
-            {
-                attribute = attributeObjects.FirstOrDefault(o => o.Name == json.Attribute);
-
-                if (attribute is null && !attributeObjects.Select(x => x.Name).Contains(json.Attribute))
-                {
-                    attribute = new CardAttribute() { Name = json.Attribute };
-                    attributeObjects.Add(attribute);
-
-                }
-
-                return attribute;
-
-
-            }
-
-            attribute = await context.CardAttributes.FirstOrDefaultAsync(x => x.Name == json.Attribute);
-
-            if (attribute is null)
-            {
-
-                attribute = new CardAttribute() { Name = json.Attribute };
-                attributeObjects.Add(attribute);
-
-            }
-
-            return attribute;
-
-
-
-
+            var startDate = context.Cards.Any()
+                ? context.Cards.Max(x => x.CreatedOn).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture)
+                : DateTime.MinValue.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture);
+            return ApiConstantValues.apiCallString.Replace(ApiConstantValues.placeholder, startDate);
         }
     }
 }

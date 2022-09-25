@@ -27,6 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Services\Yu-Gi-Oh-website.Services\Yu-Gi-Oh-website.Services.csproj" />
     <ProjectReference Include="..\..\Yu-Gi-Oh-website.Data\Yu-Gi-Oh-website.Data.csproj" />
+    <ProjectReference Include="..\..\Yu-Gi-Oh-website.Services.Forum\Yu-Gi-Oh-website.Services.Forum.csproj" />
 
   </ItemGroup>
 

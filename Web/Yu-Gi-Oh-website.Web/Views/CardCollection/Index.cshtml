@@ -1,16 +1,14 @@
 ﻿@model CardCollectionViewModel
 
-
-
-
-
 <form class="d-flex" asp-controller="CardCollection" asp-action="Index" method="get">
 
     <div class="row w-100 py-2">
-        <div class="col-sm-3"></div>
+        <h5 class="col-sm-3 text-center text-danger align-baseline">
+            <span class="text-secondary">Results:</span> @Model.CardsCount
+        </h5>
         <div class="col-sm-5 pb-1">
-            <input class="form-control  pb-1" type="text" placeholder="Search for card..." value="@Model.Fm.SearchTerm" asp-for="Fm.SearchTerm">
             <input type="hidden" value="1" asp-for="Fm.Page" />
+            <input class="form-control  pb-1" type="text" placeholder="Search for card..." value="@Model.Fm.SearchTerm" asp-for="Fm.SearchTerm">
         </div>
         <div class="col-sm-2  px-1">
             <button class="btn btn-secondary w-100" type="submit">Search</button>

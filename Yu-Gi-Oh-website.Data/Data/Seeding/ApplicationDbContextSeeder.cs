@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Yu_Gi_Oh_website.Data.Data.Seeding;
 using Yu_Gi_Oh_website.Web.Data;
 
 namespace AspNetCoreTemplate.Data.Seeding
@@ -26,7 +27,8 @@ namespace AspNetCoreTemplate.Data.Seeding
             var seeders = new List<ISeeder>
                           {
                               new RolesSeeder(),
-                              
+                              new CattegoriesSeeder(),
+                              new SubCattegoriesSeeder(),
                           };
 
             foreach (var seeder in seeders)

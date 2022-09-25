@@ -10,6 +10,8 @@ using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Services.Implementations;
 using Yu_Gi_Oh_website.Web.AutoMapper;
 using Yu_Gi_Oh_website.Web.Data;
+using Yu_Gi_Oh_website.Services.Forum.Contracts;
+using Yu_Gi_Oh_website.Services.Forum.Implementations;
 
 namespace Yu_Gi_Oh_website.Web
 {
@@ -75,6 +77,7 @@ namespace Yu_Gi_Oh_website.Web
             builder.Services.AddTransient<HttpClient>();
             builder.Services.AddScoped<IFilterService, FilterService>();
             builder.Services.AddScoped<ISortingService, SortingService>();
+            builder.Services.AddScoped<IHomePageService, HomePageService>();
 
 
 

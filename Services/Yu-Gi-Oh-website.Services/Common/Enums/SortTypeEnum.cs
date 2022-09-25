@@ -9,7 +9,7 @@ namespace Yu_Gi_Oh_website.Services.Common.Enums
 {
     public enum SortTypeEnum
     {
-        None,
+       
         [Display(Name = "A-Z")]
         A_Z,
         [Display(Name = "Z-A")]
