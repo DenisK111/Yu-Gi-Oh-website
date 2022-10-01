@@ -10,13 +10,13 @@ using Yu_Gi_Oh_website.Web.Data;
 
 namespace Yu_Gi_Oh_website.Services.ApiService
 {
-    public class DbUpdateService : IDbUpdateService
+    public class GetApiDataAndUpdateDbService : IGetApiDataAndUpdateDbService
     {
         private readonly ApplicationDbContext context;
         private readonly HttpClient httpClient;
         public readonly string allCardsString;
 
-        public DbUpdateService(ApplicationDbContext context, HttpClient httpClient)
+        public GetApiDataAndUpdateDbService(ApplicationDbContext context, HttpClient httpClient)
         {
             this.context = context;
             this.httpClient = httpClient;
@@ -25,15 +25,10 @@ namespace Yu_Gi_Oh_website.Services.ApiService
         }
         public async Task AddAllCardsToDbAsync(string imageFolder)
         {
-            var tasks = new List<Task>()
-            {
-              UpdateTypesAsync(),
-              UpdateAttributesAsync(),
-              UpdateExactTypesAsync()
-            };
 
-
-            await Task.WhenAll(tasks);
+            await UpdateTypesAsync();
+            await UpdateAttributesAsync();
+            await UpdateExactTypesAsync();
             await context.SaveChangesAsync();
             await UpdateDbAsync(imageFolder, allCardsString);
 
@@ -245,7 +240,22 @@ namespace Yu_Gi_Oh_website.Services.ApiService
         {
 
             var result = await httpClient.GetAsync(apiString);
-            result.EnsureSuccessStatusCode();
+
+            try
+            {
+                result.EnsureSuccessStatusCode();
+            }
+
+            catch (Exception a)
+            {
+                var content = await result.Content.ReadAsStringAsync();
+
+                if (!content.Contains("No card matching your query was found in the database."))
+                {
+                    throw;
+                }
+            }
+
             string responseBody = await result.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<RootObject>(responseBody);
         }

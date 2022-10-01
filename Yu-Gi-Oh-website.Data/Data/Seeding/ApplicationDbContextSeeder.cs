@@ -29,6 +29,7 @@ namespace AspNetCoreTemplate.Data.Seeding
                               new RolesSeeder(),
                               new CattegoriesSeeder(),
                               new SubCattegoriesSeeder(),
+                              new ForumThreadsSeader(),
                           };
 
             foreach (var seeder in seeders)

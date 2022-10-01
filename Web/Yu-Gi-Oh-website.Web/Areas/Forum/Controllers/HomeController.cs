@@ -14,7 +14,7 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var cattegories = await homeService.GetallCattegories(); 
+            var cattegories = await homeService.GetallCattegoriesAsync(); 
             return this.View(cattegories);
         }
 

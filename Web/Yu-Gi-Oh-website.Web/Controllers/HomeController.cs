@@ -11,10 +11,10 @@ namespace Yu_Gi_Oh_website.Web.Controllers
     {
         private readonly string imageFolder = "wwwroot/Images";
         private readonly ILogger<HomeController> _logger;
-        private readonly IDbUpdateService updater;
+        private readonly IGetApiDataAndUpdateDbService updater;
         private readonly ICardCollectionService service;
 
-        public HomeController(ILogger<HomeController> logger, IDbUpdateService updater,ICardCollectionService service)
+        public HomeController(ILogger<HomeController> logger, IGetApiDataAndUpdateDbService updater,ICardCollectionService service)
         {
             _logger = logger;
             this.updater = updater;

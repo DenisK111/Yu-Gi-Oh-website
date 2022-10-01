@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/solarly.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
 
 </head>
 <body>
@@ -95,11 +96,16 @@
 
 
                 </div>
-                <div class="col-sm-10 bg-light">
+                <div class="p-0 col-sm-8 bg-light bg-gradient fill">
 
                     @RenderBody()
 
                 </div>
+               <div class="col-sm-2 bg-success">
+
+                
+
+            </div>
                 <div class="col-sm-1" id="rightmarginForum">
 
 

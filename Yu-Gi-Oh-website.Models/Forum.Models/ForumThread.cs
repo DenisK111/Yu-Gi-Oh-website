@@ -17,7 +17,7 @@ namespace Yu_Gi_Oh_website.Models.Forum.Models
 
         public ApplicationUser Author { get; set; } = null!;
 
-        public Guid AuthorId { get; set; }
+        public string AuthorId { get; set; }
 
         public bool? Status { get; set; }
 
@@ -26,6 +26,8 @@ namespace Yu_Gi_Oh_website.Models.Forum.Models
         //TODO: CHECK FOR DEFAULT VALUE EF CORE
         public int Likes { get; set; }
         public int Dislikes { get; set; }
+        [MaxLength(60)]
+        public string Slug { get; set; } = null!;
 
 
 

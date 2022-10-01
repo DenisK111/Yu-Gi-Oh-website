@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Yu_Gi_Oh_website.Models.BaseModels;
+using Yu_Gi_Oh_website.Common;
 
 namespace Yu_Gi_Oh_website.Models.Forum.Models
 {
@@ -24,6 +25,9 @@ namespace Yu_Gi_Oh_website.Models.Forum.Models
         public int CattegoryId { get; set; }
 
         public DateTime? LastThreadModifiedOn { get; set; }
+        [MaxLength(100)]
+        public string Slug { get; set; } = null!;
+       
 
 
     }

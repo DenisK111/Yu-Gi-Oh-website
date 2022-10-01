@@ -72,12 +72,13 @@ namespace Yu_Gi_Oh_website.Web
 
             builder.Services.AddAutoMapper(typeof(CardProfile));
 
-            builder.Services.AddTransient<IDbUpdateService,DbUpdateService>();
+            builder.Services.AddTransient<IGetApiDataAndUpdateDbService,GetApiDataAndUpdateDbService>();
             builder.Services.AddTransient<ICardCollectionService, CardCollectionService>();
             builder.Services.AddTransient<HttpClient>();
             builder.Services.AddScoped<IFilterService, FilterService>();
             builder.Services.AddScoped<ISortingService, SortingService>();
             builder.Services.AddScoped<IHomePageService, HomePageService>();
+            builder.Services.AddScoped<ISubCattegoryService, SubCattegoryService>();
 
 
 

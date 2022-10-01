@@ -9,7 +9,7 @@ namespace yu_gi_oh_website.httpclient
     {
         static async Task Main(string[] args)
         {           
-         await new DbUpdateService(new ApplicationDbContext(),new HttpClient()).AddAllCardsToDbAsync("../../../Images");
+         await new GetApiDataAndUpdateDbService(new ApplicationDbContext(),new HttpClient()).AddAllCardsToDbAsync("../../../Images");
         }
     }
 }

@@ -1,25 +1,46 @@
 ﻿@model List<CattegoryDto>
+@section Styles{
+        <link rel="stylesheet" href="~/css/forum.css" asp-append-version="true" />
+    }
+<h1 class="text-center col-12 text-info ti text-bg-primary">Weclome to the Forum</h1>
 
 
-<h2 class="text-center col-10">Weclome to the Forum</h2>
 
-<div class="text-center col-10">
+<div class="text-center col-12">
 
     @foreach (var cattegory in Model)
     {
-        <h4>@cattegory.Name</h4>
-        <div><img src="@cattegory.ImageUrl" class="img-cattegory img-fluid" /></div>
+        <h4 class="pt-2 text-info">@cattegory.Name</h4>
+        <div class="pb-2"><img src="@cattegory.ImageUrl" class="img-cattegory img-fluid" /></div>
 
         @foreach (var sub in cattegory.SubCattegories)
         {
-            <div class="row">
 
-                <div>@sub.Name</div>
-                <div>@sub.ModifiedOn</div>
-                <div>@sub.Description</div>
-                
-
+            <div class="row ">
+                <div class="col-lg-12">
+                    <div class="card bg-danger rounded-0 hover_black">
+                        <a asp-controller="SubCattegory" asp-action="Index" asp-route-id="@sub.Id" asp-route-slug="@sub.Slug" class="links"  >
+                            <div class="card-title bg-white text-dark hover_blue">
+                                <div class="row ">
+                                    <h3 class="col-12 hover_black card-title border-dark ">
+                                        @sub.Name
+                                    </h3>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="card-body bg-danger">
+                            <div class="row">
+                                <h5 class="col-12 card-body bg-gradient text-dark text-start">
+                                    @sub.Description
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
+
         }
 
     }

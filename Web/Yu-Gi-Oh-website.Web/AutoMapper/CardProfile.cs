@@ -35,8 +35,16 @@ namespace Yu_Gi_Oh_website.Web.AutoMapper
 
 
             CreateMap<SubCattegory, SubCattegoryDto>()
-                .ForMember(x=>x.ModifiedOn, y=>y.MapFrom(s=>s.ModifiedOn.HasValue ? ((DateTime)s.ModifiedOn).ToString("d") : null))
-                .ForMember(x=>x.ModifiedOn, y=>y.MapFrom(s=>s.LastThreadModifiedOn.HasValue ? ((DateTime)s.LastThreadModifiedOn).ToString("d") : null));
+                .ForMember(x=>x.ModifiedOn, y=>y.MapFrom(s=>s.ModifiedOn.HasValue ? ((DateTime)s.ModifiedOn).ToString("g") : null))
+                .ForMember(x=>x.ModifiedOn, y=>y.MapFrom(s=>s.LastThreadModifiedOn.HasValue ? ((DateTime)s.LastThreadModifiedOn).ToString("g") : null));
+
+            CreateMap<SubCattegory, FullSubCattegoryDto>()
+                .ForMember(x => x.Cattegory, y => y.MapFrom(s => s.Cattegory.Name));
+
+            CreateMap<ForumThread, ForumThreadDisplayDto>()
+                .ForMember(x => x.Author, y => y.MapFrom(s => s.Author.UserName))
+                .ForMember(x => x.ModifiedOn, y => y.MapFrom(s => s.ModifiedOn.HasValue ? ((DateTime)s.ModifiedOn).ToString("g") : null))
+                .ForMember(x => x.CreatedOn, y => y.MapFrom(s => s.CreatedOn.ToString("g")));
 
         }
     }

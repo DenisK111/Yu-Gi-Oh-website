@@ -16,4 +16,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Yu-Gi-Oh-website.Common\Yu-Gi-Oh-website.Common.csproj" />
+  </ItemGroup>
+
 </Project>

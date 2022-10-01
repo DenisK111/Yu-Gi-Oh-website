@@ -10,7 +10,7 @@ using Yu_Gi_Oh_website.Models.BaseModels;
 namespace Yu_Gi_Oh_website.Models
 {
     
-    public class ApplicationRole : IdentityRole<Guid>, IAuditInfo, IDeletableEntity
+    public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {
         public ApplicationRole()
             : this(null)
@@ -20,7 +20,7 @@ namespace Yu_Gi_Oh_website.Models
         public ApplicationRole(string? name)
             : base(name)
         {
-            this.Id = Guid.NewGuid();
+            this.Id = Guid.NewGuid().ToString();
         }
 
         public DateTime CreatedOn { get; set; }

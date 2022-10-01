@@ -12,5 +12,7 @@
         public string? ImageUrl { get; set; }
 
         public ICollection<SubCattegoryDto> SubCattegories { get; set; }
+
+        public string Slug { get; set; }
     }
 }

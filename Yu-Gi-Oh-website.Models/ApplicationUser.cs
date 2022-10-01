@@ -12,14 +12,14 @@ namespace Yu_Gi_Oh_website.Models
 {
     
 
-    public class ApplicationUser : IdentityUser<Guid>, IAuditInfo, IDeletableEntity
+    public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
         public ApplicationUser()
         {
-            this.Id = Guid.NewGuid();
-            this.Roles = new HashSet<IdentityUserRole<Guid>>();
-            this.Claims = new HashSet<IdentityUserClaim<Guid>>();
-            this.Logins = new HashSet<IdentityUserLogin<Guid>>();
+            this.Id = Guid.NewGuid().ToString();
+            this.Roles = new HashSet<IdentityUserRole<string>>();
+            this.Claims = new HashSet<IdentityUserClaim<string>>();
+            this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.FavouriteCards = new HashSet<Card>();
             this.Posts = new HashSet<Post>();
             this.Threads = new HashSet<ForumThread>();
@@ -35,11 +35,11 @@ namespace Yu_Gi_Oh_website.Models
 
         public DateTime? DeletedOn { get; set; }
 
-        public virtual ICollection<IdentityUserRole<Guid>> Roles { get; set; }
+        public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
-        public virtual ICollection<IdentityUserClaim<Guid>> Claims { get; set; }
+        public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
-        public virtual ICollection<IdentityUserLogin<Guid>> Logins { get; set; }
+        public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
         public string? ProfilePic { get; set; }
 

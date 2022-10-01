@@ -1,0 +1,22 @@
+﻿@model FullSubCattegoryDto
+
+<h1>@Model.Name</h1>
+<h2>@Model.Description</h2>
+
+
+@foreach (var item in Model.Threads)
+{
+    <row>
+        <col-12>
+            <div>
+                @item.Subject
+                @item.Author
+                @item.PostsCount
+                @item.Likes
+                @item.Dislikes
+                @item.CreatedOn
+            </div>
+        </col-12>
+    </row>
+
+}

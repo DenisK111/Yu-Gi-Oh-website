@@ -11,21 +11,27 @@ using Yu_Gi_Oh_website.Web.Data;
 
 namespace Yu_Gi_Oh_website.Services.Forum.Implementations
 {
-    public class HomePageService : IHomePageService
+    public class SubCattegoryService : ISubCattegoryService
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
-        public HomePageService(ApplicationDbContext context, IMapper mapper)
+        public SubCattegoryService(ApplicationDbContext context,IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
         }
-        public async Task<ICollection<CattegoryDto>> GetallCattegoriesAsync()
+        public async Task<FullSubCattegoryDto> GetByIdAsync(int id)
         {
-            var cattegories = context.Cattegories.AsQueryable();
-            var dict = await mapper.ProjectTo<CattegoryDto>(cattegories).ToListAsync();
-            return dict;
+            var subCattegory = await context.SubCattegories
+                .Include(x => x.Threads)
+                .ThenInclude(x=>x.Author)
+                .AsNoTracking()
+               .FirstOrDefaultAsync(x => x.Id == id);
+               
+            var result = mapper.Map<FullSubCattegoryDto>(subCattegory);
+            return result;
+
         }
     }
 }

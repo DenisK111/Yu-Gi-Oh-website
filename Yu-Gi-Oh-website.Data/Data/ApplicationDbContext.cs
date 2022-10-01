@@ -19,7 +19,7 @@ namespace Yu_Gi_Oh_website.Web.Data
 
    
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole,Guid>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole,string>
     {
         private static readonly MethodInfo SetIsDeletedQueryFilterMethod =
             typeof(ApplicationDbContext).GetMethod(

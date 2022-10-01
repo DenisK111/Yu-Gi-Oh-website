@@ -1,8 +1,10 @@
-﻿namespace Yu_Gi_Oh_website.Services.Forum.Models
+﻿using Yu_Gi_Oh_website.Common;
+
+namespace Yu_Gi_Oh_website.Services.Forum.Models
 {
     public record SubCattegoryDto
     {
-        public string Name { get; set; } = null!;
+                public string Name { get; set; } = null!;
 
         public string? ImageUrl { get; set; }
 
@@ -10,5 +12,9 @@
         public string? LastThreadModifiedOn { get; set; }
 
         public string Description { get; set; } = null!;
+
+        public string Slug { get; set; } = null!;
+
+        public int Id { get; set; }
     }
 }

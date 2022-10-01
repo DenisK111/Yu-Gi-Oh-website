@@ -21,6 +21,8 @@ namespace Yu_Gi_Oh_website.Models.Forum.Models
         public ICollection<SubCattegory> SubCattegories { get; set; }
 
         public string? ImageUrl { get; set; }
+           
+        
 
 
     }
