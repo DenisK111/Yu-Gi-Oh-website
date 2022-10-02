@@ -13,7 +13,7 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
             this.subCattegoryService = subCattegoryService;
         }
         [HttpGet]
-        [Route("{id:int}/{slug}")]
+        [Route("{area}/Cattegory/{id:int}/{slug?}")]
         public async Task<IActionResult> Index(int id)
         {
             var resultModel = await subCattegoryService.GetByIdAsync(id);

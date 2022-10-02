@@ -1,22 +1,47 @@
 ﻿@model FullSubCattegoryDto
 
+
+@section Styles{
+
+    <link href="~/lib/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+    <link href="~/lib/fontawesome/css/brands.min.css" rel="stylesheet">
+    <link href="~/lib/fontawesome/css/solid.min.css" rel="stylesheet">
+
+
+    <script src="/lib/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+    </script>
+}
+
 <h1>@Model.Name</h1>
 <h2>@Model.Description</h2>
+<div>
+    <form method="post">
+        <textarea id="mytextarea">Hello, World!</textarea>
+    </form>
+</div>
+
+<div>
+    @foreach (var item in Model.Threads)
+    {
+        <div class="row">
 
 
-@foreach (var item in Model.Threads)
-{
-    <row>
-        <col-12>
-            <div>
-                @item.Subject
-                @item.Author
-                @item.PostsCount
-                @item.Likes
-                @item.Dislikes
-                @item.CreatedOn
-            </div>
-        </col-12>
-    </row>
+            <div class="col-2">@item.Subject</div>
+            <div class="col-2"><i class="fa-solid fa-user"></i> @item.Author</div>
+            <div class="col-2"><i class="fa-solid fa-comment"> </i> @item.PostsCount</div>
+            <div class="col-2"><a href="https://www.google.com/"><i class="fa-solid fa-thumbs-up"></i></a> @item.Likes</div>
+            <div class="col-2"><i class="fa-solid fa-thumbs-down"></i> @item.Dislikes</div>
+            <div class="col-2"><i class="fa-regular fa-calendar-days"></i> @item.CreatedOn</div>
 
-}
+
+
+
+        </div>
+
+    }
+</div>
+

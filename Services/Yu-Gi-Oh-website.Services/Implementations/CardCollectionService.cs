@@ -22,27 +22,27 @@ namespace Yu_Gi_Oh_website.Services.Implementations
         private readonly ISortingService sorting;
         public static readonly int cardsPerPage = 14;
 
-        public CardCollectionService(ApplicationDbContext context, IMapper mapper, IFilterService filter,ISortingService sorting)
+        public CardCollectionService(ApplicationDbContext context, IMapper mapper, IFilterService filter, ISortingService sorting)
         {
             this.context = context;
             this.mapper = mapper;
             this.filter = filter;
             this.sorting = sorting;
         }
-             
+
         private IQueryable<Card> Filter(IQueryable<Card> expression, string name, string[] parameters)
         {
-            return filter.Search(expression, name,parameters);
+            return filter.Search(expression, name, parameters);
         }
 
-        public async Task<(IQueryable<CardDisplayDto>? cards,int count)> GetCardsAndCount(SortTypeEnum sortKey,string name,string[] parameters,bool applyFilter)
+        public async Task<(IQueryable<CardDisplayDto>? cards, int count)> GetCardsAndCount(SortTypeEnum sortKey, string name, string[] parameters, bool applyFilter)
         {
-            
-           IQueryable<Card> result = context.Cards.AsNoTracking();
-            result = applyFilter ? Filter(result, name,parameters) : result;
+
+            IQueryable<Card> result = context.Cards.AsNoTracking();
+            result = applyFilter ? Filter(result, name, parameters) : result;
             result = sorting.Sort(result, sortKey);
-           IQueryable<CardDisplayDto>? endResult = mapper.ProjectTo<CardDisplayDto>(result);
-            return (endResult,await result.CountAsync());
+            IQueryable<CardDisplayDto>? endResult = mapper.ProjectTo<CardDisplayDto>(result);
+            return (endResult, await result.CountAsync());
         }
 
         private void CheckNull<T>(T input)
@@ -56,9 +56,15 @@ namespace Yu_Gi_Oh_website.Services.Implementations
         }
 
         public async Task<CardDto> GetCard(int id)
-        {                       
-            var result = mapper.ProjectTo<CardDto>(context.Cards.Where(x => x.Id == id));
-            return await result.FirstAsync();
+        {
+            var result = mapper.Map<CardDto>(await
+                context.Cards
+                .Include(x => x.ExactCardType)
+                .Include(x => x.CardImages) 
+                .Include(x => x.CardAttribute)
+                .Include(x=>x.Type)
+                .FirstOrDefaultAsync(x => x.Id == id));
+            return result;
         }
 
 

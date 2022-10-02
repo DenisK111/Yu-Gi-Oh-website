@@ -351,3 +351,5 @@ MigrationBackup/
 
 %/%/wwwroot/Images/%
 */*/wwwroot/Images/*
+%/%/wwwroot/lib/fontawesome/%
+*/*/wwwroot/lib/fontawesome/*
