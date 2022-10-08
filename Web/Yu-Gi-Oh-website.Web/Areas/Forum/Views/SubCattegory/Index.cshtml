@@ -11,16 +11,28 @@
     <script src="/lib/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
-            selector: '#mytextarea'
+            selector: 'textarea',
+            menubar: false,           
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor textcolor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table contextmenu paste code help wordcount'
+            ],
+            mobile: {
+                theme: 'mobile'
+            },
+            toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
         });
+        
     </script>
 }
 
 <h1>@Model.Name</h1>
 <h2>@Model.Description</h2>
-<div>
+<div class="row-cols-2">
     <form method="post">
         <textarea id="mytextarea">Hello, World!</textarea>
+        <input type="submit" class="btn btn-primary" />
     </form>
 </div>
 

@@ -15,7 +15,7 @@
         "webfonts/fa-solid-900.woff2",
         "webfonts/fa-regular-400.ttf",
         "webfonts/fa-v4compatibility.ttf",
-        "webfonts/fa-v4compatibility.woff2",       
+        "webfonts/fa-v4compatibility.woff2",
         "css/all.css",
         "css/all.min.css",
         "css/fontawesome.css",
@@ -25,6 +25,54 @@
         "css/solid.css",
         "css/solid.min.css"
       ]
-    }    
+    },    
+    {
+      "library": "tinymce@6.2.0",
+      "destination": "wwwroot/lib/tinymce/",
+      "files": [
+        "icons/default/icons.js",
+        "icons/default/icons.min.js",
+        "models/dom/model.js",
+        "models/dom/model.min.js",
+        "plugins/image/plugin.min.js",
+        "plugins/media/plugin.min.js",             
+        "plugins/code/plugin.min.js",
+        "plugins/help/plugin.min.js",
+        "plugins/wordcount/plugin.min.js",
+        "plugins/table/plugin.min.js",
+        "plugins/link/plugin.min.js",
+        "plugins/code/plugin.min.js",
+        "plugins/media/plugin.min.js",
+        "plugins/advlist/plugin.min.js",
+        "plugins/autolink/plugin.min.js",
+        "plugins/lists/plugin.min.js",               
+        "plugins/charmap/plugin.min.js",       
+        "plugins/preview/plugin.min.js",
+        "plugins/anchor/plugin.min.js",        
+        "plugins/searchreplace/plugin.min.js",
+        "plugins/visualblocks/plugin.min.js",
+        "plugins/code/plugin.min.js",
+        "plugins/fullscreen/plugin.min.js",
+        "plugins/insertdatetime/plugin.min.js",
+        "skins/content/default/content.css",
+        "skins/content/default/content.min.css",
+        "skins/content/document/content.css",
+        "skins/content/document/content.min.css",
+        "skins/content/tinymce-5/content.css",
+        "skins/content/tinymce-5/content.min.css",
+        "skins/content/tinymce-5-dark/content.css",
+        "skins/content/tinymce-5-dark/content.min.css",
+        "skins/content/writer/content.css",
+        "skins/content/writer/content.min.css",
+        "skins/ui/oxide/content.css",
+        "skins/ui/oxide/content.min.css",
+        "skins/ui/tinymce-5/content.css",
+        "skins/ui/tinymce-5/content.min.css",
+        "themes/silver/theme.js",
+        "themes/silver/theme.min.js"
+        
+      ]
+
+    }
   ]
 }
