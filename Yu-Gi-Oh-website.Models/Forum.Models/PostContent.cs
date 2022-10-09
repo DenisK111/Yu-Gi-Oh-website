@@ -5,7 +5,7 @@ namespace Yu_Gi_Oh_website.Models.Forum.Models
 {
     public class PostContent : BaseDeletableModel<int>
     {
-        [MaxLength(4000)]
+        [MaxLength(6000)]
         public string Content { get; set; } = null!;
     }
 }

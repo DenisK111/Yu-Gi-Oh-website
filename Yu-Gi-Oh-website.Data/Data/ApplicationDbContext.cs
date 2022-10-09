@@ -148,6 +148,7 @@ namespace Yu_Gi_Oh_website.Web.Data
                 if (entry.State == EntityState.Added && entity.CreatedOn == default)
                 {
                     entity.CreatedOn = DateTime.UtcNow;
+                    entity.ModifiedOn = entity.CreatedOn;
                 }
                 else
                 {

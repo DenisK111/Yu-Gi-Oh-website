@@ -6,6 +6,8 @@ using Yu_Gi_Oh_website.Services;
 using Yu_Gi_Oh_website.Services.ApiService;
 using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Web.Data;
+using Yu_Gi_Oh_website.Web;
+using Yu_Gi_Oh_website.Models;
 
 namespace Yu_Gi_Oh_website.Web
 {
@@ -20,13 +22,13 @@ namespace Yu_Gi_Oh_website.Web
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
-                
+
                 using (var serviceScope = app.Services.CreateScope())
                 {
                     var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                     dbContext.Database.Migrate();
                     await new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider);
-                await new GetApiDataAndUpdateDbService(dbContext,new HttpClient()).AddAllCardsToDbAsync(ApiConstantValues.imagePath);
+                    await new GetApiDataAndUpdateDbService(dbContext, new HttpClient()).AddAllCardsToDbAsync(ApiConstantValues.imagePath);
                 }
 
 
@@ -39,6 +41,7 @@ namespace Yu_Gi_Oh_website.Web
                 app.UseHsts();
                 app.UseResponseCompression();
             }
+            app.UseStatusCodePagesWithRedirects("/Error/{0}");
             app.UseCookiePolicy();
             app.UseHttpsRedirection();
             app.UseStaticFiles();

@@ -11,7 +11,7 @@ namespace Yu_Gi_Oh_website.Data.Data
 {
     
 
-    internal static class EntityIndexesConfiguration
+    public static class EntityIndexesConfiguration
     {
         public static void Configure(ModelBuilder builder)
         {

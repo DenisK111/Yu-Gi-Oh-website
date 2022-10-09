@@ -46,6 +46,13 @@ namespace Yu_Gi_Oh_website.Web.AutoMapper
                 .ForMember(x => x.ModifiedOn, y => y.MapFrom(s => s.ModifiedOn.HasValue ? ((DateTime)s.ModifiedOn).ToString("g") : null))
                 .ForMember(x => x.CreatedOn, y => y.MapFrom(s => s.CreatedOn.ToString("g")));
 
+            CreateMap<ForumThread, ThreadDto>()
+                .ForMember(x => x.Author, y => y.MapFrom(s => s.Author.UserName))
+                .ForMember(x => x.SubCattegory, y => y.MapFrom(s => s.SubCattegory.Name));
+
+            CreateMap<Post, PostDto>(); // TODO DO THE MAPPING
+                
+
         }
     }
 }

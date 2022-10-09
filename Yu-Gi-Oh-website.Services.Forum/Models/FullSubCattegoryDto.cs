@@ -22,6 +22,10 @@ namespace Yu_Gi_Oh_website.Services.Forum.Models
 
         public string Cattegory { get; set; } = null!;
 
+        public int Id { get; set; }
+
+        public string Slug { get; set; } = null!;
+
 
 
 

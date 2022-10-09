@@ -349,9 +349,9 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-%/%/wwwroot/Images/%
-*/*/wwwroot/Images/*
-%/%/wwwroot/lib/fontawesome/%
-*/*/wwwroot/lib/fontawesome/*
-%/%/wwwroot/lib/tinymce/%
-*/*/wwwroot/lib/tinymce/*
+**/wwwroot/Images
+**/wwwroot/lib/fontawesome
+**/wwwroot/lib/tinymce
+appsettings.Production.json
+*.min.css
+*.min.js

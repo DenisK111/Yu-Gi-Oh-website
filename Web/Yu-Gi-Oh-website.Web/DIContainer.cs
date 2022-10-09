@@ -79,6 +79,7 @@ namespace Yu_Gi_Oh_website.Web
             builder.Services.AddScoped<ISortingService, SortingService>();
             builder.Services.AddScoped<IHomePageService, HomePageService>();
             builder.Services.AddScoped<ISubCattegoryService, SubCattegoryService>();
+            builder.Services.AddScoped<IThreadService, ThreadService>();
 
 
 

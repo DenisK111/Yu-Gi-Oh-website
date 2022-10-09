@@ -6,54 +6,49 @@
     <link href="~/lib/fontawesome/css/fontawesome.min.css" rel="stylesheet">
     <link href="~/lib/fontawesome/css/brands.min.css" rel="stylesheet">
     <link href="~/lib/fontawesome/css/solid.min.css" rel="stylesheet">
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/forumThread.css" asp-append-version="true" />
 
-
-    <script src="/lib/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
-        tinymce.init({
-            selector: 'textarea',
-            menubar: false,           
-            plugins: [
-                'advlist autolink lists link image charmap print preview anchor textcolor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table contextmenu paste code help wordcount'
-            ],
-            mobile: {
-                theme: 'mobile'
-            },
-            toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
-        });
-        
-    </script>
 }
 
-<h1>@Model.Name</h1>
-<h2>@Model.Description</h2>
-<div class="row-cols-2">
-    <form method="post">
-        <textarea id="mytextarea">Hello, World!</textarea>
-        <input type="submit" class="btn btn-primary" />
-    </form>
+<h1 class="text-center">@Model.Name</h1>
+<h2 class="text-center">@Model.Description</h2>
+
+<div class="row">    
+    <div class="col text-center p-2">
+        <form method="get" asp-area="Forum" asp-controller="SubCattegory" asp-action="CreateThread" asp-route-id="@Model.Id" asp-route-slug="@Model.Slug" id="form1">
+        </form>
+        <button type="submit" form="form1" value="Submit" class="btn btn-danger">Create New Thread</button>
+    </div>        
 </div>
 
 <div>
     @foreach (var item in Model.Threads)
     {
-        <div class="row">
-
-
-            <div class="col-2">@item.Subject</div>
-            <div class="col-2"><i class="fa-solid fa-user"></i> @item.Author</div>
-            <div class="col-2"><i class="fa-solid fa-comment"> </i> @item.PostsCount</div>
-            <div class="col-2"><a href="https://www.google.com/"><i class="fa-solid fa-thumbs-up"></i></a> @item.Likes</div>
-            <div class="col-2"><i class="fa-solid fa-thumbs-down"></i> @item.Dislikes</div>
-            <div class="col-2"><i class="fa-regular fa-calendar-days"></i> @item.CreatedOn</div>
-
-
-
-
+        <div class="card row-hover pos-relative py-3 px-3 mb-3 border-warning border-top-0 border-right-0 border-bottom-0 rounded-0">
+            <div class="row align-items-center">
+                <div class="col-md-8 mb-3 mb-sm-0">
+                    <h5>
+                        <a asp-controller="Thread" asp-action="Thread" asp-route-subCattegoryId="@Model.Id" asp-route-subCattegoryName="@Model.Slug" asp-route-id="@item.Id" class="text-primary">@item.Subject</a>
+                    </h5>
+                    <p class="text-sm"><span class="op-6">Posted</span> <a class="text-black">on @item.CreatedOn</a> <span class="op-6"> by</span> <a class="text-black" href="#">@item.Author</a></p>
+                </div>
+                <div class="col-md-4 op-7">
+                    <div class="row text-center op-7">
+                        <div class="col px-1"> <ion-icon name="chatbubbles-outline" class="icon-1x"></ion-icon> <span class="d-block text-sm">@item.PostsCount Replies</span> </div>
+                        <div class="col px-1"> <ion-icon name="thumbs-up-outline" class="icon-1x"></ion-icon> <span class="d-block text-sm">@item.Likes Likes</span> </div>
+                        <div class="col px-1"> <ion-icon name="thumbs-down-outline" class="icon-1x"></ion-icon> <span class="d-block text-sm">@item.Dislikes Dislikes</span> </div>
+                        <div class="col px-1"> <i class="ion-ios-eye-outline icon-1x"></i> <span class="d-block text-sm">290 Views</span> </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     }
 </div>
+
+@section Scripts{
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+}
 
