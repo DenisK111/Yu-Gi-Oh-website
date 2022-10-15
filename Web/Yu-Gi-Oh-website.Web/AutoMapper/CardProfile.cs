@@ -44,14 +44,20 @@ namespace Yu_Gi_Oh_website.Web.AutoMapper
             CreateMap<ForumThread, ForumThreadDisplayDto>()
                 .ForMember(x => x.Author, y => y.MapFrom(s => s.Author.UserName))
                 .ForMember(x => x.ModifiedOn, y => y.MapFrom(s => s.ModifiedOn.HasValue ? ((DateTime)s.ModifiedOn).ToString("g") : null))
-                .ForMember(x => x.CreatedOn, y => y.MapFrom(s => s.CreatedOn.ToString("g")));
+                .ForMember(x => x.CreatedOn, y => y.MapFrom(s => s.CreatedOn.ToString("g")))
+                .ForMember(x=>x.PostsCount,y=>y.MapFrom(s=>s.Posts.Count()));
 
             CreateMap<ForumThread, ThreadDto>()
                 .ForMember(x => x.Author, y => y.MapFrom(s => s.Author.UserName))
-                .ForMember(x => x.SubCattegory, y => y.MapFrom(s => s.SubCattegory.Name));
+                .ForMember(x => x.SubCattegory, y => y.MapFrom(s => s.SubCattegory.Name))
+                .ForMember(x => x.CreatedOn, y => y.MapFrom(s => s.CreatedOn.ToString("g")));
 
-            CreateMap<Post, PostDto>(); // TODO DO THE MAPPING
-                
+            CreateMap<Post, PostDto>()
+                .ForMember(x => x.Author, y => y.MapFrom(s => s.Author.UserName))
+                .ForMember(x => x.PostContent, y => y.MapFrom(s => s.PostContent.Content))
+                .ForMember(x => x.CreatedOn, y => y.MapFrom(s => s.CreatedOn.ToString("g")));// TODO DO THE MAPPING
+
+
 
         }
     }

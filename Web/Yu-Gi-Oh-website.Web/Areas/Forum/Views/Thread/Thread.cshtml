@@ -1,0 +1,23 @@
+﻿@model ThreadDto
+
+<div>
+
+    <h1>Author: @Model.Author</h1>
+    <h1>Subject: @Model.Subject</h1>
+    <div>Likes: @Model.Likes Dislikes: @Model.Dislikes</div>
+    <div>Created On: @Model.CreatedOn </div>
+
+    <row>
+        @foreach (var post in Model.Posts)
+        {
+            <h3>NEW POST</h3>
+            <h4>Author: @post.Author</h4>
+            <div>Content : @Html.Raw(post.SanitizedContent)</div>
+            <div>Likes: @Model.Likes Dislikes: @Model.Dislikes</div>
+            <div>Created On: @post.CreatedOn </div>
+        }
+
+    </row>
+
+
+</div>

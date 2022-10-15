@@ -16,21 +16,15 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
-        public SubCattegoryService(ApplicationDbContext context,IMapper mapper)
+        public SubCattegoryService(ApplicationDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
         }
-        public async Task<FullSubCattegoryDto> GetByIdAsync(int id)
+        public async Task<FullSubCattegoryDto?> GetByIdAsync(int id)
         {
-            var subCattegory = await context.SubCattegories
-                .Include(x => x.Threads)
-                .ThenInclude(x=>x.Author)
-                .AsNoTracking()
-               .FirstOrDefaultAsync(x => x.Id == id);
-               
-            var result = mapper.Map<FullSubCattegoryDto>(subCattegory);
-            return result;
+            var result = mapper.ProjectTo<FullSubCattegoryDto>(context.SubCattegories.Where(x => x.Id == id));
+            return await result.FirstOrDefaultAsync();
 
         }
     }

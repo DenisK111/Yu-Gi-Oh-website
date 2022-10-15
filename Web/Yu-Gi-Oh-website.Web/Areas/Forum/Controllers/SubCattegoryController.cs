@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
 using Yu_Gi_Oh_website.Web.Areas.Forum.Models;
 
@@ -23,14 +24,22 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
             return this.View(resultModel);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("/{area}/Cattegory/{id:int}/{slug?}/Create-Thread")]
-        public async Task<IActionResult> CreateThread()
+        public async Task<IActionResult> CreateThread([FromRoute]int id)
         {
-            return this.View();
+            var viewModel = new CreateThreadInputViewModel()
+            {
+                Author = this.User.Identity!.Name!,
+                SubCattegoryId = id
+            };
+            return this.View(viewModel);
         }
 
+        [Authorize]
         [HttpPost]
+        [Route("/{area}/Cattegory/{id:int}/{slug?}/Create-Thread")]
         public async Task<IActionResult> CreateThread(CreateThreadInputViewModel thread)
         {
             if (!ModelState.IsValid)
@@ -38,12 +47,14 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
                 return this.View(thread);
             }
 
+
             
             var threadToDisplay = await threadService.CreateThread(thread.Subject, thread.PostContent, thread.Author, thread.SubCattegoryId);
 
             if (threadToDisplay.IsError)
             {
-                this.ViewData["error"] = threadToDisplay.ErrorMessage;
+                ModelState.AddModelError("", threadToDisplay.ErrorMessage!);
+                return this.View(thread);
             }
 
             return this.RedirectToAction("Thread","Thread", threadToDisplay);

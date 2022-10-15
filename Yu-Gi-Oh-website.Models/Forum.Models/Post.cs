@@ -11,10 +11,7 @@ namespace Yu_Gi_Oh_website.Models.Forum.Models
 
         public ApplicationUser Author { get; set; } = null!;
 
-        public string AuthorId { get; set; }
-
-        public Post? ParentPost { get; set; }
-        public int? ParentPostId { get; set; }                                    
+        public string AuthorId { get; set; }                                      
 
         public PostContent PostContent { get; set; } = null!;
         public int PostContentId { get; set; }

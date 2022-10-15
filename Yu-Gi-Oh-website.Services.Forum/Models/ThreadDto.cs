@@ -35,5 +35,7 @@ namespace Yu_Gi_Oh_website.Services.Forum.Models
         public int Dislikes { get; set; }
         
         public string Slug { get; set; } = null!;
+
+        public string CreatedOn { get; set; }
     }
 }
