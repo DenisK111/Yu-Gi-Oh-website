@@ -12,6 +12,7 @@ using Yu_Gi_Oh_website.Web.AutoMapper;
 using Yu_Gi_Oh_website.Web.Data;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
 using Yu_Gi_Oh_website.Services.Forum.Implementations;
+using Yu_Gi_Oh_website.Models.Forum.Models;
 
 namespace Yu_Gi_Oh_website.Web
 {
@@ -72,14 +73,17 @@ namespace Yu_Gi_Oh_website.Web
 
             builder.Services.AddAutoMapper(typeof(CardProfile));
 
-            builder.Services.AddTransient<IGetApiDataAndUpdateDbService,GetApiDataAndUpdateDbService>();
+            builder.Services.AddTransient<IGetApiDataAndUpdateDbService, GetApiDataAndUpdateDbService>();
             builder.Services.AddTransient<ICardCollectionService, CardCollectionService>();
-            builder.Services.AddTransient<HttpClient>();
             builder.Services.AddScoped<IFilterService, FilterService>();
             builder.Services.AddScoped<ISortingService, SortingService>();
             builder.Services.AddScoped<IHomePageService, HomePageService>();
             builder.Services.AddScoped<ISubCattegoryService, SubCattegoryService>();
             builder.Services.AddScoped<IThreadService, ThreadService>();
+            builder.Services.AddScoped<ISoftDeleteService<PostVote>, SoftDeleteService<PostVote>>();
+            builder.Services.AddScoped<ISoftDeleteService<ThreadVote>, SoftDeleteService<ThreadVote>>();
+            builder.Services.AddSingleton<HttpClient>();
+
 
 
 

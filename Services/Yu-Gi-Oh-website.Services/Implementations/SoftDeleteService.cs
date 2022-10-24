@@ -8,11 +8,8 @@ using Yu_Gi_Oh_website.Services.Contracts;
 
 namespace Yu_Gi_Oh_website.Services.Implementations
 {
-    public abstract class SoftDeleteService<TEntity> : ISoftDeleteService<TEntity> where TEntity : IDeletableEntity
-    {
-        protected SoftDeleteService()
-        {
-        }
+    public class SoftDeleteService<TEntity> : ISoftDeleteService<TEntity> where TEntity : IDeletableEntity
+    {        
 
         public void SoftDelete(TEntity entity)
         {

@@ -24,5 +24,7 @@ namespace Yu_Gi_Oh_website.Models.Forum.Models
         public ForumThread Thread { get; set; } = null!;
 
         public int ThreadId { get; set; }
+
+        public ICollection<PostVote> Votes { get; set; }
     }
 }

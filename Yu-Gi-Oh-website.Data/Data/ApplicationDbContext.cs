@@ -61,6 +61,8 @@ namespace Yu_Gi_Oh_website.Web.Data
         public DbSet<ForumThread> Threads { get; set; } = null!;
         public DbSet<Post> Posts { get; set; } = null!;
         public DbSet<PostContent> PostContents { get; set; } = null!;
+        public DbSet<PostVote> PostVotes { get; set; } = null!;
+        public DbSet<ThreadVote> ThreadVotes { get; set; } = null!;
 
         public override int SaveChanges() => this.SaveChanges(true);
 

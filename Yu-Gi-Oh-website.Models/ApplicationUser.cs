@@ -48,5 +48,8 @@ namespace Yu_Gi_Oh_website.Models
         public ICollection<Card> FavouriteCards { get; set; }
         public ICollection<Post> Posts { get; set; }
         public ICollection<ForumThread> Threads { get; set; }
+
+        public ICollection<ThreadVote> ThreadVotes { get; set; }
+        public ICollection<PostVote> PostVotes { get; set; }
     }
 }
