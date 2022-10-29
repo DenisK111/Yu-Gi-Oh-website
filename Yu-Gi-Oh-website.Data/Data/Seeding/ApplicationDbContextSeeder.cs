@@ -30,6 +30,7 @@ namespace AspNetCoreTemplate.Data.Seeding
                               new CattegoriesSeeder(),
                               new SubCattegoriesSeeder(),
                               new ForumThreadsSeader(),
+                              new PostSeeder(),
                           };
 
             foreach (var seeder in seeders)

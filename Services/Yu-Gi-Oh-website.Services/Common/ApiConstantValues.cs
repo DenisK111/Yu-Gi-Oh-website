@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 using Yu_Gi_Oh_website.Models.Enums;
 
 namespace Yu_Gi_Oh_website.Services.ApiService

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Yu_Gi_Oh_website.Web.Models.CardCollection
+﻿namespace Yu_Gi_Oh_website.Web.Models.CardCollection
 {
     public class CardDisplayViewModel
     {

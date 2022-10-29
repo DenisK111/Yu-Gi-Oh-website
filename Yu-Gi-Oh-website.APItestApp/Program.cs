@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Globalization;
-using Yu_Gi_Oh_website.Services.ApiService;
+﻿using Yu_Gi_Oh_website.Services.ApiService;
 using Yu_Gi_Oh_website.Web.Data;
 
 namespace yu_gi_oh_website.httpclient

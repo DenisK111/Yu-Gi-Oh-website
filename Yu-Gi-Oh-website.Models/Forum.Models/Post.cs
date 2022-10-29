@@ -14,10 +14,7 @@ namespace Yu_Gi_Oh_website.Models.Forum.Models
         public string AuthorId { get; set; }                                      
 
         public PostContent PostContent { get; set; } = null!;
-        public int PostContentId { get; set; }
-
-        public int Likes { get; set; }
-        public int Dislikes { get; set; }
+        public int PostContentId { get; set; }      
 
         public bool? Status { get; set; }
 

@@ -1,12 +1,7 @@
 using AspNetCoreTemplate.Data.Seeding;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Yu_Gi_Oh_website.Services;
 using Yu_Gi_Oh_website.Services.ApiService;
-using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Web.Data;
-using Yu_Gi_Oh_website.Web;
-using Yu_Gi_Oh_website.Models;
 
 namespace Yu_Gi_Oh_website.Web
 {

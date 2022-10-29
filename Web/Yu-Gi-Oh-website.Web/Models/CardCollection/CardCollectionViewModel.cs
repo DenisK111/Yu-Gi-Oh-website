@@ -1,6 +1,4 @@
-﻿using Yu_Gi_Oh_website.Services.Common.Enums;
-
-namespace Yu_Gi_Oh_website.Web.Models.CardCollection
+﻿namespace Yu_Gi_Oh_website.Web.Models.CardCollection
 {
     public class CardCollectionViewModel
     {

@@ -1,16 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Yu_Gi_Oh_website.Models.BaseModels;
 using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
 using Yu_Gi_Oh_website.Models.Forum.Models;
 
 namespace Yu_Gi_Oh_website.Models
 {
-    
+
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -42,8 +37,7 @@ namespace Yu_Gi_Oh_website.Models
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
         public string? ProfilePic { get; set; }
-
-        public int? PostsCount { get; set; }
+               
 
         public ICollection<Card> FavouriteCards { get; set; }
         public ICollection<Post> Posts { get; set; }

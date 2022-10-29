@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Yu_Gi_Oh_website.Common.ValidationAttributes;
-using Yu_Gi_Oh_website.Models;
 
 namespace Yu_Gi_Oh_website.Web.Areas.Forum.Models
 {

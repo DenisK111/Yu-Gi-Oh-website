@@ -1,16 +1,14 @@
 ﻿using Ganss.Xss;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Yu_Gi_Oh_website.Services.Forum.Models
 {
     public class PostDto
     {
+        public int Id { get; set; }
         public string Author { get; set; } = null!;
+
+        public string AuthorCreatedOn { get; set; } = null!;
+        public int AuthorPostsCount { get; set; }
               
         public string PostContent { get; set; } = null!;
 

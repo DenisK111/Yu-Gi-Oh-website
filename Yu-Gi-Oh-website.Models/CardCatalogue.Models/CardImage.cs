@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Yu_Gi_Oh_website.Models.BaseModels;
 using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
 

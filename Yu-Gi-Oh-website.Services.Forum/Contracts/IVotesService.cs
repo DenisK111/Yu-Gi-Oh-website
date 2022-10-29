@@ -4,6 +4,6 @@
     {
         Task<int> AddThreadVote(int threadId, string userId, bool isUpvote);
         //Task<(int upVotes, int DownVotes)> GetAllPostVotes(int postId);
-        Task PostVote(int postId, string userId, bool isUpvote);
+        Task<int> PostVote(int postId, string userId, bool isUpvote);
     }
 }

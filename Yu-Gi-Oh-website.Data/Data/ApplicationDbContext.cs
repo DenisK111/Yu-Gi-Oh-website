@@ -6,18 +6,14 @@ using System.Reflection;
 using Yu_Gi_Oh_website.Models;
 using Yu_Gi_Oh_website.Models.BaseModels;
 using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Yu_Gi_Oh_website.Data.Data;
 using Yu_Gi_Oh_website.Models.Forum.Models;
 
 namespace Yu_Gi_Oh_website.Web.Data
 {
-    
 
-   
+
+
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole,string>
     {
@@ -87,10 +83,7 @@ namespace Yu_Gi_Oh_website.Web.Data
         {
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
-
-            builder.Entity<ApplicationUser>()
-                .Property(x => x.PostsCount)
-                .HasDefaultValue(0);
+                     
 
             builder.Entity<ForumThread>()
                 .Property(x => x.Status)

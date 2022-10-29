@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mime;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Yu_Gi_Oh_website.Models.Forum.Models;
 using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
@@ -24,12 +17,26 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
             this.postDeleteService = postDeleteService;
             this.threadDeleteService = threadDeleteService;
             this.context = context;
+
         }
-        public async Task PostVote(int postId, string userId, bool isUpvote)
+
+        /// <summary>
+        /// Returns Value Based on the type of vote:
+        /// 1 - Adding new Vote
+        /// 2 - Negative/Positive Vote Changing to Positive / Negative
+        /// -1 - Removing a vote
+        /// </summary>
+        /// <param name="postId"></param>
+        /// <param name="userId"></param>
+        /// <param name="isUpvote"></param>
+        /// <returns>int</returns>
+        public async Task<int> PostVote(int postId, string userId, bool isUpvote)
         {
             var userPost = await context.PostVotes.IgnoreQueryFilters<PostVote>()
                 .Where(x => x.PostId == postId && x.UserId == userId)
                 .FirstOrDefaultAsync();
+
+            var returnValue = 0;
 
             if (userPost == null)
             {
@@ -40,21 +47,37 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
                     PostId = postId,
 
                 });
+                returnValue = 1;
 
             }
 
-            else if (userPost.IsUpvote != isUpvote)
+            else if (userPost.IsUpvote != isUpvote && userPost.IsDeleted)
             {
                 userPost.IsUpvote = isUpvote;
                 postDeleteService.Undelete(userPost);
+                returnValue = 1;
+            }
+
+            else if(userPost.IsUpvote != isUpvote)
+            {
+                userPost.IsUpvote= isUpvote;
+                returnValue = 2;
+            }
+
+            else if (userPost.IsDeleted)
+            {
+                postDeleteService.Undelete(userPost);
+                returnValue = 1;
             }
 
             else
             {
                 postDeleteService.SoftDelete(userPost);
+                returnValue = -1;
             }
 
             await context.SaveChangesAsync();
+            return returnValue;
 
 
         }

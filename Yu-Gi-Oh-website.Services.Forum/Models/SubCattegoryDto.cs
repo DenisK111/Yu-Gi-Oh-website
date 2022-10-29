@@ -1,6 +1,4 @@
-﻿using Yu_Gi_Oh_website.Common;
-
-namespace Yu_Gi_Oh_website.Services.Forum.Models
+﻿namespace Yu_Gi_Oh_website.Services.Forum.Models
 {
     public record SubCattegoryDto
     {

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Yu_Gi_Oh_website.Services.ApiService;
 using Yu_Gi_Oh_website.Services.Contracts;

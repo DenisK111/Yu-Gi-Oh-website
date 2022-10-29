@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Yu_Gi_Oh_website.Models.BaseModels;
 using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
 
 namespace Yu_Gi_Oh_website.Data.Data
 {
-    
+
 
     public static class EntityIndexesConfiguration
     {

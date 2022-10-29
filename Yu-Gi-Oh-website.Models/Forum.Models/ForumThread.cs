@@ -19,7 +19,7 @@ namespace Yu_Gi_Oh_website.Models.Forum.Models
 
         public string AuthorId { get; set; } = null!;
 
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
 
         public SubCattegory SubCattegory { get; set; } = null!;
         public int SubCattegoryId { get; set; }

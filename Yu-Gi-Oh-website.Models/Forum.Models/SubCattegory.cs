@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Yu_Gi_Oh_website.Models.BaseModels;
-using Yu_Gi_Oh_website.Common;
 
 namespace Yu_Gi_Oh_website.Models.Forum.Models
 {

@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
+﻿using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
 using Yu_Gi_Oh_website.Models.Enums;
-using Yu_Gi_Oh_website.Services.Common;
 using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Services.Models;
-using Yu_Gi_Oh_website.Web.Data;
 using Yu_Gi_Oh_website.Services.ApiService;
 using Yu_Gi_Oh_website.Services.Common.Enums;
-using Yu_Gi_Oh_website.Services.ExtensionMethods;
 
 namespace Yu_Gi_Oh_website.Services.Implementations
 {

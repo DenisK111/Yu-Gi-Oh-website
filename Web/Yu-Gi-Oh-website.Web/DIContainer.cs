@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using Microsoft.AspNetCore.Http;
 using Yu_Gi_Oh_website.Models;
-using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
 using Yu_Gi_Oh_website.Services.ApiService;
 using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Services.Implementations;
@@ -66,7 +62,7 @@ namespace Yu_Gi_Oh_website.Web
 
             builder.Services.AddControllersWithViews(options =>
             {
-                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+               // options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
 
             })
                 .AddSessionStateTempDataProvider();
@@ -82,6 +78,9 @@ namespace Yu_Gi_Oh_website.Web
             builder.Services.AddScoped<IThreadService, ThreadService>();
             builder.Services.AddScoped<ISoftDeleteService<PostVote>, SoftDeleteService<PostVote>>();
             builder.Services.AddScoped<ISoftDeleteService<ThreadVote>, SoftDeleteService<ThreadVote>>();
+            builder.Services.AddScoped<IPostService,PostService>();
+            builder.Services.AddScoped<IEntityByIdService,EntityByIdService>();
+            builder.Services.AddScoped<IVotesService,VotesService>();
             builder.Services.AddSingleton<HttpClient>();
 
 

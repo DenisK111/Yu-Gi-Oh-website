@@ -1,14 +1,8 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
 using Yu_Gi_Oh_website.Models.Forum.Models;
 using Yu_Gi_Oh_website.Services.Forum.Models;
 using Yu_Gi_Oh_website.Services.Models;
-using Yu_Gi_Oh_website.Web.Models;
 using Yu_Gi_Oh_website.Web.Models.CardCollection;
 using Yu_Gi_Oh_website.Web.Models.CardDetails;
 
@@ -50,11 +44,16 @@ namespace Yu_Gi_Oh_website.Web.AutoMapper
             CreateMap<ForumThread, ThreadDto>()
                 .ForMember(x => x.Author, y => y.MapFrom(s => s.Author.UserName))
                 .ForMember(x => x.SubCattegory, y => y.MapFrom(s => s.SubCattegory.Name))
+                .ForMember(x => x.ModifiedOn, y => y.MapFrom(s => s.ModifiedOn.HasValue ? ((DateTime)s.ModifiedOn).ToString("g") : null))
                 .ForMember(x => x.CreatedOn, y => y.MapFrom(s => s.CreatedOn.ToString("g")));
 
             CreateMap<Post, PostDto>()
                 .ForMember(x => x.Author, y => y.MapFrom(s => s.Author.UserName))
+                .ForMember(x=>x.AuthorCreatedOn,y=>y.MapFrom(s=>s.Author.CreatedOn.ToString("d")))
                 .ForMember(x => x.PostContent, y => y.MapFrom(s => s.PostContent.Content))
+                .ForMember(x=>x.Likes,y=>y.MapFrom(s=>s.Votes.Where(x=>x.IsUpvote).Count()))
+                .ForMember(x => x.Dislikes, y => y.MapFrom(s => s.Votes.Where(x => !x.IsUpvote).Count()))
+                .ForMember(x=>x.AuthorPostsCount,y=>y.MapFrom(s=>s.Author.Posts.Count()))
                 .ForMember(x => x.CreatedOn, y => y.MapFrom(s => s.CreatedOn.ToString("g")));// TODO DO THE MAPPING
 
 

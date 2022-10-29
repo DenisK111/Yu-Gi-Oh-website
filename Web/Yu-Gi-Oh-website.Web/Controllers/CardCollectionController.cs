@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using Yu_Gi_Oh_website.Services.Common.Enums;
 using Yu_Gi_Oh_website.Services.Contracts;
-using Yu_Gi_Oh_website.Services.Models;
-using Yu_Gi_Oh_website.Web.Models;
 using Yu_Gi_Oh_website.Web.Models.CardCollection;
 using Yu_Gi_Oh_website.Web.Models.CardDetails;
 
