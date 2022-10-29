@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
@@ -12,11 +13,13 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
 	public class PostController : Controller
 	{
 		private readonly IPostService postService;
+        private readonly IMapper mapper;
 
-		public PostController(IPostService postService)
+        public PostController(IPostService postService, IMapper mapper)
 		{
 			this.postService = postService;
-		}
+            this.mapper = mapper;
+        }
 
 		[HttpGet]
 		public IActionResult AddPost(int id)
@@ -44,7 +47,9 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
                 return this.View(post);
             }
 
-            return this.RedirectToAction("Thread", "Thread", threadToDisplay);
+            var model = mapper.Map<ThreadInfoViewModel>(threadToDisplay);
+
+            return this.RedirectToAction("Thread", "Thread", model);
         }
     }
 }

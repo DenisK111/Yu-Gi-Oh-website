@@ -6,11 +6,13 @@
 
         public int SubCattegoryId { get; set; }
 
-        public string SubCattegoryName { get; set; } = null!;
+        public string SubCattegorySlug { get; set; } = null!;
 
         public bool IsError { get; set; }
 
         public string? ErrorMessage { get; set; }
+
+        public int currentPage { get; set; }
 
     }
 }

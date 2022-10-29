@@ -13,7 +13,7 @@
     
         public string Subject { get; set; } = null!;
 
-        public ICollection<PostDto> Posts { get; set; }
+        public ICollection<PostDto> Posts { get; set; }       
 
         public string Author { get; set; } = null!;
 

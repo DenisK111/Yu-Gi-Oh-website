@@ -53,13 +53,20 @@ namespace Yu_Gi_Oh_website.Web.Controllers
 
             var cardsCount = cardModel.count;
             var pagesCount = (int)Math.Ceiling(cardsCount / (decimal)cardsPerPage);
+
+          
+
             var viewModel = new CardCollectionViewModel
             {
                 Fm = fm,
                 CardModel = cardDisplayModel,
-                CurrentPage = fm.Page,
-                PagesCount = pagesCount,
-                CardsCount = cardsCount,
+                Paging = new()
+                {
+                    CurrentPage = fm.Page,
+                    PagesCount = pagesCount,
+                    ItemsCount = cardsCount,
+                },
+                
             };
 
             return this.View(viewModel);

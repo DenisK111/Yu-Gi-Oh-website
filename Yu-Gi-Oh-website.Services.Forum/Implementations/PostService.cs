@@ -57,6 +57,7 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
             };
 
             thread.Posts.Add(post);
+            thread.ModifiedOn = DateTime.UtcNow;
 
             await context.SaveChangesAsync();
 
@@ -65,7 +66,8 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
             {
                 Id = threadId,
                 SubCattegoryId = thread.SubCattegoryId,
-                SubCattegoryName = thread.SubCattegory.Name,
+                SubCattegorySlug = thread.SubCattegory.Slug,
+                currentPage = 1,
             };
         }
     }

@@ -1,9 +1,12 @@
-﻿@model ThreadDto
+﻿@model ThreadViewModel
 
 @section Styles{
 	<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
 }
+
+
 	<div>
+		 
 
 		<h1 class="text-center">@Model.Subject</h1>
 
@@ -16,11 +19,9 @@
 					<button type="submit" form="form1" value="Submit" class="btn btn-danger rounded-0">Add New Post</button>
 				</div>
 			</div>
-			<div class="d-inline-block ms">Last Post On: @Model.Posts.Select(x=>x.CreatedOn).Max()</div>
+			<div class="d-inline-block ms">Last Post On: @Model.ModifiedOn</div>
 
-		</div>
-		<div>Likes: @Model.Likes Dislikes: @Model.Dislikes</div>
-
+		</div>		
 
 		<row>
 			@{
@@ -68,6 +69,14 @@
 	</form>
 	<button type="submit" form="form1" value="Submit" class="btn btn-danger rounded-0">Add New Post</button>
 </div>
+
+@{	
+	var url = Context.Request.PathBase + Context.Request.Path + Context.Request.QueryString;
+	Model.Paging.Url = url;
+
+}
+
+<partial name="_PagingPartial" for=Paging />
 
 @section Scripts{
 	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

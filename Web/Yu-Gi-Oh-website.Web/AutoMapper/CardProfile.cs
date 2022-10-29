@@ -3,6 +3,7 @@ using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
 using Yu_Gi_Oh_website.Models.Forum.Models;
 using Yu_Gi_Oh_website.Services.Forum.Models;
 using Yu_Gi_Oh_website.Services.Models;
+using Yu_Gi_Oh_website.Web.Areas.Forum.Models;
 using Yu_Gi_Oh_website.Web.Models.CardCollection;
 using Yu_Gi_Oh_website.Web.Models.CardDetails;
 
@@ -53,8 +54,11 @@ namespace Yu_Gi_Oh_website.Web.AutoMapper
                 .ForMember(x => x.PostContent, y => y.MapFrom(s => s.PostContent.Content))
                 .ForMember(x=>x.Likes,y=>y.MapFrom(s=>s.Votes.Where(x=>x.IsUpvote).Count()))
                 .ForMember(x => x.Dislikes, y => y.MapFrom(s => s.Votes.Where(x => !x.IsUpvote).Count()))
-                .ForMember(x=>x.AuthorPostsCount,y=>y.MapFrom(s=>s.Author.Posts.Count()))
+                .ForMember(x=>x.AuthorPostsCount,y=>y.MapFrom(s=>s.Author.Posts.Count()))              
                 .ForMember(x => x.CreatedOn, y => y.MapFrom(s => s.CreatedOn.ToString("g")));// TODO DO THE MAPPING
+
+            CreateMap<ThreadDto, ThreadViewModel>();
+            CreateMap<ThreadInfoDto, ThreadInfoViewModel>();                
 
 
 

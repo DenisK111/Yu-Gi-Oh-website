@@ -70,23 +70,38 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
 
         }
 
-        public async Task<ThreadDto?> GetThreadDtoById(int id)
+        public async Task<(ThreadDto? thread, int postCount)> GetThreadDtoById(int id, int forumPosts, int skip)
         {
-            var thread = await context.Threads
+            var postsCount = await context.Posts.CountAsync(x => x.ThreadId == id);
+
+            if (postsCount <= 0)
+            {
+                return (mapper.Map<ThreadDto>(await context.Threads
                 .Include(x => x.Author)
                 .Include(x => x.Posts)
-                .ThenInclude(x=>x.Votes)
-                .Include(x=>x.Posts)
-                .ThenInclude(x => x.PostContent)                
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            if (thread == null)
-            {
-                return null;
+                .ThenInclude(x => x.Votes)
+                .Include(x => x.Posts)
+                .ThenInclude(x => x.PostContent)
+                .FirstOrDefaultAsync(x => x.Id == id)), 0)
+                  ;
             }
 
-            var threadDto = mapper.Map<ThreadDto>(thread);
-            return threadDto;
+            var posts = await context.Posts
+                .Include(x => x.Votes)
+                .Include(x => x.PostContent)
+                .Include(x => x.Thread)
+                .ThenInclude(x => x.Author)
+                .ThenInclude(x=>x.Posts)
+                .Where(x => x.ThreadId == id)
+                .OrderBy(x => x.CreatedOn)
+                .Skip(skip * forumPosts)
+                .Take(forumPosts)
+                .ToListAsync();
+
+            var thread = mapper.Map<ThreadDto>(posts.First().Thread);
+            thread.Posts = mapper.Map<List<PostDto>>(posts);          
+
+            return (thread, postsCount);
         }
     }
 }

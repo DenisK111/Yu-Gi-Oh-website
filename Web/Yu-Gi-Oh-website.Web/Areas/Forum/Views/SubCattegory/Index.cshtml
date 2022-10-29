@@ -13,10 +13,15 @@
 
 <h1 class="text-center">@Model.Name</h1>
 <h2 class="text-center">@Model.Description</h2>
+<form asp-controller="Thread" asp-action="Thread" method="get">
+	
+		<button class="btn btn-secondary w-100" type="submit" style="display:none">Search</button>
+	</form>
 
 <div class="row">    
     <div class="col text-center p-2">
         <form method="get" asp-area="Forum" asp-controller="SubCattegory" asp-action="CreateThread" asp-route-id="@Model.Id" asp-route-slug="@Model.Slug" id="form1">
+                
         </form>
         <button type="submit" form="form1" value="Submit" class="btn btn-danger">Create New Thread</button>
     </div>        
@@ -29,7 +34,7 @@
             <div class="row align-items-center">
                 <div class="col-md-8 mb-3 mb-sm-0">
                     <h5>
-                        <a asp-controller="Thread" asp-action="Thread" asp-route-subCattegoryId="@Model.Id" asp-route-subCattegoryName="@Model.Slug" asp-route-id="@item.Id" class="text-primary">@item.Subject</a>
+                        <a asp-controller="Thread" asp-action="Thread" asp-route-subCattegoryId="@Model.Id" asp-route-subCattegorySlug="@Model.Slug" asp-route-id="@item.Id" asp-route-currentPage="1" class="text-primary">@item.Subject</a>
                     </h5>
                     <p class="text-sm"><span class="op-6">Posted</span> <a class="text-black">on @item.CreatedOn</a> <span class="op-6"> by</span> <a class="text-black" href="#">@item.Author</a></p>
                 </div>
