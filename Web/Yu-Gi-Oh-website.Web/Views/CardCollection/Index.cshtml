@@ -7,7 +7,7 @@
             <span class="text-secondary">Results:</span> @Model.Paging.ItemsCount
         </h5>
         <div class="col-sm-5 pb-1">
-            <input type="hidden" value="1" asp-for="Fm.Page" />
+            <input type="hidden" value="1" asp-for="Paging.CurrentPage" />
             <input class="form-control  pb-1" type="text" placeholder="Search for card..." value="@Model.Fm.SearchTerm" asp-for="Fm.SearchTerm">
         </div>
         <div class="col-sm-2  px-1">
@@ -121,12 +121,6 @@
 
     }
 </div>
-
-@*@{
-    var url = $"/CardCollection/Index" + Context.Request.QueryString;
-    Model.Paging.Url = url;
-
-}*@
 
 <partial name="_PagingPartial" for="Paging" />
 

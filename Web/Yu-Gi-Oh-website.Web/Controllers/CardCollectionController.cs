@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Yu_Gi_Oh_website.Services.Contracts;
+using Yu_Gi_Oh_website.Web.Helpers;
 using Yu_Gi_Oh_website.Web.Models.CardCollection;
 using Yu_Gi_Oh_website.Web.Models.CardDetails;
 
@@ -28,8 +30,10 @@ namespace Yu_Gi_Oh_website.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                fm.Page = 1;
+                return this.View("error404");
             }
+            
+            fm.Page = Paging.PageCheck(fm.Page);
 
             fm.Filters = HttpContext.Request.Query
                 .Where(x => x.Key == "Filters")
@@ -60,14 +64,17 @@ namespace Yu_Gi_Oh_website.Web.Controllers
             {
                 Fm = fm,
                 CardModel = cardDisplayModel,
-                Paging = new()
-                {
-                    CurrentPage = fm.Page,
-                    PagesCount = pagesCount,
-                    ItemsCount = cardsCount,
-                },
+                
+                //Paging = new()
+                //{
+                //    CurrentPage = fm.Page,
+                //    PagesCount = pagesCount,
+                //    ItemsCount = cardsCount,
+                //},
                 
             };
+
+            Paging.CreatePaging(viewModel, cardModel.count, cardsPerPage, fm.Page);
 
             return this.View(viewModel);
 

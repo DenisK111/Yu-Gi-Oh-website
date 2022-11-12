@@ -29,18 +29,18 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
 
         public async Task<IActionResult> Thread(int id, int currentPage)
         {
+            if (!ModelState.IsValid)
+            {
+                return this.View("error404");
+            }
+          
             var path = this.HttpContext.Request.Path;
             var ip = this.HttpContext.Connection.RemoteIpAddress!.ToString();
 
             await visitorCountService.AddOrUpdateAsync(path, ip,id);
 
-            Console.WriteLine(path,ip);
-
             currentPage = Paging.PageCheck(currentPage);
-            
-
-            Console.WriteLine(ip);
-
+          
             var threadDetails = await threadService.GetThreadDtoById(id, forumPostsToTake, currentPage - 1);
 
             var model = mapper.Map<ThreadViewModel>(threadDetails.thread);

@@ -26,6 +26,11 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
         [Route("{area}/Cattegory/{id:int}/{slug?}")]
         public async Task<IActionResult> Index(int id,int currentPage)
         {
+            if (!ModelState.IsValid)
+            {
+                return this.View("error404");
+            }
+            
             currentPage = Paging.PageCheck(currentPage);
             var resultModel = await subCattegoryService.GetByIdAsync(id,currentPage,itemsToTake);
             var model = mapper.Map<FullSubCattegoryViewModel>(resultModel);           

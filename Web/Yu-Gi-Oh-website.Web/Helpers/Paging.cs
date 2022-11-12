@@ -16,7 +16,7 @@ namespace Yu_Gi_Oh_website.Web.Helpers
 
             model.Paging.CurrentPage = currentPage;
             model.Paging.PagesCount = pagesCount;
-            model.Paging.ItemsCount = postsCount;
+            model.Paging.ItemsCount = postsCount;           
         }
 
         public static int PageCheck(int currentPage)
