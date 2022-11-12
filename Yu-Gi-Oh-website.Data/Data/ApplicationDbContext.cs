@@ -15,7 +15,7 @@ namespace Yu_Gi_Oh_website.Web.Data
 
 
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole,string>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         private static readonly MethodInfo SetIsDeletedQueryFilterMethod =
             typeof(ApplicationDbContext).GetMethod(
@@ -50,7 +50,7 @@ namespace Yu_Gi_Oh_website.Web.Data
 
         public DbSet<CardType> Types { get; set; } = null!;
         public DbSet<ExactCardType> ExactCardTypes { get; set; } = null!;
-      
+
         public DbSet<CardAttribute> CardAttributes { get; set; } = null!;
         public DbSet<Cattegory> Cattegories { get; set; } = null!;
         public DbSet<SubCattegory> SubCattegories { get; set; } = null!;
@@ -82,18 +82,7 @@ namespace Yu_Gi_Oh_website.Web.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             // Needed for Identity models configuration
-            base.OnModelCreating(builder);
-                     
-
-            builder.Entity<ForumThread>()
-                .Property(x => x.Status)
-                .HasDefaultValue(true);
-
-            builder.Entity<Post>()
-                .Property(x => x.Status)
-                .HasDefaultValue(true);
-
-
+            base.OnModelCreating(builder);          
 
             this.ConfigureUserIdentityRelations(builder);
 

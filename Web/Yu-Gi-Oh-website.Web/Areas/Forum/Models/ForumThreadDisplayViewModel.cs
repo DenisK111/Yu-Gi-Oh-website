@@ -1,6 +1,6 @@
-﻿namespace Yu_Gi_Oh_website.Services.Forum.Models
+﻿namespace Yu_Gi_Oh_website.Web.Areas.Forum.Models
 {
-    public class ForumThreadDisplayDto
+    public class ForumThreadDisplayViewModel
     {
         public int Id { get; set; }
         public string Subject { get; set; } = null!;
@@ -13,12 +13,12 @@
 
         public string CreatedOn { get; set; } = null!;
 
-        public DateTime? ModifiedOn { get; set; }
-       
+        public string? ModifiedOn { get; set; }
+
         public string Slug { get; set; } = null!;
 
         public int Views { get; set; }
-        public string LastModifiedBy { get; set; } = null!;
 
+        public string LastModifiedBy { get; set; } = null!;
     }
 }

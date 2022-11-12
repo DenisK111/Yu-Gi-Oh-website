@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
+using Yu_Gi_Oh_website.Web.Models.Contracts;
 
 namespace Yu_Gi_Oh_website.Web.Extentension
 {
@@ -14,5 +15,7 @@ namespace Yu_Gi_Oh_website.Web.Extentension
         {
             return controller.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
         }
+
+       
     }
 }

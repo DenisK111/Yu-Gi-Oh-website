@@ -355,3 +355,4 @@ MigrationBackup/
 appsettings.Production.json
 *.min.css
 *.min.js
+/Web/Yu-Gi-Oh-website.Web/appsettings.Development.json

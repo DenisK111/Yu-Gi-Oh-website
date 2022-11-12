@@ -1,4 +1,5 @@
-﻿@model ThreadViewModel
+﻿@using Yu_Gi_Oh_website.Common.Settings
+@model ThreadViewModel
 
 
 @section Styles{
@@ -21,13 +22,13 @@
 				</div>
 			</div>
 			<div class="d-inline-block ms">Last Post On: @Model.ModifiedOn</div>
-
+			
 		</div>		
 
 		<row>
 			@{
 			var id = 1;
-		}
+		}<form id="votesForm" method="post"></form>
 		@foreach (var post in Model.Posts)
 		{
 
@@ -73,11 +74,7 @@
 	<button type="submit" form="form1" value="Submit" class="btn btn-danger rounded-0">Add New Post</button>
 </div>
 
-@{	
-	var url = Context.Request.PathBase + Context.Request.Path + Context.Request.QueryString;
-	Model.Paging.Url = url;
 
-}
 
 <partial name="_PagingPartial" for=Paging />
 
@@ -107,12 +104,14 @@
 		}
 
 		async function sendPostVote(id, isUpvote, elementId) {
+			const token = $("#votesForm input[name=__RequestVerificationToken]").val();
 			const response = await fetch('/api/vote', {
 				method: 'POST',
 				credentials: 'include',
 				mode: 'same-origin',
 				headers: {
-					'Content-Type': 'application/json'
+					'Content-Type': 'application/json',
+					'@(AntiforgerySettings.HeaderName)': token,
 				},
 				body: JSON.stringify({ id, isUpvote }),
 				redirect: 'follow'

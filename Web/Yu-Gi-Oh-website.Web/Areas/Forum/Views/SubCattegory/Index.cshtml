@@ -1,4 +1,4 @@
-﻿@model FullSubCattegoryDto
+﻿@model FullSubCattegoryViewModel
 
 
 @section Styles{
@@ -23,7 +23,7 @@
         <form method="get" asp-area="Forum" asp-controller="SubCattegory" asp-action="CreateThread" asp-route-id="@Model.Id" asp-route-slug="@Model.Slug" id="form1">
                 
         </form>
-        <button type="submit" form="form1" value="Submit" class="btn btn-danger">Create New Thread</button>
+        <button type="submit" form="form1" value="Submit" class="btn btn-danger rounded-0">Create New Thread</button>
     </div>        
 </div>
 
@@ -32,18 +32,17 @@
     {
         <div class="card row-hover pos-relative py-3 px-3 mb-3 border-warning border-top-0 border-right-0 border-bottom-0 rounded-0">
             <div class="row align-items-center">
-                <div class="col-md-8 mb-3 mb-sm-0">
+                <div class="col-md-10 mb-3 mb-sm-0">
                     <h5>
                         <a asp-controller="Thread" asp-action="Thread" asp-route-subCattegoryId="@Model.Id" asp-route-subCattegorySlug="@Model.Slug" asp-route-id="@item.Id" asp-route-currentPage="1" class="text-primary">@item.Subject</a>
                     </h5>
-                    <p class="text-sm"><span class="op-6">Posted</span> <a class="text-black">on @item.CreatedOn</a> <span class="op-6"> by</span> <a class="text-black" href="#">@item.Author</a></p>
+                    <p class="text-sm"><span class="op-6">Created</span> <a class="text-black">on @item.CreatedOn</a> <span class="op-6"> by</span> <a class="text-black" href="#">@item.Author</a></p>
+                    <p class="text-sm"><span class="op-6">Last Post on</span> <a class="text-black">on @item.ModifiedOn</a> <span class="op-6"> by</span> <a class="text-black" href="#">@item.LastModifiedBy</a></p>
                 </div>
-                <div class="col-md-4 op-7">
+                <div class="col-md-2 op-7">
                     <div class="row text-center op-7">
-                        <div class="col px-1"> <ion-icon name="chatbubbles-outline" class="icon-1x"></ion-icon> <span class="d-block text-sm">@item.PostsCount Posts</span> </div>
-                        <div class="col px-1"> <ion-icon name="thumbs-up-outline" class="icon-1x"></ion-icon> <span class="d-block text-sm">@item.Likes Likes</span> </div>
-                        <div class="col px-1"> <ion-icon name="thumbs-down-outline" class="icon-1x"></ion-icon> <span class="d-block text-sm">@item.Dislikes Dislikes</span> </div>
-                        <div class="col px-1"> <i class="ion-ios-eye-outline icon-1x"></i> <span class="d-block text-sm">290 Views</span> </div>
+                        <div class="col px-1"> <ion-icon name="chatbubbles-outline" class="icon-1x"></ion-icon> <span class="d-block text-sm">@item.PostsCount Posts</span> </div>                 
+                        <div class="col px-1"> <ion-icon name="eye-outline"></ion-icon> <span class="d-block text-sm text-truncate mt-1">@item.Views</span> </div>
                     </div>
                 </div>
             </div>
@@ -51,6 +50,8 @@
 
     }
 </div>
+
+<partial name="_PagingPartial" for=Paging />
 
 @section Scripts{
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

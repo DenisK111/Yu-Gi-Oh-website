@@ -19,13 +19,11 @@ namespace Yu_Gi_Oh_website.Models.Forum.Models
 
         public string AuthorId { get; set; } = null!;
 
-        public bool Status { get; set; }
+        public bool IsLocked { get; set; }
 
         public SubCattegory SubCattegory { get; set; } = null!;
         public int SubCattegoryId { get; set; }
-        //TODO: CHECK FOR DEFAULT VALUE EF CORE
-        public int Likes { get; set; }
-        public int Dislikes { get; set; }
+        //TODO: CHECK FOR DEFAULT VALUE EF CORE        
         [MaxLength(60)]
         public string Slug { get; set; } = null!;
 

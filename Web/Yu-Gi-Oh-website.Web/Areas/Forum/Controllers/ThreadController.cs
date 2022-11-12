@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
 using Yu_Gi_Oh_website.Web.Areas.Forum.Models;
 using Yu_Gi_Oh_website.Web.Extentension;
+using Yu_Gi_Oh_website.Web.Helpers;
+using Yu_Gi_Oh_website.Web.Models.Contracts;
 
 namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
 {
@@ -14,37 +16,36 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
         private readonly IThreadService threadService;
         private readonly IMapper mapper;
         private readonly IVotesService voteService;
+        private readonly IVisitorCountService visitorCountService;
 
-        public ThreadController(IThreadService threadService, IMapper mapper, IVotesService voteService)
+        public ThreadController(IThreadService threadService, IMapper mapper, IVotesService voteService,IVisitorCountService visitorCountService)
         {
             this.threadService = threadService;
             this.mapper = mapper;
             this.voteService = voteService;
+            this.visitorCountService = visitorCountService;
         }
         [Route("{id:int}")]
 
         public async Task<IActionResult> Thread(int id, int currentPage)
         {
-            if (currentPage < 1)
-            {
-                currentPage = 1;
-            }
+            var path = this.HttpContext.Request.Path;
+            var ip = this.HttpContext.Connection.RemoteIpAddress!.ToString();
+
+            await visitorCountService.AddOrUpdateAsync(path, ip,id);
+
+            Console.WriteLine(path,ip);
+
+            currentPage = Paging.PageCheck(currentPage);
+            
+
+            Console.WriteLine(ip);
 
             var threadDetails = await threadService.GetThreadDtoById(id, forumPostsToTake, currentPage - 1);
 
             var model = mapper.Map<ThreadViewModel>(threadDetails.thread);
 
-            var postsCount = threadDetails.postCount;
-            var pagesCount = (int)Math.Ceiling(postsCount / (decimal)forumPostsToTake);
-
-            if (model.Paging == null)
-            {
-                model.Paging = new();
-            }
-
-            model.Paging.CurrentPage = currentPage;
-            model.Paging.PagesCount = pagesCount;
-            model.Paging.ItemsCount = postsCount;
+            Paging.CreatePaging(model, threadDetails.postCount, forumPostsToTake, currentPage);            
 
             var userEmail = this.GetUserEmail();
             var userId = this.GetUserId();

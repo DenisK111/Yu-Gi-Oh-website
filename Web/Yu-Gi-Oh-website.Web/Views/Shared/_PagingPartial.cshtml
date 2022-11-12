@@ -1,5 +1,11 @@
 ﻿@model PageViewModel
 
+@{
+    var url = Context.Request.PathBase + Context.Request.Path + Context.Request.QueryString;
+    Model.Url = url;
+
+}
+
 <nav aria-label="Card Pages">
     <ul class="pagination justify-content-center position-relative py-3 text-center">
         @if (this.Model.CurrentPage > 1)

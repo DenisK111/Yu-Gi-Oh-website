@@ -23,7 +23,7 @@ namespace Yu_Gi_Oh_website.Data.Data.Seeding
                 return;
             }
 
-            var threadToAddPostsTo = await dbContext.Threads.FirstOrDefaultAsync();
+            var threadToAddPostsTo = await dbContext.Threads.Take(20).ToListAsync();
 
             var postContents = new List<PostContent>();
 
@@ -53,7 +53,7 @@ namespace Yu_Gi_Oh_website.Data.Data.Seeding
                 {
                     PostContent = content,
                     Author = user,
-                    Thread = threadToAddPostsTo!
+                    Thread = threadToAddPostsTo[random.Next(0,threadToAddPostsTo.Count)]
                 };
 
                 posts.Add(post);

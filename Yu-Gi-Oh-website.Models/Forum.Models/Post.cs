@@ -11,17 +11,17 @@ namespace Yu_Gi_Oh_website.Models.Forum.Models
 
         public ApplicationUser Author { get; set; } = null!;
 
-        public string AuthorId { get; set; }                                      
+        public string AuthorId { get; set; } = null!;                                  
 
         public PostContent PostContent { get; set; } = null!;
         public int PostContentId { get; set; }      
 
-        public bool? Status { get; set; }
+        public bool IsRemoved { get; set; }
 
         public ForumThread Thread { get; set; } = null!;
 
         public int ThreadId { get; set; }
 
-        public ICollection<PostVote> Votes { get; set; }
+        public ICollection<PostVote> Votes { get; set; } = null!;
     }
 }

@@ -20,8 +20,7 @@
 
         public string Slug { get; set; } = null!;
 
-
-
+        public int TotalCount { get; set; }
 
     }
 }

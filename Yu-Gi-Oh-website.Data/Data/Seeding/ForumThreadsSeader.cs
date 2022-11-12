@@ -1,4 +1,5 @@
-﻿using AspNetCoreTemplate.Data.Seeding;
+﻿using System;
+using AspNetCoreTemplate.Data.Seeding;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Yu_Gi_Oh_website.Common;
@@ -19,29 +20,32 @@ namespace Yu_Gi_Oh_website.Data.Data.Seeding
             }
 
             var subCattegory = dbContext.SubCattegories.First();
-            var roleManager = serviceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
-            var role = await roleManager.FindByNameAsync(Roles.Admin);
-            var newUser = new ApplicationUser();
-            newUser.UserName = InitialSeedSettings.AdminUserName;
-            newUser.Email = InitialSeedSettings.AdminUserName;
-            newUser.NormalizedEmail = InitialSeedSettings.AdminUserName.ToUpper();
-            newUser.PostCount = InitialSeedSettings.InititalPostCount;
-            var applicationRole = new ApplicationRole();
-            
-            var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>()!;
-            await userManager.CreateAsync(newUser, InitialSeedSettings.AdminUserPassword);
-            await userManager.AddToRoleAsync(newUser, Roles.Admin);
+
+            var admin = await CreateAdmin(serviceProvider);
             var threadsToAdd = new List<ForumThread>();
 
-            for (int i = 1; i <= 50; i++)
+            for (int i = 1; i <= 20; i++)
             {
-                var thread = new ForumThread() { Author = newUser, SubCattegory = subCattegory, Subject = $"Test Thread {i}" };
+                var thread = new ForumThread() { Author = admin, SubCattegory = subCattegory, Subject = $"Test Thread {i}" };
                 thread.Slug = thread.Subject.ToUrlSlug();
                 threadsToAdd.Add(thread);
             }
 
             await dbContext.AddRangeAsync(threadsToAdd);
 
+        }
+
+        private async Task<ApplicationUser> CreateAdmin(IServiceProvider serviceProvider)
+        {
+            var newUser = new ApplicationUser();
+            newUser.UserName = InitialSeedSettings.AdminUserName;
+            newUser.Email = InitialSeedSettings.AdminUserName;
+            newUser.NormalizedEmail = InitialSeedSettings.AdminUserName.ToUpper();
+            newUser.PostCount = InitialSeedSettings.InititalPostCount;
+            var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>()!;
+            await userManager.CreateAsync(newUser, InitialSeedSettings.AdminUserPassword);
+            await userManager.AddToRoleAsync(newUser, Roles.Admin);
+            return newUser;
         }
     }
 }

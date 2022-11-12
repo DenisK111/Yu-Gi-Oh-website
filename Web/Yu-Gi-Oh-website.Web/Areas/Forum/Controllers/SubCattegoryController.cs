@@ -1,27 +1,36 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
 using Yu_Gi_Oh_website.Web.Areas.Forum.Models;
+using Yu_Gi_Oh_website.Web.Extentension;
+using Yu_Gi_Oh_website.Web.Helpers;
 
 namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
 {
     [Area("Forum")]
     public class SubCattegoryController : Controller
     {
+        private readonly int itemsToTake = 15;
         private readonly ISubCattegoryService subCattegoryService;
         private readonly IThreadService threadService;
+        private readonly IMapper mapper;
 
-        public SubCattegoryController(ISubCattegoryService subCattegoryService,IThreadService threadService)
+        public SubCattegoryController(ISubCattegoryService subCattegoryService,IThreadService threadService,IMapper mapper)
         {
             this.subCattegoryService = subCattegoryService;
             this.threadService = threadService;
+            this.mapper = mapper;
         }
         [HttpGet]
         [Route("{area}/Cattegory/{id:int}/{slug?}")]
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Index(int id,int currentPage)
         {
-            var resultModel = await subCattegoryService.GetByIdAsync(id);
-            return this.View(resultModel);
+            currentPage = Paging.PageCheck(currentPage);
+            var resultModel = await subCattegoryService.GetByIdAsync(id,currentPage,itemsToTake);
+            var model = mapper.Map<FullSubCattegoryViewModel>(resultModel);           
+            Paging.CreatePaging(model, resultModel.TotalCount, itemsToTake, currentPage);
+            return this.View(model);
         }
 
         [Authorize]
@@ -31,10 +40,10 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
         {
             var viewModel = new CreateThreadInputViewModel()
             {
-                Author = this.User.Identity!.Name!,
+                Author = this.GetUserEmail()!,
                 SubCattegoryId = id
             };
-            return this.View(viewModel);
+            return await Task.FromResult(this.View(viewModel));
         }
 
         [Authorize]
@@ -46,8 +55,6 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
             {
                 return this.View(thread);
             }
-
-
             
             var threadToDisplay = await threadService.CreateThread(thread.Subject, thread.PostContent, thread.Author, thread.SubCattegoryId);
 
