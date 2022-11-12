@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Yu_Gi_Oh_website.Common.ValidationAttributes;
 using Yu_Gi_Oh_website.Models;
 
 namespace Yu_Gi_Oh_website.Web.Areas.Identity.Pages.Account
@@ -59,7 +60,7 @@ namespace Yu_Gi_Oh_website.Web.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [EmailAddress]
+            [RegexEmail("Email must be a valid email address.")]
             public string Email { get; set; }
 
             /// <summary>

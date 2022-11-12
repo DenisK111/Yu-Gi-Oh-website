@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Yu_Gi_Oh_website.Common.ValidationAttributes;
+using Yu_Gi_Oh_website.Data.Data.Seeding.Common;
 using Yu_Gi_Oh_website.Models;
 
 namespace Yu_Gi_Oh_website.Web.Areas.Identity.Pages.Account
@@ -69,7 +71,7 @@ namespace Yu_Gi_Oh_website.Web.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [EmailAddress]
+            [RegexEmail("Email must be a valid email address.")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -114,6 +116,7 @@ namespace Yu_Gi_Oh_website.Web.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                     await _userManager.AddToRoleAsync(user, Roles.User);
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

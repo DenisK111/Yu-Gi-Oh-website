@@ -9,6 +9,7 @@ using Yu_Gi_Oh_website.Services.Forum.Models;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
 using Yu_Gi_Oh_website.Web.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Yu_Gi_Oh_website.Services.Forum.Implementations
 {
@@ -16,11 +17,13 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
     {
         private readonly ApplicationDbContext context;
         private readonly IEntityByIdService entityService;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public PostService(ApplicationDbContext context, IEntityByIdService entityService)
+        public PostService(ApplicationDbContext context, IEntityByIdService entityService, UserManager<ApplicationUser> userManager)
         {
             this.context = context;
             this.entityService = entityService;
+            this.userManager = userManager;
         }
         public async Task<ThreadInfoDto> AddPost(int threadId, string postContent, string authorName)
         {
@@ -58,7 +61,8 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
 
             thread.Posts.Add(post);
             thread.ModifiedOn = DateTime.UtcNow;
-
+            author.PostCount++;
+            await userManager.UpdateAsync(author);
             await context.SaveChangesAsync();
 
             var threadId = (await context.Threads.FirstOrDefaultAsync(x => x.Subject == thread.Subject)!)!.Id;

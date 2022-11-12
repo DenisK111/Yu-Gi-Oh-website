@@ -10,6 +10,7 @@ using Yu_Gi_Oh_website.Models.Forum.Models;
 using Yu_Gi_Oh_website.Models;
 using Yu_Gi_Oh_website.Web.Data;
 using Microsoft.EntityFrameworkCore;
+using Yu_Gi_Oh_website.Data.Data.Seeding.Common;
 
 namespace Yu_Gi_Oh_website.Data.Data.Seeding
 {
@@ -42,9 +43,9 @@ namespace Yu_Gi_Oh_website.Data.Data.Seeding
             var posts = new List<Post>();
 
             var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>()!;
-            var user = await userManager.FindByNameAsync("abc@abc");
+            var user = await userManager.FindByNameAsync(InitialSeedSettings.AdminUserName);
 
-            for (int i = 1; i <= 50; i++)
+            for (int i = 1; i <= InitialSeedSettings.InititalPostCount; i++)
             {
                 var content = postContents[random.Next(0, postContents.Count)];
 

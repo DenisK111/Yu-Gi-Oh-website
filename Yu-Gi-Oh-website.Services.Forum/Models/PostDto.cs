@@ -7,6 +7,9 @@ namespace Yu_Gi_Oh_website.Services.Forum.Models
         public int Id { get; set; }
         public string Author { get; set; } = null!;
 
+        public bool IsVoted { get; set; }
+        public bool IsUpvote { get; set; }
+
         public string AuthorCreatedOn { get; set; } = null!;
         public int AuthorPostsCount { get; set; }
               

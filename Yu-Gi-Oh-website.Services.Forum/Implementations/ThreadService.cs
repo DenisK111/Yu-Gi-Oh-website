@@ -66,6 +66,8 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
 
             subCattegory.Threads.Add(thread);
 
+            await context.SaveChangesAsync();
+
             return await postService.AddPost(thread.Id, postContent, author.UserName);
 
         }
@@ -86,22 +88,27 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
                   ;
             }
 
+            
+
             var posts = await context.Posts
                 .Include(x => x.Votes)
                 .Include(x => x.PostContent)
-                .Include(x => x.Thread)
-                .ThenInclude(x => x.Author)
-                .ThenInclude(x=>x.Posts)
+                .Include(x => x.Author)                
                 .Where(x => x.ThreadId == id)
                 .OrderBy(x => x.CreatedOn)
                 .Skip(skip * forumPosts)
                 .Take(forumPosts)
                 .ToListAsync();
 
-            var thread = mapper.Map<ThreadDto>(posts.First().Thread);
-            thread.Posts = mapper.Map<List<PostDto>>(posts);          
+            var thread = await context.Threads
+                .Include(x => x.Author)
+                .Include(x => x.SubCattegory)
+                .FirstOrDefaultAsync(x => x.Id == id);
 
-            return (thread, postsCount);
+            var threadDto = mapper.Map<ThreadDto>(thread);
+            threadDto.Posts = mapper.Map<List<PostDto>>(posts);          
+
+            return (threadDto, postsCount);
         }
     }
 }

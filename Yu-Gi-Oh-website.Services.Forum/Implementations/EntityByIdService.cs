@@ -8,16 +8,19 @@ using Yu_Gi_Oh_website.Models;
 using Yu_Gi_Oh_website.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
+using Microsoft.AspNetCore.Identity;
 
 namespace Yu_Gi_Oh_website.Services.Forum.Implementations
 {
     public class EntityByIdService : IEntityByIdService
     {
         private readonly ApplicationDbContext context;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public EntityByIdService(ApplicationDbContext context)
+        public EntityByIdService(ApplicationDbContext context,UserManager<ApplicationUser> userManager)
         {
             this.context = context;
+            this.userManager = userManager;
         }
 
         public async Task<ForumThread?> GetThreadById(int threadId)
@@ -34,7 +37,9 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
 
         public async Task<ApplicationUser?> GetAuthorByUserName(string userName)
         {
-            return await context.Users.FirstOrDefaultAsync(x => x.UserName == userName);
+            
+            return await userManager.FindByEmailAsync(userName);
+            
         }
     }
 }

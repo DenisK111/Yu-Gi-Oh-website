@@ -133,6 +133,11 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
             return returnValue;
         }
 
+        public async Task<PostVote?> GetVoteByUserIdPostId(string userId, int postId)
+        {
+            return await context.PostVotes.FirstOrDefaultAsync(x=>x.UserId==userId && x.PostId==postId);
+        }
+
         //public async Task<(int upVotes, int DownVotes)> GetAllPostVotes(int postId)
         //{
         //    var upVotes = await context.PostVotes

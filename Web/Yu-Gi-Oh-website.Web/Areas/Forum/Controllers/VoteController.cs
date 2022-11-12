@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
 using Yu_Gi_Oh_website.Web.Areas.Forum.Models;
+using Yu_Gi_Oh_website.Web.Extentension;
 
 namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
 {
@@ -22,8 +23,8 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> PostVote([FromBody] VoteInputViewModel vote)
-        {
-            var userId = this.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+        {            
+            var userId = this.GetUserId()!;
             var result = await votesService.PostVote(vote.Id, userId, vote.IsUpvote);
             return Ok(new { result = result });
         }

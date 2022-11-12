@@ -219,3 +219,241 @@ Tribal Synergy : Type Skill Card, Race: Mai
 Twisted Personality : Type Skill Card, Race: Yami Marik
 Union Combination : Type Skill Card, Race: Seto Kaiba
 World Legacy Token : Type Token, Race: Machine
+Dark Soul Token : Type Token, Race: Zombie
+Ancient Gear Token : Type Token, Race: Machine
+Aroma Strategy : Type Skill Card, Race: Mai
+Beasts of Phantom : Type Skill Card, Race: Yami Yugi
+Beatdown! : Type Skill Card, Race: Kaiba
+Black Sheep Token : Type Token, Race: Zombie
+Ceremonial Token : Type Token, Race: Rock
+Cocoon of Ultra Evolution (Skill Card) : Type Skill Card, Race: Weevil
+Crystron Token : Type Token, Race: Machine
+Dark Soul Token : Type Token, Race: Zombie
+Destiny Draw (Skill Card) : Type Skill Card, Race: Yugi
+Digging for Gold : Type Skill Card, Race: David
+Dinosaur Kingdom : Type Skill Card, Race: Rex
+Dragon Caller : Type Skill Card, Race: Kaiba
+Dragonoid Token : Type Token, Race: Machine
+Emissary of Darkness Token : Type Token, Race: Fairy
+Endless Traps : Type Skill Card, Race: Odion
+Final Draw : Type Skill Card, Race: Yugi
+Flight of the Harpies : Type Skill Card, Race: Mai
+Fluff Token : Type Token, Race: Plant
+Fury of Thunder : Type Skill Card, Race: Yami Yugi
+Fusion Party! : Type Skill Card, Race: Christine
+Gravekeeper's Lot : Type Skill Card, Race: Ishizu
+Great Dragon Token : Type Token, Race: Dragon
+Grit : Type Skill Card, Race: Joey
+Guardians of the Tomb : Type Skill Card, Race: Odion
+Hidden Parasite : Type Skill Card, Race: Weevil
+Hieratic Chant : Type Skill Card, Race: Yami Marik
+Hippo Token : Type Token, Race: Beast
+Hyper Metamorphosis : Type Skill Card, Race: Weevil
+I'm Just Gonna Attack! : Type Skill Card, Race: Joey Wheeler
+Infernoid Token : Type Token, Race: Fiend
+Inner Conflict : Type Skill Card, Race: Yami Bakura
+Into the Darkness Below : Type Skill Card, Race: Yami Bakura
+It's a Toon World! : Type Skill Card, Race: Pegasus
+It's Jinzo! : Type Skill Card, Race: Espa Roba
+It's No Monster, It's a God! : Type Skill Card, Race: Seto Kaiba
+Knight of Legend : Type Skill Card, Race: Yami Yugi
+Kuriboh Token : Type Token, Race: Fiend
+Lamb Token : Type Token, Race: Beast
+Last Gamble : Type Skill Card, Race: Joey
+Laval Token : Type Token, Race: Pyro
+Low Blow : Type Skill Card, Race: Andrew
+Magician's Act : Type Skill Card, Race: Arkana
+Magnetic Attraction : Type Skill Card, Race: Yami Yugi
+Mecha Phantom Beast Token : Type Token, Race: Machine
+Millennium Eye (Skill Card) : Type Skill Card, Race: Pegasus
+Millennium Necklace (Skill Card) : Type Skill Card, Race: Ishizu
+Mind Scan (Skill Card) : Type Skill Card, Race: Pegasus
+Nightmare Sonic Blast! : Type Skill Card, Race: Rex
+No More Mrs. Nice Mai! : Type Skill Card, Race: Mai Valentine
+Ojama Token : Type Token, Race: Beast
+Option Token : Type Token, Race: Machine
+Pal-O'Mine-zation! : Type Skill Card, Race: Joey
+Peak Performance : Type Skill Card, Race: Kaiba
+Phantasm Token : Type Token, Race: Fiend
+Phantasmal Martyr Token : Type Token, Race: Fiend
+Photon Token : Type Token, Race: Thunder
+Power of Dark : Type Skill Card, Race: Yugi
+Power of Friendship : Type Skill Card, Race: Tea Gardner
+Power Up! : Type Skill Card, Race: Yami Yugi
+Prescience : Type Skill Card, Race: Ishizu
+Rise of the Fallen : Type Skill Card, Race: Ishizu Ishtar
+Ritual Ceremony : Type Skill Card, Race: Emma
+Ritual of Black Mastery : Type Skill Card, Race: Yami Yugi
+Shadow Reborn : Type Skill Card, Race: Yami Marik
+Sheep Token : Type Token, Race: Beast
+Sky Striker Ace Token : Type Token, Race: Warrior
+Slime Token : Type Token, Race: Aqua
+Spell of Mask : Type Skill Card, Race: Lumis Umbra
+Synchron Token : Type Token, Race: Machine
+Synthetic Seraphim Token : Type Token, Race: Fairy
+The Psychic Duelist : Type Skill Card, Race: Espa Roba
+Thousand-Eyes Spell : Type Skill Card, Race: Pegasus
+Toon Mayhem! : Type Skill Card, Race: Pegasus
+Torment Token : Type Token, Race: Fiend
+Tribal Synergy : Type Skill Card, Race: Mai
+Twisted Personality : Type Skill Card, Race: Yami Marik
+Union Combination : Type Skill Card, Race: Seto Kaiba
+World Legacy Token : Type Token, Race: Machine
+Ancient Gear Token : Type Token, Race: Machine
+Aroma Strategy : Type Skill Card, Race: Mai
+Beasts of Phantom : Type Skill Card, Race: Yami Yugi
+Beatdown! : Type Skill Card, Race: Kaiba
+Black Sheep Token : Type Token, Race: Zombie
+Ceremonial Token : Type Token, Race: Rock
+Cocoon of Ultra Evolution (Skill Card) : Type Skill Card, Race: Weevil
+Crystron Token : Type Token, Race: Machine
+Dark Soul Token : Type Token, Race: Zombie
+Destiny Draw (Skill Card) : Type Skill Card, Race: Yugi
+Digging for Gold : Type Skill Card, Race: David
+Dinosaur Kingdom : Type Skill Card, Race: Rex
+Dragon Caller : Type Skill Card, Race: Kaiba
+Dragonoid Token : Type Token, Race: Machine
+Emissary of Darkness Token : Type Token, Race: Fairy
+Endless Traps : Type Skill Card, Race: Odion
+Final Draw : Type Skill Card, Race: Yugi
+Flight of the Harpies : Type Skill Card, Race: Mai
+Fluff Token : Type Token, Race: Plant
+Fury of Thunder : Type Skill Card, Race: Yami Yugi
+Fusion Party! : Type Skill Card, Race: Christine
+Gravekeeper's Lot : Type Skill Card, Race: Ishizu
+Great Dragon Token : Type Token, Race: Dragon
+Grit : Type Skill Card, Race: Joey
+Guardians of the Tomb : Type Skill Card, Race: Odion
+Hidden Parasite : Type Skill Card, Race: Weevil
+Hieratic Chant : Type Skill Card, Race: Yami Marik
+Hippo Token : Type Token, Race: Beast
+Hyper Metamorphosis : Type Skill Card, Race: Weevil
+I'm Just Gonna Attack! : Type Skill Card, Race: Joey Wheeler
+Infernoid Token : Type Token, Race: Fiend
+Inner Conflict : Type Skill Card, Race: Yami Bakura
+Into the Darkness Below : Type Skill Card, Race: Yami Bakura
+It's a Toon World! : Type Skill Card, Race: Pegasus
+It's Jinzo! : Type Skill Card, Race: Espa Roba
+It's No Monster, It's a God! : Type Skill Card, Race: Seto Kaiba
+Knight of Legend : Type Skill Card, Race: Yami Yugi
+Kuriboh Token : Type Token, Race: Fiend
+Lamb Token : Type Token, Race: Beast
+Last Gamble : Type Skill Card, Race: Joey
+Laval Token : Type Token, Race: Pyro
+Low Blow : Type Skill Card, Race: Andrew
+Magician's Act : Type Skill Card, Race: Arkana
+Magnetic Attraction : Type Skill Card, Race: Yami Yugi
+Mecha Phantom Beast Token : Type Token, Race: Machine
+Millennium Eye (Skill Card) : Type Skill Card, Race: Pegasus
+Millennium Necklace (Skill Card) : Type Skill Card, Race: Ishizu
+Mind Scan (Skill Card) : Type Skill Card, Race: Pegasus
+Nightmare Sonic Blast! : Type Skill Card, Race: Rex
+No More Mrs. Nice Mai! : Type Skill Card, Race: Mai Valentine
+Ojama Token : Type Token, Race: Beast
+Option Token : Type Token, Race: Machine
+Pal-O'Mine-zation! : Type Skill Card, Race: Joey
+Peak Performance : Type Skill Card, Race: Kaiba
+Phantasm Token : Type Token, Race: Fiend
+Phantasmal Martyr Token : Type Token, Race: Fiend
+Photon Token : Type Token, Race: Thunder
+Power of Dark : Type Skill Card, Race: Yugi
+Power of Friendship : Type Skill Card, Race: Tea Gardner
+Power Up! : Type Skill Card, Race: Yami Yugi
+Prescience : Type Skill Card, Race: Ishizu
+Rise of the Fallen : Type Skill Card, Race: Ishizu Ishtar
+Ritual Ceremony : Type Skill Card, Race: Emma
+Ritual of Black Mastery : Type Skill Card, Race: Yami Yugi
+Shadow Reborn : Type Skill Card, Race: Yami Marik
+Sheep Token : Type Token, Race: Beast
+Sky Striker Ace Token : Type Token, Race: Warrior
+Slime Token : Type Token, Race: Aqua
+Spell of Mask : Type Skill Card, Race: Lumis Umbra
+Synchron Token : Type Token, Race: Machine
+Synthetic Seraphim Token : Type Token, Race: Fairy
+The Psychic Duelist : Type Skill Card, Race: Espa Roba
+Thousand-Eyes Spell : Type Skill Card, Race: Pegasus
+Toon Mayhem! : Type Skill Card, Race: Pegasus
+Torment Token : Type Token, Race: Fiend
+Tribal Synergy : Type Skill Card, Race: Mai
+Twisted Personality : Type Skill Card, Race: Yami Marik
+Union Combination : Type Skill Card, Race: Seto Kaiba
+World Legacy Token : Type Token, Race: Machine
+Ancient Gear Token : Type Token, Race: Machine
+Aroma Strategy : Type Skill Card, Race: Mai
+Beasts of Phantom : Type Skill Card, Race: Yami Yugi
+Beatdown! : Type Skill Card, Race: Kaiba
+Black Sheep Token : Type Token, Race: Zombie
+Ceremonial Token : Type Token, Race: Rock
+Cocoon of Ultra Evolution (Skill Card) : Type Skill Card, Race: Weevil
+Crystron Token : Type Token, Race: Machine
+Dark Soul Token : Type Token, Race: Zombie
+Destiny Draw (Skill Card) : Type Skill Card, Race: Yugi
+Digging for Gold : Type Skill Card, Race: David
+Dinosaur Kingdom : Type Skill Card, Race: Rex
+Dragon Caller : Type Skill Card, Race: Kaiba
+Dragonoid Token : Type Token, Race: Machine
+Emissary of Darkness Token : Type Token, Race: Fairy
+Endless Traps : Type Skill Card, Race: Odion
+Final Draw : Type Skill Card, Race: Yugi
+Flight of the Harpies : Type Skill Card, Race: Mai
+Fluff Token : Type Token, Race: Plant
+Fury of Thunder : Type Skill Card, Race: Yami Yugi
+Fusion Party! : Type Skill Card, Race: Christine
+Gravekeeper's Lot : Type Skill Card, Race: Ishizu
+Great Dragon Token : Type Token, Race: Dragon
+Grit : Type Skill Card, Race: Joey
+Guardians of the Tomb : Type Skill Card, Race: Odion
+Hidden Parasite : Type Skill Card, Race: Weevil
+Hieratic Chant : Type Skill Card, Race: Yami Marik
+Hippo Token : Type Token, Race: Beast
+Hyper Metamorphosis : Type Skill Card, Race: Weevil
+I'm Just Gonna Attack! : Type Skill Card, Race: Joey Wheeler
+Infernoid Token : Type Token, Race: Fiend
+Inner Conflict : Type Skill Card, Race: Yami Bakura
+Into the Darkness Below : Type Skill Card, Race: Yami Bakura
+It's a Toon World! : Type Skill Card, Race: Pegasus
+It's Jinzo! : Type Skill Card, Race: Espa Roba
+It's No Monster, It's a God! : Type Skill Card, Race: Seto Kaiba
+Knight of Legend : Type Skill Card, Race: Yami Yugi
+Kuriboh Token : Type Token, Race: Fiend
+Lamb Token : Type Token, Race: Beast
+Last Gamble : Type Skill Card, Race: Joey
+Laval Token : Type Token, Race: Pyro
+Low Blow : Type Skill Card, Race: Andrew
+Magician's Act : Type Skill Card, Race: Arkana
+Magnetic Attraction : Type Skill Card, Race: Yami Yugi
+Mecha Phantom Beast Token : Type Token, Race: Machine
+Millennium Eye (Skill Card) : Type Skill Card, Race: Pegasus
+Millennium Necklace (Skill Card) : Type Skill Card, Race: Ishizu
+Mind Scan (Skill Card) : Type Skill Card, Race: Pegasus
+Nightmare Sonic Blast! : Type Skill Card, Race: Rex
+No More Mrs. Nice Mai! : Type Skill Card, Race: Mai Valentine
+Ojama Token : Type Token, Race: Beast
+Option Token : Type Token, Race: Machine
+Pal-O'Mine-zation! : Type Skill Card, Race: Joey
+Peak Performance : Type Skill Card, Race: Kaiba
+Phantasm Token : Type Token, Race: Fiend
+Phantasmal Martyr Token : Type Token, Race: Fiend
+Photon Token : Type Token, Race: Thunder
+Power of Dark : Type Skill Card, Race: Yugi
+Power of Friendship : Type Skill Card, Race: Tea Gardner
+Power Up! : Type Skill Card, Race: Yami Yugi
+Prescience : Type Skill Card, Race: Ishizu
+Rise of the Fallen : Type Skill Card, Race: Ishizu Ishtar
+Ritual Ceremony : Type Skill Card, Race: Emma
+Ritual of Black Mastery : Type Skill Card, Race: Yami Yugi
+Shadow Reborn : Type Skill Card, Race: Yami Marik
+Sheep Token : Type Token, Race: Beast
+Sky Striker Ace Token : Type Token, Race: Warrior
+Slime Token : Type Token, Race: Aqua
+Spell of Mask : Type Skill Card, Race: Lumis Umbra
+Synchron Token : Type Token, Race: Machine
+Synthetic Seraphim Token : Type Token, Race: Fairy
+The Psychic Duelist : Type Skill Card, Race: Espa Roba
+Thousand-Eyes Spell : Type Skill Card, Race: Pegasus
+Toon Mayhem! : Type Skill Card, Race: Pegasus
+Torment Token : Type Token, Race: Fiend
+Tribal Synergy : Type Skill Card, Race: Mai
+Twisted Personality : Type Skill Card, Race: Yami Marik
+Union Combination : Type Skill Card, Race: Seto Kaiba
+World Legacy Token : Type Token, Race: Machine
