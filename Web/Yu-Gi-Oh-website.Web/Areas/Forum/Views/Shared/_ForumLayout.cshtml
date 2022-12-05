@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/solarly.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />    
     @await RenderSectionAsync("Styles", required: false)
+
 
 </head>
 <body>
@@ -28,29 +29,13 @@
                                 Home
                                 <span class="visually-hidden">(current)</span>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="AddToDb">Add Card</a>
-                        </li>
-                        <li class="nav-item">
+                        </li> 
+                        <li>
                             <a class="nav-link" asp-area="Forum" asp-controller="Home" asp-action="Index">Forum</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="CardCollection" asp-action="Index" asp-route-page="1">Card Collection</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a>
-                            </div>
-                        </li>
+                            <a class="nav-link" asp-area="" asp-controller="CardCollection" asp-action="Index" asp-route-page="1">Card Cattallogue</a>
+                        </li>                        
                     </ul>
                     <partial class="nav-link" name="_LoginPartial" />
 
@@ -61,33 +46,6 @@
                 </div>
             </div>
         </nav>
-        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
-                <div class="container-fluid">
-                    <a class="navbar-brand text-primary" asp-area="" asp-controller="Home" asp-action="Index">Yu_Gi_Oh_website.Web</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="AddToDb">Add Card</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-muted" asp-area="" asp-controller="CardCollection" asp-action="CardCollection">Card Collection</a>
-                            </li>
-
-                        </ul>
-                        <partial name="_LoginPartial" />
-                    </div>
-                </div>
-            </nav>*@
     </header>
     <div class="container-fluid">
         <partial name="_CookieConsentPartial" />
@@ -129,7 +87,8 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+    @await Component.InvokeAsync("NToastNotify")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>    
 </body>
 </html>

@@ -14,7 +14,7 @@ namespace Yu_Gi_Oh_website.Web.Models.CardCollection
         public Dictionary<FilterTypesEnum, List<FilterEntryModel>>? FilterEntries { get; set; }
         [FromQuery]
         public string[]? Filters { get; set; }
-        [Range(1,int.MaxValue)]
+        [Range(0,int.MaxValue)]
         public int Page { get; set; }
         [EnumDataType(typeof(SortTypeEnum))]
         public SortTypeEnum Sorting { get; set; }

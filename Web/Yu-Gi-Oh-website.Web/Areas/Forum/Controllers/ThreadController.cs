@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
 using Yu_Gi_Oh_website.Web.Areas.Forum.Models;
 using Yu_Gi_Oh_website.Web.Extentension;
@@ -17,13 +18,16 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
         private readonly IMapper mapper;
         private readonly IVotesService voteService;
         private readonly IVisitorCountService visitorCountService;
+        private readonly IToastNotification toastNotification;
 
-        public ThreadController(IThreadService threadService, IMapper mapper, IVotesService voteService,IVisitorCountService visitorCountService)
+
+        public ThreadController(IThreadService threadService, IMapper mapper, IVotesService voteService, IVisitorCountService visitorCountService, IToastNotification toastNotification)
         {
             this.threadService = threadService;
             this.mapper = mapper;
             this.voteService = voteService;
             this.visitorCountService = visitorCountService;
+            this.toastNotification = toastNotification;
         }
         [Route("{id:int}")]
 
@@ -63,10 +67,10 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
                     post.IsVoted = true;
                     post.IsUpvote = vote.IsUpvote;
                 }
-            }
-
+            }          
+          
             return this.View(model);
-        }
+        }     
 
     }
 }

@@ -10,6 +10,9 @@ using Yu_Gi_Oh_website.Services.Forum.Contracts;
 using Yu_Gi_Oh_website.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Yu_Gi_Oh_website.Services.Contracts;
+using System.Reflection.Metadata;
+using System.Threading;
 
 namespace Yu_Gi_Oh_website.Services.Forum.Implementations
 {
@@ -18,12 +21,14 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
         private readonly ApplicationDbContext context;
         private readonly IEntityByIdService entityService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ISoftDeleteService<Post> postDeleteService;
 
-        public PostService(ApplicationDbContext context, IEntityByIdService entityService, UserManager<ApplicationUser> userManager)
+        public PostService(ApplicationDbContext context, IEntityByIdService entityService, UserManager<ApplicationUser> userManager, ISoftDeleteService<Post> postDeleteService)
         {
             this.context = context;
             this.entityService = entityService;
             this.userManager = userManager;
+            this.postDeleteService = postDeleteService;
         }
         public async Task<ThreadInfoDto> AddPost(int threadId, string postContent, string authorName)
         {
@@ -44,6 +49,32 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
             };
 
             return await this.AddPost(thread, postContent, author);
+        }
+
+        public async Task<ThreadInfoDto?> RemovePost(int postId)
+        {
+            var post = await
+                context.Posts
+                .Include(x => x.Thread)
+                .ThenInclude(x => x.SubCattegory)
+                .Include(x=>x.Author)
+                .FirstOrDefaultAsync(x => x.Id == postId);
+
+            if (post is null)
+            {
+                return null;
+            }
+            postDeleteService.SoftDelete(post);
+            post.Author.PostCount--;
+            await context.SaveChangesAsync();
+
+            return new ThreadInfoDto()
+            {
+                Id = post.Thread.Id,
+                SubCattegoryId = post.Thread.SubCattegoryId,
+                SubCattegorySlug = post.Thread.SubCattegory.Slug,
+                currentPage = 1,
+            };
         }
 
         private async Task<ThreadInfoDto> AddPost(ForumThread thread, string content, ApplicationUser author)

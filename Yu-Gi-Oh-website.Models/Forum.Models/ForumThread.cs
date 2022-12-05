@@ -27,9 +27,5 @@ namespace Yu_Gi_Oh_website.Models.Forum.Models
         [MaxLength(60)]
         public string Slug { get; set; } = null!;
 
-        public ICollection<ThreadVote> Votes { get; set; } = null!;
-
-
-
     }
 }

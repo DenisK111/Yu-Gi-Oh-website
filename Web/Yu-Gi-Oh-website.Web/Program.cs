@@ -15,6 +15,7 @@ using Yu_Gi_Oh_website.Web.AutoMapper;
 using Yu_Gi_Oh_website.Web.Data;
 using Yu_Gi_Oh_website.Web.Middleware;
 using Yu_Gi_Oh_website.Web.Extentension;
+using NToastNotify;
 
 namespace Yu_Gi_Oh_website.Web
 {
@@ -51,13 +52,14 @@ namespace Yu_Gi_Oh_website.Web
                     options.CheckConsentNeeded = context => true;
                     options.MinimumSameSitePolicy = SameSiteMode.None;
                 });
-            builder.Services.AddDistributedSqlServerCache(options =>
-            {
-                options.ConnectionString = builder.Configuration.GetConnectionString(
-                    "DefaultConnection");
-                options.SchemaName = "dbo";
-                options.TableName = "TestCache";
-            });
+            //builder.Services.AddDistributedSqlServerCache(options =>
+            //{
+            //    options.ConnectionString = builder.Configuration.GetConnectionString(
+            //        "DefaultConnection");
+            //    options.SchemaName = "dbo";
+            //    options.TableName = "TestCache";
+            //});
+            builder.Services.AddMemoryCache();           
 
             builder.Services.AddSession(options =>
             {
@@ -68,12 +70,15 @@ namespace Yu_Gi_Oh_website.Web
 
             builder.Services.AddResponseCompression();
 
-
-
             builder.Services.AddControllersWithViews(options =>
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
 
+            }).AddNToastNotifyToastr(new NToastNotify.ToastrOptions()
+            {
+                ProgressBar = true,
+                PositionClass = ToastPositions.TopCenter,
+                TimeOut = 3000
             })
                 .AddSessionStateTempDataProvider();
 
@@ -82,8 +87,8 @@ namespace Yu_Gi_Oh_website.Web
                 options.HeaderName = AntiforgerySettings.HeaderName;
             });
 
-            builder.Services.AddAutoMapper(typeof(CardProfile));
-           
+            builder.Services.AddAutoMapper(typeof(CardProfile));            
+
             builder.Services.AddSingleton<HttpClient>();
             builder.Services.RegisterServices();
             builder.Services.RegisterRepositories();
@@ -111,7 +116,7 @@ namespace Yu_Gi_Oh_website.Web
                 app.UseResponseCompression();
                 app.UseStatusCodePagesWithRedirects("/Error/{0}");
             }
-            app.UseCookiePolicy();
+          app.UseNToastNotify();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
@@ -124,14 +129,15 @@ namespace Yu_Gi_Oh_website.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseNToastNotify();
             app.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
-          //  app.UseMiddleware<VisitorCounterMiddleware>();
+            //  app.UseMiddleware<VisitorCounterMiddleware>();
+            app.UseCookiePolicy();
 
             app.Run();
         }

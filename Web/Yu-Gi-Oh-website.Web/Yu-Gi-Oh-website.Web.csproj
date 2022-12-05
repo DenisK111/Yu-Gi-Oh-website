@@ -24,6 +24,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.9" />
     
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
+    
+    <PackageReference Include="NToastNotify" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>

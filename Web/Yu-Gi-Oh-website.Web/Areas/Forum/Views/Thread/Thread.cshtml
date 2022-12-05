@@ -1,16 +1,19 @@
-﻿@using Yu_Gi_Oh_website.Common.Settings
+﻿@using Microsoft.AspNetCore.Identity
+@using Yu_Gi_Oh_website.Common.Settings
+@using Yu_Gi_Oh_website.Data.Data.Seeding.Common
 @model ThreadViewModel
 
-
 @section Styles{
+
+	
 	<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
 }
-
 
 	<div>
 		 
 
-		<h1 class="text-center">@Model.Subject</h1>
+		<h1 class="text-center">@Model.Subject</h1>	
+		
 
 		<div class="d-flex justify-content-between">
 			<div>Created On: @Model.CreatedOn </div>
@@ -53,11 +56,25 @@
 						<div class="card-body bg-white text-black">
 							@Html.Raw(post.SanitizedContent)
 						</div>
-						<div class="card-footer rounded-0 d-flex align-items-start px-0 pt-0 pb-1">
+						<div class="card-footer rounded-0 d-flex px-0 pt-0 pb-1">
 							<div class="px-1"><a href="javascript:void(0)" onclick="sendPostVote(@post.Id, true,@id)"> <ion-icon name="thumbs-up-outline" id="thumbsUp" class="icon-1x"></ion-icon> </a><span id="@id" class="d-inline-block text-lg-end">@post.Likes</span> </div>
 							<div class="px-1"> <a href="javascript:void(0)" onclick="sendPostVote(@post.Id, false,@id)"><ion-icon name="thumbs-down-outline" id="thumbsDown" class="icon-1x"></ion-icon> </a><span id="@(id * -1)" class="d-inline-block text-lg-start">@post.Dislikes</span> </div>
+							@if (this.User.IsInRole(Roles.Admin) || this.User.IsInRole(Roles.Moderator))
+							{
+								<div class="ms-auto">
+									<form method="post" asp-area="Forum" asp-controller="Post" asp-action="RemovePost" id="form2">
+										<input type="hidden" value="@Model.Id" name="threadId" />
+										<input type="hidden" value="@post.Id" name="postId" />
+									</form>
+									<button class="btn btn-success rounded-0" form="form2" type="submit" value="Submit">
+										Remove Post
+									</button>
+								</div>
+							}
 
 						</div>
+						
+						
 					</div>
 				</div>
 			</div>
@@ -81,6 +98,7 @@
 @section Scripts{
 	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+	<script>function toast() { toastr.warning('My name is Inigo Montoya. You killed my father, prepare to die!') } ()</script>
 	<script>
 
 		function renderIcon(i){

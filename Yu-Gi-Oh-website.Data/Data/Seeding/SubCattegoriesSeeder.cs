@@ -43,16 +43,16 @@ namespace Yu_Gi_Oh_website.Data.Data.Seeding
                 new SubCattegory { Name = "Events", Cattegory = duelLinksCattegory , Description = "Discussion about current and upcoming Duel Links in-game Events." },
                 new SubCattegory { Name = "Tournaments", Cattegory = duelLinksCattegory , Description = "Promote or organize Duel Links Tournaments." },
 
-                new SubCattegory { Name = "General Discussions", Cattegory = tcgCattegory , Description = "abcdadawdadsadwad" },
-                new SubCattegory { Name = "Meta Discussions", Cattegory = tcgCattegory , Description = "abcdadawdadsadwad" },
-                new SubCattegory { Name = "Deck Discussions", Cattegory = tcgCattegory , Description = "abcdadawdadsadwad" },
-                new SubCattegory { Name = "Card Trading", Cattegory = tcgCattegory , Description = "abcdadawdadsadwad" },
-                new SubCattegory { Name = "Live Events", Cattegory = tcgCattegory, Description = "abcdadawdadsadwad" },
+                new SubCattegory { Name = "General Discussions", Cattegory = tcgCattegory , Description = "Discussions about the Yu-Gi-Oh! TCG" },
+                new SubCattegory { Name = "Meta Discussions", Cattegory = tcgCattegory , Description = "Discussions about the current Meta in the TCG." },
+                new SubCattegory { Name = "Deck Discussions", Cattegory = tcgCattegory , Description = "Discussions about Decks - Share Decks, Deck Strategies and Ideas about DeckBuilding." },
+                new SubCattegory { Name = "Card Trading", Cattegory = tcgCattegory , Description = "Sell, buy and trade cards with other players." },
+                new SubCattegory { Name = "Live Events", Cattegory = tcgCattegory, Description = "Discussions about live meatups and tournaments." },
 
-                new SubCattegory { Name = "Other Anime", Cattegory = miscellaneousCattegory, Description = "abcdadawdadsadwad" },
-                new SubCattegory { Name = "Other Games", Cattegory = miscellaneousCattegory, Description = "abcdadawdadsadwad" },
-                new SubCattegory { Name = "Movies / TV Shows", Cattegory = miscellaneousCattegory, Description = "abcdadawdadsadwad" },
-                new SubCattegory { Name = "Spam", Cattegory = miscellaneousCattegory, Description = "abcdadawdadsadwad" }
+                new SubCattegory { Name = "Other Anime", Cattegory = miscellaneousCattegory, Description = "Discussions about other animes other than the Yu-Gi-Oh! franchise" },
+                new SubCattegory { Name = "Other Games", Cattegory = miscellaneousCattegory, Description = "Discussion about non-Yu-Gi-Oh! games." },
+                new SubCattegory { Name = "Movies / TV Shows", Cattegory = miscellaneousCattegory, Description = "Discussions about movies and TV shows" },
+                new SubCattegory { Name = "Spam", Cattegory = miscellaneousCattegory, Description = "Discussions about random topics." }
             };
 
             foreach (var item in subCattegoryList)
