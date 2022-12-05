@@ -23,10 +23,12 @@ namespace Yu_Gi_Oh_website.Web.Extentension
                 .AddScoped<IThreadService, ThreadService>()
                 .AddScoped<ISoftDeleteService<PostVote>, SoftDeleteService<PostVote>>()                
                 .AddScoped<ISoftDeleteService<Post>, SoftDeleteService<Post>>()                
+                .AddScoped<ISoftDeleteService<SubCattegory>, SoftDeleteService<SubCattegory>>()                
                 .AddScoped<IPostService, PostService>()
                 .AddScoped<IEntityByIdService, EntityByIdService>()
                 .AddScoped<IVotesService, VotesService>()
-                .AddScoped<IVisitorCountService,VisitorCountService>();
+                .AddScoped<IVisitorCountService,VisitorCountService>()
+                .AddScoped<ICattegoryService,CattegoryService>();
 
             return services;
         }

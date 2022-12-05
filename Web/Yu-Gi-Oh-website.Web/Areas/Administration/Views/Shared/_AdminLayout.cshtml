@@ -8,16 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Yu-Gi-Oh BG</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+   @* <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/solarly.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />    
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />*@
     @await RenderSectionAsync("Styles", required: false)
 
 
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light ">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">YGObg</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,23 +30,23 @@
                                 Home
                                 <span class="visually-hidden">(current)</span>
                             </a>
-                        </li> 
+                        </li>
                         <li>
-                            <a class="nav-link active" asp-area="Forum" asp-controller="Home" asp-action="Index">Forum</a>
+                            <a class="nav-link" asp-area="Forum" asp-controller="Home" asp-action="Index">Forum</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="CardCollection" asp-action="Index" asp-route-page="1">Card Catallogue</a>
-                        </li> 
-                          @if (User.IsInRole(Roles.Admin))
+                        </li>
+                        @if (User.IsInRole(Roles.Admin))
                         {
                             <li>
-                                <a class="nav-link" asp-area="Administration" asp-controller="Home" asp-action="Index">Administration</a>
+                                <a class="nav-link active" asp-area="Administration" asp-controller="Home" asp-action="Index">Administration</a>
                             </li>
                         }
                     </ul>
                     <partial class="nav-link" name="_LoginPartial" />
 
-                    <form class="d-flex" asp-area=" "asp-controller="CardCollection" asp-action="Index" asp-route-page="0" method="get">
+                    <form class="d-flex" asp-area=" " asp-controller="CardCollection" asp-action="Index" asp-route-page="0" method="get">
                         <input class="form-control me-sm-2" type="text" placeholder="Search for card..." name="searchTerm">
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>
@@ -57,26 +57,10 @@
     <div class="container-fluid">
         <partial name="_CookieConsentPartial" />
         <main role="main">
-            <div class="row fill ">
-
-                <div class="col-sm-1" id="leftmarginForum">
-
-
-                </div>
-                <div class="p-0 col-sm-8 bg-light bg-gradient fill">
-
+            <div class="row fill text-center">
+               
                     @RenderBody()
-
-                </div>
-               <div class="col-sm-2 bg-success">
-
-                
-
-            </div>
-                <div class="col-sm-1" id="rightmarginForum">
-
-
-                </div>
+               
 
             </div>
 
@@ -84,7 +68,7 @@
 
     </div>
 
-    <footer class="footer text-white mt-auto bg-opacity-75 bg-gradient align-text-bottom">
+    <footer class="footer text-black mt-auto bg-opacity-75 bg-gradient align-text-bottom">
         <div class="container">
             &copy; 2022 - YGObg - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
@@ -96,6 +80,7 @@
     @await RenderSectionAsync("Scripts", required: false)
     @await Component.InvokeAsync("NToastNotify")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>
+

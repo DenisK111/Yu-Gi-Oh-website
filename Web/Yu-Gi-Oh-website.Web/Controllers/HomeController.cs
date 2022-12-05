@@ -22,6 +22,7 @@ namespace Yu_Gi_Oh_website.Web.Controllers
 
         public IActionResult Index()
         {
+            this.ViewData["Home"] = true;
             return View();
         }
 
@@ -29,43 +30,13 @@ namespace Yu_Gi_Oh_website.Web.Controllers
         {
             this.HttpContext.Session.SetString("Read Privacy", "true");
             return this.View();
-        }
-
-        public IActionResult AddToDb(AddToDbModel model)
-        {
-
-            var dbModel = model ?? new AddToDbModel();
-
-            return this.View(dbModel);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddCardToDb(AddToDbModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return RedirectToAction(nameof(AddToDb),model);
-            }
-
-            await updater.AddIndividualCardToDbAsync(imageFolder, model.cardName);
-            return this.Redirect(nameof(Index));
-        }
-
+        }       
        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        [Route("/update")]
-        public async Task<IActionResult> UpdateDb()
-        {
-            
-            await updater.AddAllCardsToDbAsync(imageFolder);
-
-            return RedirectToAction(nameof(this.Index));
-        }
+        }        
     }
 }

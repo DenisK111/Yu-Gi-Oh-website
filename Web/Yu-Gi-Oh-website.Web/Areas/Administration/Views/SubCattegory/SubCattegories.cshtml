@@ -1,0 +1,65 @@
+﻿@using Yu_Gi_Oh_website.Web.Areas.Administration.Models
+@model SubCattegoriesViewModel
+<div class="row">
+	<div class="col-12 mb-4 mb-lg-0">
+		<div class="col text-center p-2">
+					<form method="get" asp-area="Administration" asp-action="AddSubCattegory" id="form1">
+					</form>
+					<button type="submit" form="form1" value="Submit" class="btn btn-sm btn-info rounded-0">Add New SubCattegory</button>
+				</div>
+		<div class="card">
+			<h5 class="card-header">SubCattegories</h5>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Id</th>
+								<th scope="col">Name</th>
+								<th scope="col">Description</th>
+								<th scope="col">Is Live</th>
+								<th scope="col">Cattegory</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var subCattegory in Model.SubCattegories)
+							{
+								<form method="post">
+								<tr>
+									<th scope="row">@subCattegory.Id<input type="hidden" asp-for="@subCattegory.Id" name="Id"/></th>
+									<td><input asp-for="@subCattegory.Name" name="name" />
+										<span asp-validation-for="@subCattegory.Name" class="text-danger"></span>
+									</td>
+									<td><textarea asp-for="@subCattegory.Description" name="Description">"@subCattegory.Description"</textarea>
+										<span asp-validation-for="@subCattegory.Description" class="text-danger"></span></td>
+									<td>
+										<select name="isDeleted" asp-for="@subCattegory.IsDeleted">
+											<option value="false" selected="@(!subCattegory.IsDeleted)">Yes</option>
+											<option value="true" selected="@(subCattegory.IsDeleted)">No</option>
+										</select>
+
+									</td>
+									<td>
+										<select name="cattegoryId" asp-for="@subCattegory.CattegoryId">
+												@foreach (var cattegory in Model.Cattegories)
+												{
+												<option value="@cattegory.Id"
+												selected="@(subCattegory.CattegoryId == cattegory.Id)">@cattegory.Name</option>
+												}
+
+										</select>
+										<span asp-validation-for="SubCattegories" class="text-danger"></span>
+									</td>
+									<td><button type="submit" class="btn btn-sm btn-primary">Apply Edit</button></td>
+								</tr>
+								</form>
+							}
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -52,13 +52,7 @@ namespace Yu_Gi_Oh_website.Web
                     options.CheckConsentNeeded = context => true;
                     options.MinimumSameSitePolicy = SameSiteMode.None;
                 });
-            //builder.Services.AddDistributedSqlServerCache(options =>
-            //{
-            //    options.ConnectionString = builder.Configuration.GetConnectionString(
-            //        "DefaultConnection");
-            //    options.SchemaName = "dbo";
-            //    options.TableName = "TestCache";
-            //});
+     
             builder.Services.AddMemoryCache();           
 
             builder.Services.AddSession(options =>
@@ -78,7 +72,8 @@ namespace Yu_Gi_Oh_website.Web
             {
                 ProgressBar = true,
                 PositionClass = ToastPositions.TopCenter,
-                TimeOut = 3000
+                TimeOut = 3000,
+               
             })
                 .AddSessionStateTempDataProvider();
 

@@ -3,6 +3,7 @@ using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
 using Yu_Gi_Oh_website.Models.Forum.Models;
 using Yu_Gi_Oh_website.Services.Forum.Models;
 using Yu_Gi_Oh_website.Services.Models;
+using Yu_Gi_Oh_website.Web.Areas.Administration.Models;
 using Yu_Gi_Oh_website.Web.Areas.Forum.Models;
 using Yu_Gi_Oh_website.Web.Models.CardCollection;
 using Yu_Gi_Oh_website.Web.Models.CardDetails;
@@ -27,6 +28,7 @@ namespace Yu_Gi_Oh_website.Web.AutoMapper
                 .Select(c => c.ImageUrl)
                 .FirstOrDefault(x => x.EndsWith("1.jpg"))));
             CreateMap<CardDisplayDto, CardDisplayViewModel>();
+            CreateMap<SubCattegoryInfoDto, SubCattegoryViewModel>();
 
         }
     }
