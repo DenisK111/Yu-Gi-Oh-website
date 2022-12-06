@@ -1,5 +1,6 @@
 ﻿using AngleSharp.Common;
 using AutoMapper;
+using Yu_Gi_Oh_website.Models;
 using Yu_Gi_Oh_website.Models.Forum.Models;
 using Yu_Gi_Oh_website.Services.Forum.Models;
 using Yu_Gi_Oh_website.Web.Areas.Forum.Models;
@@ -50,6 +51,9 @@ namespace Yu_Gi_Oh_website.Web.AutoMapper
 
             CreateMap<SubCattegory, SubCattegoryInfoDto>();
             CreateMap<Cattegory, CattegoryIdNameDto>();
+
+            CreateMap<ApplicationUser, UserInfoDto>()
+                .ForMember(x => x.Roles, y => y.MapFrom(s => s.Roles.Select(r => r.RoleId)));
                  
         }
     }

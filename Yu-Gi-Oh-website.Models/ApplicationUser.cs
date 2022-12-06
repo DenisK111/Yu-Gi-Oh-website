@@ -10,14 +10,14 @@ namespace Yu_Gi_Oh_website.Models
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
         public ApplicationUser()
-        {
-           
-            this.Roles = new HashSet<IdentityUserRole<string>>();
+        {          
+          
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.FavouriteCards = new HashSet<Card>();
             this.Posts = new HashSet<Post>();
             this.Threads = new HashSet<ForumThread>();
+            this.PostVotes = new HashSet<PostVote>();
         }
 
         // Audit info
@@ -28,9 +28,7 @@ namespace Yu_Gi_Oh_website.Models
         // Deletable entity
         public bool IsDeleted { get; set; }
 
-        public DateTime? DeletedOn { get; set; }
-
-        public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
+        public DateTime? DeletedOn { get; set; }       
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
@@ -45,5 +43,7 @@ namespace Yu_Gi_Oh_website.Models
         public ICollection<ForumThread> Threads { get; set; }
        
         public ICollection<PostVote> PostVotes { get; set; }
+
+        public ICollection<IdentityUserRole<string>> Roles { get; set; } = new HashSet<IdentityUserRole<string>>();
     }
 }

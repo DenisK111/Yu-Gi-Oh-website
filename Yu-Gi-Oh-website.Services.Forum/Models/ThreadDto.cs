@@ -30,6 +30,6 @@
         public string Slug { get; set; } = null!;
 
         public string CreatedOn { get; set; } = null!;
-        public string ModifiedOn { get; set; } = null!;
+        public string ModifiedOn { get; set; } = null!;        
     }
 }

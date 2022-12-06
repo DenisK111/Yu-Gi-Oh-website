@@ -28,6 +28,7 @@ namespace Yu_Gi_Oh_website.Web.Extentension
                 .AddScoped<IEntityByIdService, EntityByIdService>()
                 .AddScoped<IVotesService, VotesService>()
                 .AddScoped<IVisitorCountService,VisitorCountService>()
+                .AddScoped<IUserService,AspUserService>()
                 .AddScoped<ICattegoryService,CattegoryService>();
 
             return services;

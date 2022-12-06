@@ -24,6 +24,6 @@ namespace Yu_Gi_Oh_website.Models
 
         public bool IsDeleted { get; set; }
 
-        public DateTime? DeletedOn { get; set; }
+        public DateTime? DeletedOn { get; set; }        
     }
 }

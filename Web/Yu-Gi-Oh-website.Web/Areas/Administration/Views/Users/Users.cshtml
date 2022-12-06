@@ -1,0 +1,61 @@
+﻿@model IEnumerable<UserInfoDto>
+
+<div class="row">
+	<div class="col-12 mb-4 mb-lg-0">		
+		<div class="card">
+			<h5 class="card-header">Users</h5>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Profile Pic</th>
+								<th scope="col">Id</th>
+								<th scope="col">User Name</th>
+								<th scope="col">Phone Number</th>
+								<th scope="col">Post Count</th>
+								<th scope="col">Roles</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var user in Model)
+							{
+								
+								<tr>
+									<th scope="row">
+										
+											<img src="@(user.ProfilePic ?? "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=")" class="mx-auto img-fluid" style="max-width:100px" />
+										
+									</th>
+									<th scope="row">@user.Id</th>
+									<td>
+										@user.UserName
+									</td>
+									<td>
+										@(user.PhoneNumber ?? "-")
+										
+									</td>
+									<td>
+										@user.PostCount
+
+									</td>
+									<td>
+										@(string.Join(", ",user.Roles))
+									</td>
+									<td>
+										<form method="get" asp-area="Administration" asp-controller="Users" asp-action="ModifyRole" asp-route-id="@user.Id" id="form1">
+										</form>
+										<button type="submit" form="form1" value="Submit" class="btn btn-sm btn-primary">ModifyRoles</button>
+									</td>
+								</tr>
+								
+							}
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

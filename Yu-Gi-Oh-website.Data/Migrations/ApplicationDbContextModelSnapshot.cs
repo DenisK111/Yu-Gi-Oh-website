@@ -129,16 +129,17 @@ namespace Yu_Gi_Oh_website.Data.Migrations
                     b.Property<string>("RoleId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserRole<string>");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -717,6 +718,25 @@ namespace Yu_Gi_Oh_website.Data.Migrations
                     b.ToTable("SubCattegories");
                 });
 
+            modelBuilder.Entity("Yu_Gi_Oh_website.Models.ApplicationUserRole", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserRole<string>");
+
+                    b.Property<string>("RoleId1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasIndex("RoleId1");
+
+                    b.HasIndex("UserId1");
+
+                    b.HasDiscriminator().HasValue("ApplicationUserRole");
+                });
+
             modelBuilder.Entity("ApplicationUserCard", b =>
                 {
                     b.HasOne("Yu_Gi_Oh_website.Models.CardCatalogue.Models.Card", null)
@@ -769,10 +789,6 @@ namespace Yu_Gi_Oh_website.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Yu_Gi_Oh_website.Models.ApplicationUser", null)
-                        .WithMany("Roles")
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("Yu_Gi_Oh_website.Models.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
@@ -907,6 +923,30 @@ namespace Yu_Gi_Oh_website.Data.Migrations
                     b.Navigation("Cattegory");
                 });
 
+            modelBuilder.Entity("Yu_Gi_Oh_website.Models.ApplicationUserRole", b =>
+                {
+                    b.HasOne("Yu_Gi_Oh_website.Models.ApplicationRole", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId1")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Yu_Gi_Oh_website.Models.ApplicationUser", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId1")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Yu_Gi_Oh_website.Models.ApplicationRole", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
+
             modelBuilder.Entity("Yu_Gi_Oh_website.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Claims");
@@ -917,9 +957,9 @@ namespace Yu_Gi_Oh_website.Data.Migrations
 
                     b.Navigation("Posts");
 
-                    b.Navigation("Roles");
-
                     b.Navigation("Threads");
+
+                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("Yu_Gi_Oh_website.Models.CardCatalogue.Models.Card", b =>
