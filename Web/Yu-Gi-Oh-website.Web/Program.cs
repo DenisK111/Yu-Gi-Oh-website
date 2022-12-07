@@ -19,6 +19,8 @@ using NToastNotify;
 using CloudinaryDotNet;
 using Cloudinary = CloudinaryDotNet.Cloudinary;
 using Microsoft.AspNetCore.Identity;
+using Serilog;
+using Serilog.Sinks.SystemConsole.Themes;
 
 namespace Yu_Gi_Oh_website.Web
 {
@@ -26,7 +28,14 @@ namespace Yu_Gi_Oh_website.Web
     {
         public static async Task Main(string[] args)
         {
+            var logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .MinimumLevel.Information()
+                .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+                .CreateLogger();
+
             var builder = WebApplication.CreateBuilder(args);
+            builder.Logging.AddSerilog(logger);
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -123,9 +132,11 @@ namespace Yu_Gi_Oh_website.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
                 app.UseResponseCompression();
-               
+                app.UseStatusCodePagesWithReExecute("Error/{0}");
+                app.UseMiddleware<ErrorHandlerMiddleware>();
+
             }
-            app.UseStatusCodePagesWithRedirects("Error/{0}");
+            
             app.UseNToastNotify();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -146,8 +157,7 @@ namespace Yu_Gi_Oh_website.Web
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-            app.MapRazorPages();
-            //  app.UseMiddleware<VisitorCounterMiddleware>();
+            app.MapRazorPages();           
             app.UseCookiePolicy();
 
             app.Run();

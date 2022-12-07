@@ -21,7 +21,7 @@ namespace Yu_Gi_Oh_website.Web.Controllers
         }
 
         public IActionResult Index()
-        {
+        {            
             this.ViewData["Home"] = true;
             return View();
         }

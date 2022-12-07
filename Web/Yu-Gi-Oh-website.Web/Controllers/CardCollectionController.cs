@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Web.Helpers;
@@ -24,7 +23,7 @@ namespace Yu_Gi_Oh_website.Web.Controllers
             this.filter = filter;
             this.sorter = sorter;
         }
-        //[Route("CardCollection/{page:int}")]
+        
         [HttpGet]
         public async Task<IActionResult> Index(FilterViewModel fm)
         {
