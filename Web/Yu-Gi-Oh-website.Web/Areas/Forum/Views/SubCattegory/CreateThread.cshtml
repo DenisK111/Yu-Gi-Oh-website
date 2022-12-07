@@ -4,9 +4,9 @@
     <div class="col-2"></div>
     <div class="col-md-8 col-md-offset-2">
 
-        <h1>Create New Thread</h1>
+        <h1 class="text-center">Create New Thread</h1>
         
-        <form asp-action="CreateThread" method="post" class="m-2">
+        <form asp-action="CreateThread" method="post" class="m-2 d-inline-block">
 
             <div asp-validation-summary="ModelOnly"></div>
 
@@ -34,12 +34,11 @@
                 <button type="submit" class="btn btn-primary">
                     Create
                 </button>
-                <button class="btn btn-default">
+                <button class="btn btn-default" type="button" onclick="location.href='@Url.Action("Index","SubCattegory",new{id=Model.SubCattegoryId,currentPage=1})';">
                     Cancel
-                </button>
+                </button>               
             </div>
-
-        </form>
+        </form>        
     </div>
     <div class="col-2"></div>
 </div>

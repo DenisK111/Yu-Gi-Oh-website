@@ -19,7 +19,7 @@
 			<div>Created On: @Model.CreatedOn </div>
 			<div class="row">
 				<div class="col text-center p-2">
-					<form method="get" asp-area="Forum" asp-controller="Post" asp-action="AddPost" asp-route-id="@Model.Id" id="form1">
+					<form method="get" asp-area="Forum" asp-controller="Post" asp-action="AddPost" asp-route-id="@Model.Id" asp-route-subCattegoryId="@Model.SubCattegoryId" id="form1">
 					</form>
 					<button type="submit" form="form1" value="Submit" class="btn btn-danger rounded-0">Add New Post</button>
 				</div>
@@ -86,7 +86,7 @@
 
 </div>
 <div class="col text-center p-2">
-	<form method="get" asp-area="Forum" asp-controller="Post" asp-action="AddPost" asp-route-id="@Model.Id" id="form1">
+	<form method="get" asp-area="Forum" asp-controller="Post" asp-action="AddPost" asp-route-id="@Model.Id" asp-route-subCattegoryId="@Model.SubCattegoryId" id="form1">
 	</form>
 	<button type="submit" form="form1" value="Submit" class="btn btn-danger rounded-0">Add New Post</button>
 </div>

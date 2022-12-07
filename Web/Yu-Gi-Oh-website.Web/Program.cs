@@ -16,6 +16,9 @@ using Yu_Gi_Oh_website.Web.Data;
 using Yu_Gi_Oh_website.Web.Middleware;
 using Yu_Gi_Oh_website.Web.Extentension;
 using NToastNotify;
+using CloudinaryDotNet;
+using Cloudinary = CloudinaryDotNet.Cloudinary;
+using Microsoft.AspNetCore.Identity;
 
 namespace Yu_Gi_Oh_website.Web
 {
@@ -44,7 +47,18 @@ namespace Yu_Gi_Oh_website.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services.Configure<MongoDbSettings>(
-                builder.Configuration.GetSection(nameof(MongoDbSettings)));
+                builder.Configuration.GetSection(nameof(MongoDbSettings)));          
+
+            /// ADD CLOUDINARY
+            
+            Account account = new Account(
+                        builder.Configuration["Cloudinary:ApiName"],
+                        builder.Configuration["Cloudinary:ApiKey"],
+                        builder.Configuration["Cloudinary:ApiSecret"]);
+
+            var cloudinary = new Cloudinary(account);
+
+            builder.Services.AddSingleton(cloudinary);
 
             builder.Services.Configure<CookiePolicyOptions>(
                 options =>
@@ -97,7 +111,7 @@ namespace Yu_Gi_Oh_website.Web
 
                 using (var serviceScope = app.Services.CreateScope())
                 {
-                    var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                    var dbContext = serviceScope.ServiceProvider.GetRequiredService<Data.ApplicationDbContext>();
                     dbContext.Database.Migrate();
                     await new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider);
                     await new GetApiDataAndUpdateDbService(dbContext, new HttpClient()).AddAllCardsToDbAsync(ApiConstantValues.imagePath);
@@ -109,9 +123,10 @@ namespace Yu_Gi_Oh_website.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
                 app.UseResponseCompression();
-                app.UseStatusCodePagesWithRedirects("/Error/{0}");
+               
             }
-          app.UseNToastNotify();
+            app.UseStatusCodePagesWithRedirects("Error/{0}");
+            app.UseNToastNotify();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
@@ -125,6 +140,7 @@ namespace Yu_Gi_Oh_website.Web
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseNToastNotify();
+            //app.UseMiddleware<AntiXssMiddleware>();
             app.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(

@@ -16,5 +16,6 @@ namespace Yu_Gi_Oh_website.Services.Forum.Contracts
 		Task<bool> AddUserToRoleAsync(string userID, string role);
 
 		Task<bool> RemoveUserFromRoleAsync(string userID, string role);
+		Task<bool> UpdateProfilePictureAsync(string userId, string imageUrl);
 	}
 }

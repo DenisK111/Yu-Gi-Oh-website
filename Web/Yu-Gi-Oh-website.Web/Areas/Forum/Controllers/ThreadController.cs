@@ -10,7 +10,7 @@ using Yu_Gi_Oh_website.Web.Models.Contracts;
 namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
 {
     [Area("Forum")]
-    [Route("{area}/Cattegory/{subCattegoryId:int}/{subCattegorySlug}/Thread/")]
+    [Route("{area}/Cattegory/{subCattegoryId:int}/{subCattegorySlug?}/Thread/")]
     public class ThreadController : Controller
     {
         private readonly int forumPostsToTake = 15;
@@ -18,16 +18,15 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
         private readonly IMapper mapper;
         private readonly IVotesService voteService;
         private readonly IVisitorCountService visitorCountService;
-        private readonly IToastNotification toastNotification;
+        
 
 
-        public ThreadController(IThreadService threadService, IMapper mapper, IVotesService voteService, IVisitorCountService visitorCountService, IToastNotification toastNotification)
+        public ThreadController(IThreadService threadService, IMapper mapper, IVotesService voteService, IVisitorCountService visitorCountService)
         {
             this.threadService = threadService;
             this.mapper = mapper;
             this.voteService = voteService;
-            this.visitorCountService = visitorCountService;
-            this.toastNotification = toastNotification;
+            this.visitorCountService = visitorCountService;            
         }
         [Route("{id:int}")]
 

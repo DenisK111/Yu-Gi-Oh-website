@@ -1,0 +1,42 @@
+﻿.full-screenError {
+    background-color: rgb(51, 51, 51);
+    width: 100vw;
+    height: 100vh;
+    color: white;
+    font-family: 'Arial Black';
+    text-align: center;
+}
+
+.containerError {
+    padding-top: 4em;
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+.error-numError {
+    font-size: 8em;
+}
+
+.eyeError {
+    background: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    height: 100px;
+    position: relative;
+    width: 100px;    
+}
+
+.italic {
+    font-style: italic;
+}
+
+.errorP {
+    margin-bottom: 4em;
+}
+
+.errorA {
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;    
+}

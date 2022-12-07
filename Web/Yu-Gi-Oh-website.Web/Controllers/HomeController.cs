@@ -30,9 +30,8 @@ namespace Yu_Gi_Oh_website.Web.Controllers
         {
             this.HttpContext.Session.SetString("Read Privacy", "true");
             return this.View();
-        }       
+        }   
        
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

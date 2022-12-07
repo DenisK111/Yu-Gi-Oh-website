@@ -36,7 +36,13 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="CardCollection" asp-action="Index" asp-route-page="1">Card Catallogue</a>
-                        </li> 
+                        </li>
+                        @if (User.Identity!.IsAuthenticated)
+                        {
+                            <li>
+                                <a class="nav-link" asp-area="" asp-controller="ProfilePic" asp-action="Index">Change Profile Picture</a>
+                            </li>
+                        }
                           @if (User.IsInRole(Roles.Admin))
                         {
                             <li>
@@ -59,7 +65,7 @@
         <main role="main">
             <div class="row fill ">
 
-                <div class="col-sm-1" id="leftmarginForum">
+                <div class="col-sm-2" id="leftmarginForum">
 
 
                 </div>
@@ -68,12 +74,8 @@
                     @RenderBody()
 
                 </div>
-               <div class="col-sm-2 bg-success">
-
-                
-
-            </div>
-                <div class="col-sm-1" id="rightmarginForum">
+               
+                <div class="col-sm-2" id="rightmarginForum">
 
 
                 </div>

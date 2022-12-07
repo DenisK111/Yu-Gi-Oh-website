@@ -37,6 +37,12 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="CardCollection" asp-action="Index" asp-route-page="1">Card Catallogue</a>
                         </li>
+                        @if (User.Identity!.IsAuthenticated)
+                        {
+                            <li>
+                                <a class="nav-link" asp-area="" asp-controller="ProfilePic" asp-action="Index">Change Profile Picture</a>
+                            </li>
+                        }
                         @if (User.IsInRole(Roles.Admin))
                         {
                             <li>

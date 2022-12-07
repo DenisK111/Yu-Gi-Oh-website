@@ -2,3 +2,92 @@
 @model UserRoleModifierViewModel
 
 
+<div class="row">
+	<div class="col-12 mb-4 mb-lg-0">
+		<div class="card">
+			<h5 class="card-header">User @Model.User.Id</h5>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Profile Pic</th>
+								<th scope="col">Id</th>
+								<th scope="col">User Name</th>
+								<th scope="col">Phone Number</th>
+								<th scope="col">Post Count</th>
+								<th scope="col">Roles</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>							
+
+								<tr>
+									<th scope="row">
+
+										<img src="@(Model.User.ProfilePic ?? "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=")" class="mx-auto img-fluid" style="max-width:100px" />
+
+									</th>
+									<th scope="row">@Model.User.Id</th>
+									<td>
+										@Model.User.UserName
+									</td>
+									<td>
+									@(Model.User.PhoneNumber ?? "-")
+
+									</td>
+									<td>
+									@Model.User.PostCount
+
+									</td>
+									<td>
+									@(string.Join(", ", Model.User.Roles))
+									</td>
+									
+								</tr>
+
+
+
+						</tbody>
+					</table>
+					<div class="form-group form-inline px-3 py-2">
+						
+									<form method="post" asp-area="Administration" asp-controller="Users" asp-action="AddRole" asp-route-id="@Model.User" id="form1">
+							<label for="selectRoles">Select Role to add</label>
+								<select name="role" id="selectRoles">
+									@foreach (var role in Model.AllRoles.Where(x=>!Model.User.Roles.Contains(x)))
+									{
+										<option value="@role"
+											selected="false">@role</option>
+									}
+
+								</select>
+								
+								<input type="hidden" name="userId" value="@Model.User.Id"/>
+							<button type="submit" form="form1" value="Submit" class="btn btn-primary">Add Role</button>
+										</form>
+										</div>
+					<div class="form-group form-inline px-3 py-2">
+
+						<form method="post" asp-area="Administration" asp-controller="Users" asp-action="RemoveRole" asp-route-id="@Model.User" id="form2">
+							<label for="selectRoles">Select Role to remove</label>
+							<select name="role" id="selectRoles">
+								@foreach (var role in Model.AllRoles.Where(x => Model.User.Roles.Contains(x)))
+								{
+									<option value="@role"
+										selected="false">@role</option>
+								}
+
+							</select>
+
+							<input type="hidden" name="userId" value="@Model.User.Id" />
+							<button type="submit" form="form2" value="Submit" class="btn btn-primary">Remove Role</button>
+						</form>
+										
+									
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Yu_Gi_Oh_website.Models;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
 using Yu_Gi_Oh_website.Services.Forum.Models;
+using Yu_Gi_Oh_website.Web.Data;
 
 namespace Yu_Gi_Oh_website.Services.Forum.Implementations
 {
@@ -17,13 +18,15 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<ApplicationRole> roleManager;
         private readonly IMapper mapper;
+        private readonly ApplicationDbContext context;
 
-        public AspUserService(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IMapper mapper)
+        public AspUserService(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IMapper mapper,ApplicationDbContext context)
         {
 
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.mapper = mapper;
+            this.context = context;
         }
 
         public async Task<bool> AddUserToRoleAsync(string userID, string role)
@@ -57,7 +60,7 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
 
         public async Task<UserInfoDto?> GetUserWithRolesAsync(string userID)
         {
-            var user = await userManager.Users.Where(x=>x.UserName == userID).SingleOrDefaultAsync();
+            var user = await userManager.Users.Where(x=>x.Id == userID).SingleOrDefaultAsync();
 
             if (user is null) return null;
 
@@ -83,6 +86,19 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
             if ((await userManager.GetRolesAsync(user)).Contains(role)) await userManager.RemoveFromRoleAsync(user, role);
 
             return true;                      
-        }        
+        }
+
+        public async Task<bool> UpdateProfilePictureAsync(string userId, string imageUrl)
+        {
+            var user = await userManager.Users.FirstOrDefaultAsync(x => x.Id == userId);
+
+            if (user == null) return false;
+
+            user.ProfilePic = imageUrl;
+
+            await context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Yu_Gi_Oh_website.Data.Repositories.Contracts;
+﻿using CloudinaryDotNet;
+using Yu_Gi_Oh_website.Data.Repositories.Contracts;
 using Yu_Gi_Oh_website.Data.Repositories.Implementations;
 using Yu_Gi_Oh_website.Models.Forum.Models;
 using Yu_Gi_Oh_website.Services.ApiService;
@@ -29,6 +30,7 @@ namespace Yu_Gi_Oh_website.Web.Extentension
                 .AddScoped<IVotesService, VotesService>()
                 .AddScoped<IVisitorCountService,VisitorCountService>()
                 .AddScoped<IUserService,AspUserService>()
+                .AddScoped<IImageUploadService, CloudinaryImageUploadService>()
                 .AddScoped<ICattegoryService,CattegoryService>();
 
             return services;
@@ -38,6 +40,13 @@ namespace Yu_Gi_Oh_website.Web.Extentension
         {
             services
                 .AddSingleton<IVisitorCountRepository, MongoVisitorCountRepository>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddCloudinary(this IServiceCollection services)
+        {
+            
 
             return services;
         }

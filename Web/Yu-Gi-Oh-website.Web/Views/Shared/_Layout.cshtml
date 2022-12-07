@@ -33,14 +33,23 @@
                             <a class="nav-link" asp-area="Forum" asp-controller="Home" asp-action="Index">Forum</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @(!this.ViewData.ContainsKey("Home") ? "active" : "")" asp-area="" asp-controller="CardCollection" asp-action="Index" asp-route-page="1">Card Cattallogue</a>
+                            <a class="nav-link @(this.ViewData.ContainsKey("Cards") ? "active" : "")" asp-area="" asp-controller="CardCollection" asp-action="Index" asp-route-page="1">Card Cattallogue</a>
                         </li>
+                        @if (User.Identity!.IsAuthenticated)
+                        {
+                            <li>
+                                <a class="nav-link @(this.ViewData.ContainsKey("Picture") ? "active" : "")" asp-area="" asp-controller="ProfilePic" asp-action="Index">Change Profile Picture</a>
+                            </li>
+                        }
+
                         @if (User.IsInRole(Roles.Admin))
                         {
                             <li>
                                 <a class="nav-link" asp-area="Administration" asp-controller="Home" asp-action="Index">Administration</a>
                             </li>
                         }
+
+                     
 
                     </ul>
                     <partial class="nav-link" name="_LoginPartial" />
@@ -51,34 +60,7 @@
                     </form>
                 </div>
             </div>
-        </nav>
-        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
-                <div class="container-fluid">
-                    <a class="navbar-brand text-primary" asp-area="" asp-controller="Home" asp-action="Index">Yu_Gi_Oh_website.Web</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="AddToDb">Add Card</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-muted" asp-area="" asp-controller="CardCollection" asp-action="CardCollection">Card Collection</a>
-                            </li>
-
-                        </ul>
-                        <partial name="_LoginPartial" />
-                    </div>
-                </div>
-            </nav>*@
+        </nav>       
     </header>
     <div class="container-fluid">
         <partial name="_CookieConsentPartial" />
@@ -114,7 +96,8 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)   
+    @await RenderSectionAsync("Scripts", required: false)
+    @await Component.InvokeAsync("NToastNotify")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>   
 </body>

@@ -43,6 +43,7 @@ namespace Yu_Gi_Oh_website.Web.AutoMapper
                 .ForMember(x => x.Likes, y => y.MapFrom(s => s.Votes.Where(x => x.IsUpvote).Count()))
                 .ForMember(x => x.Dislikes, y => y.MapFrom(s => s.Votes.Where(x => !x.IsUpvote).Count()))
                 .ForMember(x => x.AuthorPostsCount, y => y.MapFrom(s => s.Author.PostCount))
+                .ForMember(x => x.ProfilePic, y => y.MapFrom(s => s.Author.ProfilePic))
                 .ForMember(x => x.CreatedOn, y => y.MapFrom(s => s.CreatedOn.ToString("g")));// TODO DO THE MAPPING
 
             CreateMap<ThreadDto, ThreadViewModel>();

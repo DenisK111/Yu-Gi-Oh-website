@@ -32,7 +32,7 @@ namespace Yu_Gi_Oh_website.Web.Controllers
             {
                 return this.View("error404");
             }
-            
+
             fm.Page = Paging.PageCheck(fm.Page);
 
             fm.Filters = HttpContext.Request.Query
@@ -58,33 +58,25 @@ namespace Yu_Gi_Oh_website.Web.Controllers
             var cardsCount = cardModel.count;
             var pagesCount = (int)Math.Ceiling(cardsCount / (decimal)cardsPerPage);
 
-          
+
 
             var viewModel = new CardCollectionViewModel
             {
                 Fm = fm,
                 CardModel = cardDisplayModel,
-                
-                //Paging = new()
-                //{
-                //    CurrentPage = fm.Page,
-                //    PagesCount = pagesCount,
-                //    ItemsCount = cardsCount,
-                //},
-                
             };
 
             Paging.CreatePaging(viewModel, cardModel.count, cardsPerPage, fm.Page);
+            this.ViewData["Cards"] = true;
 
             return this.View(viewModel);
-
         }
-
 
         public async Task<IActionResult> Details(int Id)
         {
             var model = await service.GetCard(Id);
             var viewModel = mapper.Map<CardDetailsViewModel>(model);
+            this.ViewData["Cards"] = true;
             return this.View(viewModel);
         }
 
@@ -110,9 +102,6 @@ namespace Yu_Gi_Oh_website.Web.Controllers
             {
                 fm.Filters = new string[0];
             }
-
-           
-
             return applyFilter;
         }
 
