@@ -19,13 +19,7 @@ namespace Yu_Gi_Oh_website.Services.Implementations
             [SortTypeEnum.DEFDESC] = x => x.OrderByDescending(y=>y.Def),
             [SortTypeEnum.LEVEL_RANK_LINK_ASC] = x => x.OrderBy(y => Convert.ToInt32(y.Level + y.LinkValue)),
             [SortTypeEnum.LEVEL_RANK_LINK_DESC] = x => x.OrderByDescending(y => Convert.ToInt32(y.Level + y.LinkValue)),
-        };
-        private readonly ILogger logger;
-
-        public SortingService(ILogger<SortingService> logger)
-        {
-            this.logger = logger;
-        }
+        };      
 
         public SortTypeEnum[] GetSortings()
         {

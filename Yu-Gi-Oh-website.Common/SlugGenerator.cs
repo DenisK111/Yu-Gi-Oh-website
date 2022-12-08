@@ -1,6 +1,8 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
 
+
+
 namespace Yu_Gi_Oh_website.Common
 {
 
@@ -17,7 +19,7 @@ namespace Yu_Gi_Oh_website.Common
             }                   
 
             //Remove all accents
-            var bytes = Encoding.GetEncoding("Cyrillic").GetBytes(value);
+            var bytes = Encoding.GetEncoding(65001).GetBytes(value);
             value = Encoding.ASCII.GetString(bytes);
 
             //Replace spaces

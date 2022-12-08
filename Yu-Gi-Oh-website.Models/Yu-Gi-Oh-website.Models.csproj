@@ -8,7 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="News.Models\" />
+    <Compile Remove="News.Models\**" />
+    <EmbeddedResource Remove="News.Models\**" />
+    <None Remove="News.Models\**" />
   </ItemGroup>
 
   <ItemGroup>
