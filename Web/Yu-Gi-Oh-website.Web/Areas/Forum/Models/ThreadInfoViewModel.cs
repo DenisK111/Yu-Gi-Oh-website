@@ -8,6 +8,6 @@
 
         public string SubCattegorySlug { get; set; } = null!;              
 
-        public int Page { get; set; }
+        public int CurrentPage { get; set; }
     }
 }
