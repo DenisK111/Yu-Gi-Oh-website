@@ -4,7 +4,7 @@ namespace Yu_Gi_Oh_website.Services.Forum.Contracts
 {
     public interface ISubCattegoryService
     {
-        Task<FullSubCattegoryDto> GetByIdAsync(int Id,int currentPage,int itemsToTake);
+        Task<FullSubCattegoryDto> GetByIdAsync(int Id,int Page,int itemsToTake);
 
         Task<IEnumerable<SubCattegoryInfoDto>> GetSubCattegoryAdminDetailsAsync();
 

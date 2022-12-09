@@ -73,7 +73,7 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
             return true;
         }
 
-        public async Task<FullSubCattegoryDto> GetByIdAsync(int id, int currentPage, int itemsToTake)
+        public async Task<FullSubCattegoryDto> GetByIdAsync(int id, int Page, int itemsToTake)
         {
             var result = await mapper
                 .ProjectTo<FullSubCattegoryDto>(context.SubCattegories.Where(x => x.Id == id))
@@ -85,7 +85,7 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
                     ImageUrl = x.ImageUrl,
                     Name = x.Name,
                     Slug = x.Slug,
-                    Threads = x.Threads.OrderByDescending(y => y.ModifiedOn).Skip(itemsToTake * (currentPage - 1)).Take(itemsToTake).ToList(),
+                    Threads = x.Threads.OrderByDescending(y => y.ModifiedOn).Skip(itemsToTake * (Page - 1)).Take(itemsToTake).ToList(),
                     TotalCount = x.Threads.Count(),
                 })
                 .FirstOrDefaultAsync();

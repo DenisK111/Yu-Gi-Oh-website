@@ -28,5 +28,12 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
 
             return await result.ToListAsync();
 		}
-	}
+
+        public async Task<ICollection<CattegoryDto>> GetallCattegoriesAsync()
+        {
+            var cattegories = context.Cattegories.AsQueryable();
+            var dict = await mapper.ProjectTo<CattegoryDto>(cattegories).ToListAsync();
+            return dict;
+        }
+    }
 }

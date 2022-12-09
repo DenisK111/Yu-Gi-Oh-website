@@ -6,9 +6,9 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
     [Area("Forum")]
     public class HomeController : Controller
     {
-        private readonly IHomePageService homeService;
+        private readonly ICattegoryService homeService;
 
-        public HomeController(IHomePageService homeService)
+        public HomeController(ICattegoryService homeService)
         {
             this.homeService = homeService;
         }

@@ -10,13 +10,13 @@ using Yu_Gi_Oh_website.Web.Data;
 
 namespace Yu_Gi_Oh_website.Services.ApiService
 {
-    public class GetApiDataAndUpdateDbService : IGetApiDataAndUpdateDbService
+    public class YGOApiService : IYGOApiService
     {
         private readonly ApplicationDbContext context;
         private readonly HttpClient httpClient;
         public readonly string allCardsString;
 
-        public GetApiDataAndUpdateDbService(ApplicationDbContext context, HttpClient httpClient)
+        public YGOApiService(ApplicationDbContext context, HttpClient httpClient)
         {
             this.context = context;
             this.httpClient = httpClient;
@@ -32,24 +32,7 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             await context.SaveChangesAsync();
             await UpdateDbAsync(imageFolder, allCardsString);
 
-        }
-
-        public async Task AddIndividualCardToDbAsync(string imageFolder, string cardName)
-        {
-            if (string.IsNullOrEmpty(cardName))
-            {
-                throw new ArgumentException("Card name cannot be empty");
-            }
-
-            if (context.Cards.Any(x => x.Name == cardName))
-            {
-                return;
-            }
-
-
-            await UpdateDbAsync(imageFolder, $"https://db.ygoprodeck.com/api/v7/cardinfo.php?name={cardName}&misc=yes");
-
-        }
+        }       
 
         private async Task UpdateDbAsync(string imageFolder, string apiString)
         {
@@ -246,7 +229,7 @@ namespace Yu_Gi_Oh_website.Services.ApiService
                 result.EnsureSuccessStatusCode();
             }
 
-            catch (Exception a)
+            catch (Exception)
             {
                 var content = await result.Content.ReadAsStringAsync();
 

@@ -33,7 +33,7 @@
                             <a class="nav-link" asp-area="Forum" asp-controller="Home" asp-action="Index">Forum</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @(this.ViewData.ContainsKey("Cards") ? "active" : "")" asp-area="" asp-controller="CardCollection" asp-action="Index" asp-route-page="1">Card Cattallogue</a>
+                            <a class="nav-link @(this.ViewData.ContainsKey("Cards") ? "active" : "")" asp-area="" asp-controller="CardCollection" asp-action="Index" asp-route-currentPage="1">Card Catallogue</a>
                         </li>
                         @if (User.Identity!.IsAuthenticated)
                         {
@@ -54,7 +54,7 @@
                     </ul>
                     <partial class="nav-link" name="_LoginPartial" />
 
-                    <form class="d-flex" asp-controller="CardCollection" asp-action="Index" asp-route-page="0" method="get">
+                    <form class="d-flex" asp-controller="CardCollection" asp-action="Index" asp-route-currentPage="0" method="get">
                         <input class="form-control me-sm-2" type="text" placeholder="Search for card..." name="searchTerm">
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>

@@ -73,7 +73,7 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
                 Id = post.Thread.Id,
                 SubCattegoryId = post.Thread.SubCattegoryId,
                 SubCattegorySlug = post.Thread.SubCattegory.Slug,
-                currentPage = 1,
+                Page = 1,
             };
         }
 
@@ -102,7 +102,7 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
                 Id = threadId,
                 SubCattegoryId = thread.SubCattegoryId,
                 SubCattegorySlug = thread.SubCattegory.Slug,
-                currentPage = 1,
+                Page = 1,
             };
         }
     }

@@ -4,7 +4,7 @@ namespace Yu_Gi_Oh_website.Web.Helpers
 {
     public static class Paging
     {
-        public static void CreatePaging(IPagingModel model, int countOfPosts, int postsToTake, int currentPage)
+        public static void CreatePaging(IPagingModel model, int countOfPosts, int postsToTake, int Page)
         {
             var postsCount = countOfPosts;
             var pagesCount = (int)Math.Ceiling(postsCount / (decimal)postsToTake);
@@ -14,19 +14,19 @@ namespace Yu_Gi_Oh_website.Web.Helpers
                 model.Paging = new();
             }
 
-            model.Paging.CurrentPage = currentPage;
+            model.Paging.CurrentPage = Page;
             model.Paging.PagesCount = pagesCount;
             model.Paging.ItemsCount = postsCount;           
         }
 
-        public static int PageCheck(int currentPage)
+        public static int PageCheck(int Page)
         {
-            if (currentPage < 1)
+            if (Page < 1)
             {
-                currentPage = 1;
+                Page = 1;
             }
 
-            return currentPage;
+            return Page;
         }
     }
 }

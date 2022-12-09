@@ -57,10 +57,10 @@ namespace Yu_Gi_Oh_website.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services.Configure<MongoDbSettings>(
-                builder.Configuration.GetSection(nameof(MongoDbSettings)));          
+                builder.Configuration.GetSection(nameof(MongoDbSettings)));
 
             /// ADD CLOUDINARY
-            
+
             Account account = new Account(
                         builder.Configuration["Cloudinary:ApiName"],
                         builder.Configuration["Cloudinary:ApiKey"],
@@ -76,8 +76,8 @@ namespace Yu_Gi_Oh_website.Web
                     options.CheckConsentNeeded = context => true;
                     options.MinimumSameSitePolicy = SameSiteMode.None;
                 });
-     
-            builder.Services.AddMemoryCache();           
+
+            builder.Services.AddMemoryCache();
 
             builder.Services.AddSession(options =>
             {
@@ -97,7 +97,7 @@ namespace Yu_Gi_Oh_website.Web
                 ProgressBar = true,
                 PositionClass = ToastPositions.TopCenter,
                 TimeOut = 3000,
-               
+
             })
                 .AddSessionStateTempDataProvider();
 
@@ -106,7 +106,7 @@ namespace Yu_Gi_Oh_website.Web
                 options.HeaderName = AntiforgerySettings.HeaderName;
             });
 
-            builder.Services.AddAutoMapper(typeof(CardProfile));            
+            builder.Services.AddAutoMapper(typeof(CardProfile));
 
             builder.Services.AddSingleton<HttpClient>();
             builder.Services.RegisterServices();
@@ -120,26 +120,18 @@ namespace Yu_Gi_Oh_website.Web
             {
                 app.UseMigrationsEndPoint();
 
-                using (var serviceScope = app.Services.CreateScope())
-                {
-                    var dbContext = serviceScope.ServiceProvider.GetRequiredService<Data.ApplicationDbContext>();
-                    dbContext.Database.Migrate();
-                    await new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider);
-                    await new GetApiDataAndUpdateDbService(dbContext, new HttpClient()).AddAllCardsToDbAsync(ApiConstantValues.imagePath);
-                }
-                            }
+
+            }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
                 app.UseResponseCompression();
-               
-
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
+                app.UseMiddleware<ErrorHandlerMiddleware>();
             }
-            app.UseStatusCodePagesWithReExecute("/Error/{0}");
-            app.UseMiddleware<ErrorHandlerMiddleware>();
-            app.UseNToastNotify();
+                        
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
@@ -153,14 +145,22 @@ namespace Yu_Gi_Oh_website.Web
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseNToastNotify();
-            //app.UseMiddleware<AntiXssMiddleware>();
+           
             app.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-            app.MapRazorPages();           
+            app.MapRazorPages();
             app.UseCookiePolicy();
+
+            using (var serviceScope = app.Services.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetRequiredService<Data.ApplicationDbContext>();
+                dbContext.Database.Migrate();
+                await new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider);
+                await new YGOApiService(dbContext, new HttpClient()).AddAllCardsToDbAsync(ApiConstantValues.imagePath);
+            }
 
             app.Run();
         }

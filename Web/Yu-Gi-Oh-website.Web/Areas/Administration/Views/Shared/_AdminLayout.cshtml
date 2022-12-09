@@ -35,7 +35,7 @@
                             <a class="nav-link" asp-area="Forum" asp-controller="Home" asp-action="Index">Forum</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="CardCollection" asp-action="Index" asp-route-page="1">Card Catallogue</a>
+                            <a class="nav-link" asp-area="" asp-controller="CardCollection" asp-action="Index" asp-route-currentPage="1">Card Catallogue</a>
                         </li>
                         @if (User.Identity!.IsAuthenticated)
                         {
@@ -52,7 +52,7 @@
                     </ul>
                     <partial class="nav-link" name="_LoginPartial" />
 
-                    <form class="d-flex" asp-area=" " asp-controller="CardCollection" asp-action="Index" asp-route-page="0" method="get">
+                    <form class="d-flex" asp-area=" " asp-controller="CardCollection" asp-action="Index" asp-route-currentPage="0" method="get">
                         <input class="form-control me-sm-2" type="text" placeholder="Search for card..." name="searchTerm">
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>
@@ -65,7 +65,9 @@
         <main role="main">
             <div class="row fill text-center">
                
+                <div class="col">
                     @RenderBody()
+                </div>
                
 
             </div>
@@ -74,7 +76,7 @@
 
     </div>
 
-    <footer class="footer text-black mt-auto bg-opacity-75 bg-gradient align-text-bottom">
+    <footer class="footer text-black mt-auto bg-opacity-75 bg-gradient align-text-bottom fixed-bottom">
         <div class="container">
             &copy; 2022 - YGObg - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

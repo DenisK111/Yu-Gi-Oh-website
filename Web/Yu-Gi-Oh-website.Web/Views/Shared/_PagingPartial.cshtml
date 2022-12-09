@@ -1,7 +1,7 @@
 ﻿@model PageViewModel
 
 @{
-    var url = Context.Request.PathBase + Context.Request.Path + Context.Request.QueryString;
+    var url = Context.Request.PathBase + Context.Request.Path + (Context.Request.QueryString.HasValue ? Context.Request.QueryString : new QueryString("?currentPage=1"));
     Model.Url = url;   
 
 }

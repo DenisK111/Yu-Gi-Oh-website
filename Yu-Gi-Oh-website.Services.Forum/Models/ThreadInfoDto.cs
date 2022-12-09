@@ -12,7 +12,7 @@
 
         public string? ErrorMessage { get; set; }
 
-        public int currentPage { get; set; }
+        public int Page { get; set; }
 
     }
 }

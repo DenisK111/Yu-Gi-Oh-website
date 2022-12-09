@@ -8,12 +8,11 @@ namespace Yu_Gi_Oh_website.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly string imageFolder = "wwwroot/Images";
         private readonly ILogger<HomeController> _logger;
-        private readonly IGetApiDataAndUpdateDbService updater;
+        private readonly IYGOApiService updater;
         private readonly ICardCollectionService service;
 
-        public HomeController(ILogger<HomeController> logger, IGetApiDataAndUpdateDbService updater,ICardCollectionService service)
+        public HomeController(ILogger<HomeController> logger, IYGOApiService updater, ICardCollectionService service)
         {
             _logger = logger;
             this.updater = updater;
@@ -21,16 +20,16 @@ namespace Yu_Gi_Oh_website.Web.Controllers
         }
 
         public IActionResult Index()
-        {            
+        {
             this.ViewData["Home"] = true;
             return View();
         }
-      
-       
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }        
+        }
     }
 }

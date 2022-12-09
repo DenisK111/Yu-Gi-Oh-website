@@ -3,23 +3,23 @@
 <form class="d-flex" asp-controller="CardCollection" asp-action="Index" method="get">
 
     <div class="row w-100 py-2">
-        <h5 class="col-sm-3 text-center text-danger align-baseline">
+        <h5 class="col-sm-3 col-lg-2 col-xl-4 text-center text-danger align-baseline">
             <span class="text-secondary">Results:</span> @Model.Paging.ItemsCount
         </h5>
-        <div class="col-sm-5 pb-1">
+        <div class="col-sm-5 col-lg-4 pb-1">
             <input type="hidden" value="1" asp-for="Paging.CurrentPage" />
             <input class="form-control  pb-1" type="text" placeholder="Search for card..." value="@Model.Fm.SearchTerm" asp-for="Fm.SearchTerm">
         </div>
-        <div class="col-sm-2  px-1">
+        <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2 px-1">
             <button class="btn btn-secondary w-100" type="submit">Search</button>
         </div>
-        <div class="col-sm-1 px-1 ">
+        <div class="col-sm-6 col-md-6 col-lg-2 col-xl-1 px-1 ">
             <a class="btn btn-danger w-100" data-bs-toggle="collapse" data-bs-target="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Filter
             </a>
         </div>
 
-        <div class="dropdown col-sm-1 px-1 ">
+        <div class="dropdown col-sm-6 col-md-6 col-lg-2 col-xl-1 px-1 ">
             <button class="btn btn-info dropdown-toggle w-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 Sort
             </button>

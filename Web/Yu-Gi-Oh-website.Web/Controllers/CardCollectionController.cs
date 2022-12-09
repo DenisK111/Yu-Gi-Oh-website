@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Yu_Gi_Oh_website.Common.Settings;
 using Yu_Gi_Oh_website.Services.Contracts;
 using Yu_Gi_Oh_website.Web.Helpers;
 using Yu_Gi_Oh_website.Web.Models.CardCollection;
@@ -8,9 +9,10 @@ using Yu_Gi_Oh_website.Web.Models.CardDetails;
 
 namespace Yu_Gi_Oh_website.Web.Controllers
 {
+    
     public class CardCollectionController : Controller
     {
-        private readonly int cardsPerPage = 21;
+        private readonly int cardsPerPage = WebConstants.CardCollectionCardsPerPage;
         private readonly ICardCollectionService service;
         private readonly IMapper mapper;
         private readonly IFilterService filter;
@@ -24,7 +26,7 @@ namespace Yu_Gi_Oh_website.Web.Controllers
             this.sorter = sorter;
         }
         
-        [HttpGet]
+        [HttpGet]        
         public async Task<IActionResult> Index(FilterViewModel fm)
         {
             if (!ModelState.IsValid)
@@ -32,7 +34,7 @@ namespace Yu_Gi_Oh_website.Web.Controllers
                 return this.View("error404");
             }
 
-            fm.Page = Paging.PageCheck(fm.Page);
+            fm.CurrentPage = Paging.PageCheck(fm.CurrentPage);
 
             fm.Filters = HttpContext.Request.Query
                 .Where(x => x.Key == "Filters")
@@ -50,7 +52,7 @@ namespace Yu_Gi_Oh_website.Web.Controllers
 
             var cardDisplayModel = mapper
                 .Map<List<CardDisplayViewModel>>(await cardModel.cards!
-                .Skip((fm.Page - 1) * cardsPerPage)
+                .Skip((fm.CurrentPage - 1) * cardsPerPage)
                 .Take(cardsPerPage)
                 .ToListAsync());
 
@@ -65,7 +67,7 @@ namespace Yu_Gi_Oh_website.Web.Controllers
                 CardModel = cardDisplayModel,
             };
 
-            Paging.CreatePaging(viewModel, cardModel.count, cardsPerPage, fm.Page);
+            Paging.CreatePaging(viewModel, cardModel.count, cardsPerPage, fm.CurrentPage);
             this.ViewData["Cards"] = true;
 
             return this.View(viewModel);

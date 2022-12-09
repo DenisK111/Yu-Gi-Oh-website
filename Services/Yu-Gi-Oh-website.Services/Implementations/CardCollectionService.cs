@@ -38,17 +38,7 @@ namespace Yu_Gi_Oh_website.Services.Implementations
             result = sorting.Sort(result, sortKey);
             IQueryable<CardDisplayDto>? endResult = mapper.ProjectTo<CardDisplayDto>(result);
             return (endResult, await result.CountAsync());
-        }
-
-        private void CheckNull<T>(T input)
-            where T : new()
-        {
-            if (input is null)
-            {
-                input = new T();
-            }
-
-        }
+        }        
 
         public async Task<CardDto> GetCard(int id)
         {

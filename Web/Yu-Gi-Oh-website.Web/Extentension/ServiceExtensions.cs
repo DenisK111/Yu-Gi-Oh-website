@@ -15,11 +15,10 @@ namespace Yu_Gi_Oh_website.Web.Extentension
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
             services
-                .AddTransient<IGetApiDataAndUpdateDbService, GetApiDataAndUpdateDbService>()
+                .AddTransient<IYGOApiService, YGOApiService>()
                 .AddTransient<ICardCollectionService, CardCollectionService>()
                 .AddScoped<IFilterService, FilterService>()
-                .AddScoped<ISortingService, SortingService>()
-                .AddScoped<IHomePageService, HomePageService>()
+                .AddScoped<ISortingService, SortingService>()               
                 .AddScoped<ISubCattegoryService, SubCattegoryService>()
                 .AddScoped<IThreadService, ThreadService>()
                 .AddScoped<ISoftDeleteService<PostVote>, SoftDeleteService<PostVote>>()                
@@ -42,15 +41,7 @@ namespace Yu_Gi_Oh_website.Web.Extentension
                 .AddSingleton<IVisitorCountRepository, MongoVisitorCountRepository>();
 
             return services;
-        }
-
-        public static IServiceCollection AddCloudinary(this IServiceCollection services)
-        {
-            
-
-            return services;
-        }
-
+        }      
 
     }
 }
