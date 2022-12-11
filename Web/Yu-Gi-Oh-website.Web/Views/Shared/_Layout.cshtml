@@ -54,8 +54,9 @@
                     </ul>
                     <partial class="nav-link" name="_LoginPartial" />
 
-                    <form class="d-flex" asp-controller="CardCollection" asp-action="Index" asp-route-currentPage="0" method="get">
+                    <form class="d-flex" asp-controller="CardCollection" asp-action="Index" method="get">
                         <input class="form-control me-sm-2" type="text" placeholder="Search for card..." name="searchTerm">
+                        <input type="hidden" name="currentPage" value="1">
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </div>
