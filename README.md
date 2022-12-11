@@ -19,14 +19,14 @@ My project for Softuni's Asp.NET Course - a Yu-Gi-Oh website consisting of a for
   
 <h2>Images</h2>
 <div>
-<img src="screenshots/cardCollection.png" alt="cardCatalogue1" width="500"/>
-<img src="screenshots/cardCollection2.png" alt="cardCatalogue2" width="500"/>
+<img src="screenshots/cardCollection.png" alt="cardCatalogue1" width="400"/>
+<img src="screenshots/cardCollection2.png" alt="cardCatalogue2" width="400"/>
 </div>
 <div>
-<img src="screenshots/forum.png" alt="forum" width="500"/>
-<img src="screenshots/profilePic.png" alt="profilePic" width="500"/>
+<img src="screenshots/forum.png" alt="forum" width="400"/>
+<img src="screenshots/profilePic.png" alt="profilePic" width="400"/>
 </div>
 <div>
-<img src="screenshots/subCattegorries.png" alt="subCategories" width="500"/>
-<img src="screenshots/roles.png" alt="roles" width="500"/>
+<img src="screenshots/subCattegorries.png" alt="subCategories" width="400"/>
+<img src="screenshots/roles.png" alt="roles" width="400"/>
 </div>
