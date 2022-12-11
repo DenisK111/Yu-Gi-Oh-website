@@ -13,25 +13,20 @@ html {
 
 
 
-
-body {
-   
-}
-
 #leftmargin {
-    background-image: url("https://wallpaperaccess.com/full/505768.jpg");
+    background-image: url("backgrounds/505768.jpg");
 }
 
 #rightmargin {
-    background-image: url("https://wallpaperaccess.com/full/505768.jpg");
+    background-image: url("backgrounds/505768.jpg");
 }
 
 #leftmarginForum {
-    background-image: url("https://img.freepik.com/free-photo/background-gradient-lights_23-2149304997.jpg?w=2000");
+    background-image: url("backgrounds/background-gradient-lights_23-2149304997.jpg");
 }
 
 #rightmarginForum {
-    background-image: url("https://img.freepik.com/free-photo/background-gradient-lights_23-2149304997.jpg?w=2000");
+    background-image: url("backgrounds/background-gradient-lights_23-2149304997.jpg");
 }
 
 
