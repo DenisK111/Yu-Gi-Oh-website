@@ -1,6 +1,4 @@
-﻿using System.Net;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
 using Yu_Gi_Oh_website.Web.Areas.Forum.Models;

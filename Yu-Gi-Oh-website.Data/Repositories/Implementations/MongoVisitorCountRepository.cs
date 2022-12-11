@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Yu_Gi_Oh_website.Data.Repositories.Contracts;
 using Yu_Gi_Oh_website.Models.Configurations;
@@ -14,7 +6,7 @@ using Yu_Gi_Oh_website.Models.Forum.Models;
 
 namespace Yu_Gi_Oh_website.Data.Repositories.Implementations
 {
-	public class MongoVisitorCountRepository : IVisitorCountRepository
+    public class MongoVisitorCountRepository : IVisitorCountRepository
 	{
         private readonly IMongoCollection<VisitorCount> visitorCountCollection;       
 

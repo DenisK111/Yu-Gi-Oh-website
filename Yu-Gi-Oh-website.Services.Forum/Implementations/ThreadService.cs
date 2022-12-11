@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Yu_Gi_Oh_website.Common;
-using Yu_Gi_Oh_website.Models;
 using Yu_Gi_Oh_website.Models.Forum.Models;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
 using Yu_Gi_Oh_website.Services.Forum.Models;

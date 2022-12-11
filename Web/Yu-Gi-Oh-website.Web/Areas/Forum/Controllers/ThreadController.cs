@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using NToastNotify;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
 using Yu_Gi_Oh_website.Web.Areas.Forum.Models;
 using Yu_Gi_Oh_website.Web.Extentension;
 using Yu_Gi_Oh_website.Web.Helpers;
-using Yu_Gi_Oh_website.Web.Models.Contracts;
 
 namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
 {

@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 using Yu_Gi_Oh_website.Data.Data.Seeding.Common;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
-using Yu_Gi_Oh_website.Services.Forum.Implementations;
-using Yu_Gi_Oh_website.Services.Forum.Models;
 using Yu_Gi_Oh_website.Web.Areas.Administration.Models;
 
 namespace Yu_Gi_Oh_website.Web.Areas.Administration.Controllers

@@ -1,5 +1,4 @@
-﻿using CloudinaryDotNet;
-using Yu_Gi_Oh_website.Data.Repositories.Contracts;
+﻿using Yu_Gi_Oh_website.Data.Repositories.Contracts;
 using Yu_Gi_Oh_website.Data.Repositories.Implementations;
 using Yu_Gi_Oh_website.Models.Forum.Models;
 using Yu_Gi_Oh_website.Services.ApiService;
@@ -10,7 +9,7 @@ using Yu_Gi_Oh_website.Services.Implementations;
 
 namespace Yu_Gi_Oh_website.Web.Extentension
 {
-	public static class ServiceExtensions
+    public static class ServiceExtensions
 	{
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {

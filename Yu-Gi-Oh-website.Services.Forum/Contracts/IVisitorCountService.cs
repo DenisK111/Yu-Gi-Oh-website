@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Yu_Gi_Oh_website.Services.Forum.Contracts
+﻿namespace Yu_Gi_Oh_website.Services.Forum.Contracts
 {
-	public interface IVisitorCountService
+    public interface IVisitorCountService
 	{
         Task AddOrUpdateAsync(string path, string ipAddress,int threadId);
         Task<Dictionary<int,int>> GetTotalCountByThreadIdsAsync(IEnumerable<int> threadIds);

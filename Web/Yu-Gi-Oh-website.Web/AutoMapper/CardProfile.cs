@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
-using Yu_Gi_Oh_website.Models.Forum.Models;
 using Yu_Gi_Oh_website.Services.Forum.Models;
 using Yu_Gi_Oh_website.Services.Models;
 using Yu_Gi_Oh_website.Web.Areas.Administration.Models;
-using Yu_Gi_Oh_website.Web.Areas.Forum.Models;
 using Yu_Gi_Oh_website.Web.Models.CardCollection;
 using Yu_Gi_Oh_website.Web.Models.CardDetails;
 

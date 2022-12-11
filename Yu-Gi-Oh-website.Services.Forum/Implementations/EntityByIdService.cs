@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Yu_Gi_Oh_website.Models.Forum.Models;
+﻿using Yu_Gi_Oh_website.Models.Forum.Models;
 using Yu_Gi_Oh_website.Models;
 using Yu_Gi_Oh_website.Web.Data;
 using Microsoft.EntityFrameworkCore;

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Yu_Gi_Oh_website.Data.Repositories.Contracts;
+﻿using Yu_Gi_Oh_website.Data.Repositories.Contracts;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
 
 namespace Yu_Gi_Oh_website.Services.Forum.Implementations

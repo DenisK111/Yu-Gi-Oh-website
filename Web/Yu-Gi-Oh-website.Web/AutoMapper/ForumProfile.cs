@@ -1,5 +1,4 @@
-﻿using AngleSharp.Common;
-using AutoMapper;
+﻿using AutoMapper;
 using Yu_Gi_Oh_website.Models;
 using Yu_Gi_Oh_website.Models.Forum.Models;
 using Yu_Gi_Oh_website.Services.Forum.Models;

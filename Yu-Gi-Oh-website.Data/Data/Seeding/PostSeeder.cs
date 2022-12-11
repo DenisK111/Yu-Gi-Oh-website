@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AspNetCoreTemplate.Data.Seeding;
+﻿using AspNetCoreTemplate.Data.Seeding;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Yu_Gi_Oh_website.Models.Forum.Models;

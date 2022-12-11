@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Yu_Gi_Oh_website.Models.Forum.Models;
+﻿using Yu_Gi_Oh_website.Models.Forum.Models;
 using Yu_Gi_Oh_website.Models;
 using Yu_Gi_Oh_website.Services.Forum.Models;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
@@ -11,8 +6,6 @@ using Yu_Gi_Oh_website.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Yu_Gi_Oh_website.Services.Contracts;
-using System.Reflection.Metadata;
-using System.Threading;
 
 namespace Yu_Gi_Oh_website.Services.Forum.Implementations
 {

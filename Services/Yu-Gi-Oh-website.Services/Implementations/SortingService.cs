@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
+﻿using Yu_Gi_Oh_website.Models.CardCatalogue.Models;
 using Yu_Gi_Oh_website.Services.Common.Enums;
 using Yu_Gi_Oh_website.Services.Contracts;
 

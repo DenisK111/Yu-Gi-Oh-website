@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CloudinaryDotNet;
+﻿using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 using Yu_Gi_Oh_website.Services.Contracts;
 
 namespace Yu_Gi_Oh_website.Services.Implementations
 {
-	public class CloudinaryImageUploadService : IImageUploadService
+    public class CloudinaryImageUploadService : IImageUploadService
 	{
 		private readonly Cloudinary cloudinary;
 

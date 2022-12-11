@@ -1,13 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Server.IIS.Core;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using NToastNotify;
 using Yu_Gi_Oh_website.Data.Data.Seeding.Common;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
-using Yu_Gi_Oh_website.Services.Forum.Implementations;
 using Yu_Gi_Oh_website.Web.Areas.Forum.Models;
 
 

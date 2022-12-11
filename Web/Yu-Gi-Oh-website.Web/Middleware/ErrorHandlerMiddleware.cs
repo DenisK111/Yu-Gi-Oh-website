@@ -1,10 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
-using MongoDB.Driver.Core.WireProtocol.Messages;
-using System.Net;
-
-namespace Yu_Gi_Oh_website.Web.Middleware
+﻿namespace Yu_Gi_Oh_website.Web.Middleware
 {
     public class ErrorHandlerMiddleware
     {
