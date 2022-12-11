@@ -11,6 +11,7 @@ My project for Softuni's Asp.NET Course - a Yu-Gi-Oh website consisting of a for
   <li>Serilog</li>
   <li>NToastNotify</li>
   <li>Cloudinary</li>
+  <li>tinyMce</li>
   <li>xUnit</li>
   <li>Moq</li>
 </ul>
