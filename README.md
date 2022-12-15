@@ -1,5 +1,5 @@
 # Yu-Gi-Oh-website
-My project for Softuni's Asp.NET Course - a Yu-Gi-Oh website consisting of a forum and a card catalogue
+My project for Softuni's Asp.NET Course - a Yu-Gi-Oh website consisting of a forum and a card catalogue. - https://ygobg.azurewebsites.net/
 <h2>Technologies and Libraries used</h2>
 <ul>
   <li>.Net 6</li>  
