@@ -16,6 +16,7 @@ namespace Yu_Gi_Oh_website.Data.Repositories.Implementations
             string databaseName = mongoSettings.CurrentValue.DatabaseName;
             string collectionName = mongoSettings.CurrentValue.CollectionVisitorCount;
             settings.ServerApi = new ServerApi(ServerApiVersion.V1);
+	    settings.LinqProvider = LinqProvider.V3;
 
             var client = new MongoClient(settings);
 
@@ -43,12 +44,13 @@ namespace Yu_Gi_Oh_website.Data.Repositories.Implementations
             {
                 return;
             }
-            document.IpAddresses.Add(ipAddress);
+            document.IpAddresses.Add(ipAddress);         
             var update = Builders<VisitorCount>.Update
-                        .Set(p => p.IpAddresses, document.IpAddresses);
+                    .Push("IpAddresses", ipAddress);
 
-
-            await visitorCountCollection.UpdateOneAsync(x => x == document, update);
+            var id = document.Id;
+            
+            await visitorCountCollection.UpdateOneAsync(x => x.Id == id, update);
 		}
 
 		public async Task<int> GetTotalCountByPathAsync(int threadID)
