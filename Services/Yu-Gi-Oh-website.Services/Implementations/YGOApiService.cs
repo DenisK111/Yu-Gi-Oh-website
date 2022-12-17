@@ -25,18 +25,15 @@ namespace Yu_Gi_Oh_website.Services.ApiService
         }
         public async Task AddAllCardsToDbAsync(string imageFolder)
         {
-
             await UpdateTypesAsync();
             await UpdateAttributesAsync();
             await UpdateExactTypesAsync();
             await context.SaveChangesAsync();
             await UpdateDbAsync(imageFolder, allCardsString);
-
         }       
 
         private async Task UpdateDbAsync(string imageFolder, string apiString)
         {
-
             RootObject? json = await GetJsonResponseAsync(apiString);
             var typeObjects = new List<CardType>();
             var exactCardTypeObjects = new List<ExactCardType>();
@@ -63,7 +60,7 @@ namespace Yu_Gi_Oh_website.Services.ApiService
 
             List<Card> cards = new List<Card>();
             List<CardImage> cardImages = new List<CardImage>();
-            //  File.WriteAllText("text.json", JsonConvert.SerializeObject(json));
+            
             foreach (var cardJson in json!.Data!)
             {
 
@@ -98,8 +95,7 @@ namespace Yu_Gi_Oh_website.Services.ApiService
                 foreach (var link in cardJson.ImageUrls.Select(x => x.ImageUrl))
                 {
                     string path = $"{imageFolder}/{RemoveSpecialCharacters(cardJson.Name)}{count++}.jpg";
-                    //  Console.WriteLine(path);
-
+                    
                     await DownloadImageAsync(httpClient, link!, path);
 
                     var cardImage = new CardImage()
@@ -187,7 +183,6 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             foreach (var attribute in ApiConstantValues.attributes)
             {
                 attributeObjects.Add(new CardAttribute() { Name = attribute });
-
             }
 
             var existingAttributeNames = await context.CardAttributes.Select(x => x.Name).ToListAsync();
@@ -195,8 +190,6 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             attributeObjects = attributeObjects.Where(attr => !existingAttributeNames.Contains(attr.Name)).ToHashSet();
 
             await context.AddRangeAsync(attributeObjects);
-
-
         }
 
         private async Task UpdateExactTypesAsync()
@@ -214,14 +207,10 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             typeObjects = typeObjects.Where(type => !existingTypeNames.Contains(type.Name)).ToHashSet();
 
             await context.AddRangeAsync(typeObjects);
-
-
         }
-
 
         private async Task<RootObject?> GetJsonResponseAsync(string apiString)
         {
-
             var result = await httpClient.GetAsync(apiString);
 
             try
@@ -313,8 +302,6 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             {
                 json.Race = $"{json.Race} Trap";
             }
-
-
         }
 
         private string SetCardType(CardApiDTO json)
@@ -322,7 +309,6 @@ namespace Yu_Gi_Oh_website.Services.ApiService
             string type = json.Type;
             var typeValue = ApiConstantValues.cardTypeMapping.FirstOrDefault(t => t.Value.Contains(type)).Key;
             return typeValue.GetDisplayName();
-
         }
 
 

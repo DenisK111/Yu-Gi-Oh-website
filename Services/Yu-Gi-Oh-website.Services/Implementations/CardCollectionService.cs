@@ -24,11 +24,7 @@ namespace Yu_Gi_Oh_website.Services.Implementations
             this.filter = filter;
             this.sorting = sorting;
         }
-
-        private IQueryable<Card> Filter(IQueryable<Card> expression, string name, string[] parameters)
-        {
-            return filter.Search(expression, name, parameters);
-        }
+       
 
         public async Task<(IQueryable<CardDisplayDto>? cards, int count)> GetCardsAndCount(SortTypeEnum sortKey, string name, string[] parameters, bool applyFilter)
         {
@@ -52,6 +48,9 @@ namespace Yu_Gi_Oh_website.Services.Implementations
             return result;
         }
 
-
+        private IQueryable<Card> Filter(IQueryable<Card> expression, string name, string[] parameters)
+        {
+            return filter.Search(expression, name, parameters);
+        }
     }
 }
