@@ -6,7 +6,7 @@ namespace Yu_Gi_Oh_website.Services.Forum.Contracts
     {
         Task<ThreadInfoDto> CreateThread(string subject, string PostContent, string Author, int subCattegoryId);
 
-        Task<(ThreadDto? thread, int postCount)> GetThreadDtoById(int id,int take, int skip);
+        Task<(ThreadDto thread, int postCount)> GetThreadDtoById(int id,int take, int skip);
            
 
     }

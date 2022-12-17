@@ -71,7 +71,7 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
 
         }
 
-        public async Task<(ThreadDto? thread, int postCount)> GetThreadDtoById(int id, int forumPosts, int skip)
+        public async Task<(ThreadDto thread, int postCount)> GetThreadDtoById(int id, int forumPosts, int skip)
         {
             var postsCount = await context.Posts.CountAsync(x => x.ThreadId == id);
 
@@ -83,11 +83,8 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
                 .ThenInclude(x => x.Votes)
                 .Include(x => x.Posts)
                 .ThenInclude(x => x.PostContent)
-                .FirstOrDefaultAsync(x => x.Id == id)), 0)
-                  ;
-            }
-
-            
+                .FirstOrDefaultAsync(x => x.Id == id)), 0);
+            }           
 
             var posts = await context.Posts
                 .Include(x => x.Votes)

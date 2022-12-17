@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Yu_Gi_Oh_website.Common.Settings;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
 using Yu_Gi_Oh_website.Web.Areas.Forum.Models;
 using Yu_Gi_Oh_website.Web.Extentension;
@@ -11,7 +12,7 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
     [Route("{area}/Cattegory/{subCattegoryId:int}/{subCattegorySlug?}/Thread/")]
     public class ThreadController : Controller
     {
-        private readonly int forumPostsToTake = 15;
+        private readonly int forumPostsToTake = WebConstants.ForumPostsToTake;
         private readonly IThreadService threadService;
         private readonly IMapper mapper;
         private readonly IVotesService voteService;

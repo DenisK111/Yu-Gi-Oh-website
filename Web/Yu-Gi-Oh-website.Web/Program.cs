@@ -102,6 +102,7 @@ namespace Yu_Gi_Oh_website.Web
 
             builder.Services.AddAutoMapper(typeof(CardProfile));
 
+            builder.Services.AddHttpContextAccessor();
             builder.Services.AddSingleton<HttpClient>();
             builder.Services.RegisterServices();
             builder.Services.RegisterRepositories();

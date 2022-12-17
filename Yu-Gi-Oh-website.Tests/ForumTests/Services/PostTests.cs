@@ -39,7 +39,6 @@ namespace Yu_Gi_Oh_website.Tests.ForumTests.Services
             Assert.Equal(TestConstants.Forum.SubCattegoryId, result.SubCattegoryId);
             Assert.Equal(TestConstants.Forum.Slug, result.SubCattegorySlug);
             Assert.Equal(1, result.CurrentPage);
-
         }
 
         [Fact]
@@ -111,7 +110,7 @@ namespace Yu_Gi_Oh_website.Tests.ForumTests.Services
 
         [Fact]
         public async Task Remove_IdDoesNotExist_Failure()
-        {   
+        {
             //Arrange
             var context = ContextCreationHelper.CreateContext().AddCattegorySubCattegoryAndThread();
             var service = new PostService(context, entityServiceMock.Object, moqUserManager, softDeleteServiceMock.Object);

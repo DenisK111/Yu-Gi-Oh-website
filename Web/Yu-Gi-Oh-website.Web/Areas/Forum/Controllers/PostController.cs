@@ -18,14 +18,16 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
         private readonly IToastNotification toastNotification;
         private readonly IThreadService threadService;
         private readonly ISubCattegoryService subCattegoryService;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public PostController(IPostService postService, IMapper mapper, IToastNotification toastNotification, IThreadService threadService, ISubCattegoryService subCattegoryService)
+        public PostController(IPostService postService, IMapper mapper, IToastNotification toastNotification, IThreadService threadService, ISubCattegoryService subCattegoryService, IHttpContextAccessor httpContextAccessor)
         {
             this.postService = postService;
             this.mapper = mapper;
             this.toastNotification = toastNotification;
             this.threadService = threadService;
             this.subCattegoryService = subCattegoryService;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet]
@@ -42,7 +44,7 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
 
             var viewModel = new AddPostInputViewModel()
             {
-                Author = this.User.Identity!.Name!,
+                Author = httpContextAccessor.HttpContext?.User.Identity?.Name!,
                 ThreadId = id,
                 SubCattegoryId=subCattegoryId,
                 SubCattegorySlug = subCatttegory.Slug                

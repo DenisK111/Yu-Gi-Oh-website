@@ -10,6 +10,7 @@ namespace Yu_Gi_Oh_website.Tests
             public static int CattegoryId => 1;
             public static int SubCattegoryId => 1;
             public static int ThreadId => 1;
+            public static int PostVoteId => 1;
             public static string CattegoryName => "Test Cattegory";
             public static string SubCattegoryName => "testSubCattegory";
             public static string SubCattegoryDescription => "adawd";
@@ -47,8 +48,8 @@ namespace Yu_Gi_Oh_website.Tests
                 Id = TestConstants.Forum.ThreadId,
                 Author = User,
                 SubCattegoryId = TestConstants.Forum.SubCattegoryId,
-                Subject = TestConstants.Forum.Slug,
-                Slug = TestConstants.Forum.ThreadSubject,
+                Subject = TestConstants.Forum.ThreadSubject,
+                Slug = TestConstants.Forum.Slug,
                 SubCattegory = SubCattegory
 
             };

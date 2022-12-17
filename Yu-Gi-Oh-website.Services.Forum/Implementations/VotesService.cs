@@ -15,8 +15,6 @@ namespace Yu_Gi_Oh_website.Services.Forum.Implementations
         {
             this.context = context;
             this.postVoteDeleteService = postDeleteService;
-
-
         }
 
         /// <summary>

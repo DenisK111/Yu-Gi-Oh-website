@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Yu_Gi_Oh_website.Common.Settings;
 using Yu_Gi_Oh_website.Services.Forum.Contracts;
 using Yu_Gi_Oh_website.Web.Areas.Forum.Models;
 using Yu_Gi_Oh_website.Web.Extentension;
@@ -11,7 +12,7 @@ namespace Yu_Gi_Oh_website.Web.Areas.Forum.Controllers
     [Area("Forum")]
     public class SubCattegoryController : Controller
     {
-        private readonly int itemsToTake = 15;
+        private readonly int itemsToTake = WebConstants.ForumThreadsToTake;
         private readonly ISubCattegoryService subCattegoryService;
         private readonly IThreadService threadService;
         private readonly IMapper mapper;

@@ -19,14 +19,14 @@ namespace Yu_Gi_Oh_website.Web.Helpers
             model.Paging.ItemsCount = postsCount;           
         }
 
-        public static int PageCheck(int Page)
+        public static int PageCheck(int page)
         {
-            if (Page < 1)
+            if (page < 1)
             {
-                Page = 1;
+                page = 1;
             }
 
-            return Page;
+            return page;
         }
     }
 }
