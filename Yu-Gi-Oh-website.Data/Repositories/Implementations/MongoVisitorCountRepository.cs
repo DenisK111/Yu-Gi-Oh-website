@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using Yu_Gi_Oh_website.Data.Repositories.Contracts;
 using Yu_Gi_Oh_website.Models.Configurations;
 using Yu_Gi_Oh_website.Models.Forum.Models;
@@ -16,7 +17,7 @@ namespace Yu_Gi_Oh_website.Data.Repositories.Implementations
             string databaseName = mongoSettings.CurrentValue.DatabaseName;
             string collectionName = mongoSettings.CurrentValue.CollectionVisitorCount;
             settings.ServerApi = new ServerApi(ServerApiVersion.V1);
-	    settings.LinqProvider = LinqProvider.V3;
+	        settings.LinqProvider = LinqProvider.V3;
 
             var client = new MongoClient(settings);
 
